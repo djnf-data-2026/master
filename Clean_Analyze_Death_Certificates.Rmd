@@ -135,6 +135,32 @@ dc |>
 ```
 
 ### clean origin
+
+```{r}
+dc <- dc |> 
+  mutate(origin = str_squish(birth_place_city_or_town_and_state_write_it_as_bowie_md)) |> 
+  mutate(county_origin = case_when(
+         str_detect(origin, "(?i)^md\\.?$") ~ "Maryland", 
+         str_detect(origin, "(?i)baltimore county") ~ "Baltimore County",  # Check this FIRST
+         str_detect(origin, "(?i)baltimore") ~ "Baltimore city",
+         str_detect(origin, "(?i)easton") ~ "Talbot County",
+         str_detect(origin, "(?i)frederick") ~ "Frederick County",
+         str_detect(origin, "(?i)Prince George's County") ~ "Prince George's County",
+         str_detect(origin, "(?i)Prince Georges County, Md.") ~ "Prince George's County",
+          str_detect(origin, "(?i)Seat Pleasant") ~ "Prince George's County",
+         str_detect(origin, "(?i)unknown") ~ "Unknown",
+         str_detect(origin, "(?i)Centreville") ~ "Queen Anne's County",
+         str_detect(origin, "(?i)church hill") ~ "Queen Anne's County",
+         str_detect(origin, "(?i)Salisbury") ~ "Wicomico County",
+         str_detect(origin, "(?i)Pocomoke") ~ "Worcester County",
+         str_detect(origin, "(?i)Anne Arrundel County") ~ "Anne Arundel County",
+          is.na(origin) ~ "Unknown",
+               TRUE ~ origin
+         )) |> 
+      mutate(county_origin = str_remove_all(county_origin, ", Md.")) 
+```
+
+
 ```{r}
 
 dc <- dc |> 
@@ -201,6 +227,12 @@ dc_map1 <- dc |>
 
 ```
 
+```{r}
+dc_map <- dc_map |> 
+  st_as_sf() |> 
+  sf::st_transform(4326) |> 
+  add_count(county_origin, name = "county_count")
+```
 
 
 ```{r}
@@ -222,7 +254,7 @@ leafMap <- leaflet(data = dc_map) %>%
     color = ~pal(county_count),
     weight = 2.5,
     fillOpacity = 0.5,
-    label = ~paste0("There were ", county_count, " total inmates from ", county_origin)
+    label = ~paste0("Count of inmates from ", county_origin, ": ", county_count)
   ) 
   
 leafMap
