@@ -17,8 +17,8 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r}
 # install.packages("htmlwidgets")
 # install.packages("leaflet")
-#install.packages("sf")
-#install.packages("googlesheets4")
+# install.packages("sf")
+# install.packages("googlesheets4")
 library(tidyverse)
 library(rio)
 library(janitor)
@@ -27,6 +27,7 @@ library(leaflet)
 library(sf)
 library(googlesheets4)
 library(tidycensus)
+library(janitor)
 ```
 
 ### Import Extracted Death Certificate Data
@@ -202,7 +203,7 @@ dc <- dc |>
   mutate(cause_death_update = str_remove_all(cause_death_update, "^;+|;+$")) |> 
   mutate(cause_death_update = str_remove_all(cause_death_update, "^[;\\s]+|[;\\s]+$")) |> 
   mutate(cause_death_update = str_replace_all (cause_death_update, "blank", "")) |> 
-  separate(col = cause_death_update, into = c("death_cause1", "death_cause2", "death_cause3"), sep = ";", extra = "drop")
+  separate(col = cause_death_update, into = c("death_cause1", "death_cause2", "death_cause3"), sep = ";|,|and|or|&|/")
 
 ```
 
