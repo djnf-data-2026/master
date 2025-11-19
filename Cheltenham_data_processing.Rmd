@@ -17,10 +17,17 @@ library(janitor)
 --data cleaning needs to remove a strange "" artifact and remove leading and trailing spaces
 ```{r}
 
-master_index <- read_csv("MASTER_INDEX_11_3_2025.csv") |> 
-  clean_names() |> 
-  mutate(name = str_replace(name, "", ""),
-         name = str_squish(name)) 
+#master_index <- read_csv("MASTER_INDEX_11_3_2025.csv") |> 
+gs4_deauth()  
+master_index <- read_sheet("https://docs.google.com/spreadsheets/d/1LRSjhsrW1BJ2nKj78lGHR0C_8dxiaGhQFE2pzwSghx8/edit?usp=sharing", sheet = "Master_Index_11_19") |> 
+     clean_names() |> 
+   mutate(name = str_replace(name, "", ""),
+   name = str_squish(name)) 
+
+# master_index <- read_csv("MASTER_INDEX_11_3_2025.csv") |> 
+#   clean_names() |> 
+#   mutate(name = str_replace(name, "", ""),
+#          name = str_squish(name)) 
 	
 
 ```

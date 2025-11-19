@@ -180,8 +180,6 @@ death_categories_summary
 
 
 ```{r}
-#install.packages('DT')
-library(DT)
 
 datatable(death_categories_summary,
           caption = "Causes of Death, Cheltenham, Jessup",
@@ -241,6 +239,7 @@ dc <- dc |>
          str_detect(origin, "(?i)anne arr") ~ "Anne Arundel County",  # Catches misspelling
          str_detect(origin, "(?i)harford county") ~ "Harford County",
          str_detect(origin, "(?i)st\\.? mary") ~ "St. Mary's County",
+        str_detect(origin, "(?i)St. Marys County") ~ "St. Mary's County",
           # Non-Maryland locations
          str_detect(origin, "(?i)(^va\\.?$|virginia|^w\\.? ?va|washington.*d\\.?c|^del|^dc$|florida|^woodbine|^alabama)") ~ "Outside Maryland",
         str_detect(origin, "(?i)Not known") ~ "Unknown",
@@ -248,13 +247,13 @@ dc <- dc |>
         str_detect(origin, "(?i)na") ~ "Unknown",
         str_detect(origin, "(?i)pinna") ~ "Unknown",
         str_detect(origin, "(?i)missing") ~ "Unknown",
-       # str_detect(origin, "Pinna former residence Jamestown, Md.") ~ "Stutsman County",#north dakota??
+       str_detect(origin, "Pinna former residence Jamestown, Md.") ~ "Anne Arundel County",
           is.na(origin) ~ "Unknown",
                TRUE ~ origin
          )) |> 
       mutate(county_origin = str_remove_all(county_origin, ", Md.")) 
 ```
-
+#st marys? 
 
 ```{r}
 dc |> 
@@ -328,7 +327,7 @@ leafMap <- leaflet(data = dc_map) %>%
     color = ~pal(county_count),
     weight = 2.5,
     fillOpacity = 0.5,
-    label = ~paste0("Count of inmates from ", county_origin, ": ", county_count)
+    label = ~paste0("Count of deceased boys from ", county_origin, ": ", county_count)
   ) %>%
   addControl(html = table_html, position = "bottomleft")
 
