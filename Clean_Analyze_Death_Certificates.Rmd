@@ -285,3 +285,95 @@ saveWidget(leafMap, "leafMap.html")
 leafMap
 ```
 
+
+#--------------NOTES BELOW ----------------------------------------------------
+
+```{r}
+
+# Use colorFactor for categorical data
+pal <- colorFactor(
+  palette = "viridis",  # or "Set1", "Dark2", etc for categories
+  domain = dc_map$county_count
+)
+
+
+leafMap <- leaflet(data = dc_map) %>%
+  addProviderTiles(providers$Esri.WorldStreetMap) %>%
+  addPolygons(
+    color = ~pal(county_count),
+    weight = 2.5,
+    fillOpacity = 0.5,
+    label = ~paste0("Count of inmates from ", county_origin, ": ", county_count)
+  ) 
+  
+leafMap
+#saveWidget(leafMap, "leafMap.html")
+```
+
+
+
+
+#---------------NOTES BELOW -----------------------------------
+
+```{r}
+
+dc <- dc |> 
+  mutate(origin = str_squish(birth_place_city_or_town_and_state_write_it_as_bowie_md)) |> 
+  mutate(origin_clean = case_when(
+         str_detect(origin, "(?i)^md\\.?$") ~ "Maryland", 
+         str_detect(origin, "(?i)baltimore county") ~ "Baltimore_County",  # Check this FIRST
+         str_detect(origin, "(?i)baltimore") ~ "Baltimore_City",
+         str_detect(origin, "(?i)easton") ~ "Easton",
+         str_detect(origin, "(?i)frederick") ~ "Frederick",
+         str_detect(origin, "(?i)Prince George's County") ~ "Prince_Georges_County",
+         str_detect(origin, "(?i)Prince Georges County, Md.") ~ "Prince_Georges_County",
+         str_detect(origin, "(?i)unknown") ~ "Unknown",
+         is.na(origin) ~ "Unknown",
+            TRUE ~ origin
+  )) |> 
+  mutate(origin_clean = str_remove_all(origin_clean, ", Md.")) |> 
+    mutate(county_origin = case_when(
+      origin_clean=="Baltimore_County" ~ "Baltimore County",
+      origin_clean=="Baltimore_City" ~ "Baltimore city",
+      origin_clean=="Easton" ~ "Talbot County",
+      origin_clean=="Frederick" ~ "Frederick County",
+      origin_clean=="Prince_Georges_County" ~ "Prince George's County",
+      origin_clean=="Seat Pleasant" ~ "Prince George's County",
+      origin_clean=="Centreville" ~ "Queen Anne's County",
+      origin_clean=="Church Hill" ~ "Queen Anne's County",
+      origin_clean=="Salisbury" ~ "Worcester County",
+      str_detect(origin_clean, "(?i)Pocomoke") ~ "Worcester County",
+      TRUE ~ origin_clean))
+      
+      
+    
+```
+
+
+
+```{r}
+leafMap <- leaflet(data = dc_map) %>%
+  addProviderTiles(providers$Esri.WorldStreetMap) %>%
+  addPolygons(
+    color = ~pal(county_origin),
+    weight = 2.5,
+    smoothFactor = 0.2,
+    fillOpacity = 0.5,
+    label = ~paste0(name, " - Born in: ", county_origin),  # Show name and origin
+    popup = ~paste0("<b>", name, "</b><br>",
+                    "Birth place: ", county_origin, "<br>",
+                    "Death date: ", death_date))  # Add popup for more info
+  # ) %>%
+  # addLegend(
+  #   position = "bottomright",
+  #   pal = pal,
+  #   values = ~county_origin,
+  #   title = "Origin of Cheltenham Inmates"
+  # )
+
+saveWidget(leafMap, "leafMap.html")
+leafMap
+```
+
+
+
