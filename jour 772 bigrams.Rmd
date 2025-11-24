@@ -1,0 +1,145 @@
+---
+title: "Bigrams for Cheltenham Research"
+author: "Rob Wells"
+date: '2025-11-24'
+output: html_document
+---
+
+# Jour 772 Fall 2025:
+
+In this exercise, you will import the Article Data Extraction results and create bigrams from the comments
+The source is Cheltenham Article Data Extraction (Responses), 184 entries as of Nov 24.
+
+```{r}
+#load tidyverse, tidytext, rio,, janitor libraries
+
+library(tidyverse)
+library(tidytext)
+library(rio)
+library(janitor)
+library(googlesheets4)
+
+```
+
+# Load data - pull directly from spreadsheet
+```{r}
+#renamed important details to details for simplicity
+
+library(googlesheets4)
+
+gs4_deauth()  
+news <- read_sheet("https://docs.google.com/spreadsheets/d/1XFRMzN-xK1uQcvaEIOV7wuEPH6lYrvVpvgE3w6ngKPU/edit?usp=sharing", sheet = "Form Responses 1") |> 
+     clean_names() |> 
+  rename(details = important_details_from_article_about_the_victim_and_the_conditions_at_cheltenham_any_direct_quotes_need_to_have_quotation_marks)
+
+```
+
+# Tokenize one column
+
+```{r}
+
+stories <- str_replace_all(news$details, "- ", "")
+stories_df <- tibble(stories,)
+
+# unnest includes lower, punct removal
+
+stories_tokenized <- stories_df %>%
+  unnest_tokens(word,stories)
+
+stories_tokenized
+#A list of the common words
+```
+
+#List of top words, cleaned with stop words removed
+```{r}
+
+data(stop_words)
+
+stories_tokenized <- stories_tokenized %>%
+  anti_join(stop_words, by = c("word" = "word")) %>%
+  filter(word != "temp_file") %>%
+  filter(word != "stories_corpus") %>%
+  filter(!grepl('[0-9]', word))
+
+# Word Count of top words
+
+word_count <- stories_tokenized %>%
+  count(word, sort=TRUE)
+
+
+```
+
+# Bigrams without stop words
+
+```{r}
+bigrams <- stories_df %>%
+  unnest_tokens(bigram, stories, token="ngrams", n=2) |> 
+  separate(bigram, c("word1", "word2"), sep = " ")
+
+count_bigrams <- bigrams %>%
+  count(word1, word2, sort = TRUE)
+
+
+```
+
+# Bigrams with stop words
+
+```{r}
+bigrams_clean <-stories_df %>%
+  unnest_tokens(bigram, stories, token="ngrams", n=2) |> 
+  separate(bigram, c("word1", "word2"), sep = " ") |> 
+  filter(!word1 %in% stop_words$word) %>%
+  filter(!word2 %in% stop_words$word) |> 
+  filter(!is.na(word1) | !is.na(word2))
+
+count_clean_bigrams <- bigrams_clean  %>%
+  count(word1, word2, sort = TRUE)
+
+
+```
+
+# Next steps: Categorize the material
+Category "origins" = how the boys arrived -- sentenced, **committed** etc
+"labor" - working on a farm, broom factory anything involving their work
+"boy offenses" = specifies crimes the boys committed to get sentenced to Cheltenham
+"investigations" = grand jury or newspaper investigations of Cheltenham - critical reviews
+"abuse" = details of abuse, whippings, pubishment, no shoes, 
+"medical" = discussing medical conditions
+"praise" = any discussion that praises Cheltenham operations
+#here's my new category
+xxxxx
+
+Examine the bigrams and top words and on the categories below
+
+
+```{r}
+news <- news |> 
+  mutate(details_clean = str_squish(str_remove_all(details, "[[:punct:]]"))) |> 
+  mutate(category = paste(
+    if_else(str_detect(details_clean, "(?i)sentenced"), "origins", NA_character_),
+    if_else(str_detect(details_clean, "(?i)committed"), "origins", NA_character_),
+    if_else(str_detect(details_clean, "(?i)labor"), "labor", NA_character_),
+    if_else(str_detect(details_clean, "(?i)farm"), "labor", NA_character_),
+    if_else(str_detect(details_clean, "(?i)broom"), "labor", NA_character_),
+    if_else(str_detect(details_clean, "(?i)larceny"), "boy_offenses", NA_character_),
+    if_else(str_detect(details_clean, "(?i)conditions"), "treatment", NA_character_),
+    if_else(str_detect(details_clean, "(?i)jury"), "investigations", NA_character_),
+    if_else(str_detect(details_clean, "(?i)beaten"), "abuse", NA_character_),
+    #here are my additions
+    sep = "; "
+  )) |> 
+  mutate(category = str_remove_all(category, "NA; |; NA")) |> 
+  mutate(category = na_if(category, "NA"))
+```
+
+
+
+# Next steps: Team up:
+Akira, Brandyn
+Nicole, Bex, Raphael
+Sophie, David, Zaka
+
+1) bigrams and word count on one of these three columns "elaborate_on_the_quality_of_the_journalism_sourcing_graphics_photos_interviews"; "notes_on_neglect_or_abuse"; "notes_anything_else_thats_noteworthy"     
+
+2) add to the catgory code above -- be specific on what you are adding so I can merge it into the master code block
+
