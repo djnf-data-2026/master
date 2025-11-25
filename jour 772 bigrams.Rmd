@@ -139,8 +139,3 @@ Sophie, David, Zaka
 
 2) add to the catgory code above -- be specific on what you are adding so I can merge it into the master code block
 
-3) Start on the death certificate reponses
-
-https://docs.google.com/spreadsheets/d/13CthhhfLHiPZqr1P67SCa9BVUyb5Rl6OBhUwvqawDEk/edit?usp=sharing
-"Notes for anything of interest"
-
