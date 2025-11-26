@@ -83,11 +83,13 @@ I am combining the cause of death and if different columns unless there was a mi
 
 dc <- dc |> 
   mutate(cause_death_update = paste(cause_of_death, if_cause_of_death_different_put_that_here, sep = "; ")) |> 
+   mutate(cause_death_update = str_replace_all(cause_death_update, "(?i) & ", "; ")) |>
   mutate(cause_death_update = str_replace_all(cause_death_update, "NA", "")) |> 
   #removing pesky leading, trailing semicolons
   mutate(cause_death_update = str_remove_all(cause_death_update, "^;+|;+$")) |> 
   mutate(cause_death_update = str_remove_all(cause_death_update, "^[;\\s]+|[;\\s]+$")) |> 
   mutate(cause_death_update = str_replace_all (cause_death_update, "blank", "")) |> 
+  mutate(cause_death_update = na_if(cause_death_update, "")) |>
   separate(col = cause_death_update, into = c("death_cause1", "death_cause2", "death_cause3"), sep = ";", extra = "drop")
 
 ```
@@ -112,6 +114,7 @@ death_categories <- dc |>
 death_categories_summary <- death_categories |> 
    mutate(cause = str_squish(str_remove_all(cause, "[[:punct:]]"))) |> 
   mutate(category = case_when(
+         str_detect(cause, "(?i)Terberculosis") ~ "tuberculosis",
          str_detect(cause, "(?i)tuberculosis") ~ "tuberculosis",
          str_detect(cause, "(?i)pneumonia") ~ "pneumonia",
          str_detect(cause, "(?i)typhoid") ~ "typhoid",
@@ -122,51 +125,32 @@ death_categories_summary <- death_categories |>
       str_detect(cause, "(?i)cardiac|heart failure|heart trouble|mitral") ~ "cardiac_issues",
       str_detect(cause, "(?i)exhaustion") ~ "exhaustion",
       str_detect(cause, "(?i)gastric.*ulcer|ulcer.*gastric") ~ "gastric_ulcer",
-        ## An online search shows oedema of lungs might be more closely associated with heart issues though
-        cause=="rage of Lungs" ~ "lung_disease",
-        cause=="Encephalitis" ~ "encephalitis",
-        cause=="Asthma" ~ "asthma",
-        cause==" Asthma" ~ "asthma",
-        cause=="Tuberculosis & Asthma" ~ "asthma",
-        cause=="Tuberculosis, Contributory asthma or asthenia" ~ "asthma",
-        cause=="Pulmonary Phthisis" ~ "phthisis",
-        cause=="Pneumonia phthisis" ~ "phthisis",
-        cause=="Phthisis Pulmonalis" ~ "phthisis",
-        cause=="Phthisis 229" ~ "phthisis",
-        cause=="Phthisis" ~ "phthisis",
-        cause=="Primary: Phthisis 22a" ~ "phthisis",
-        cause==" Phthisis" ~ "phthisis",
-         cause==" Immediate: Asphyxia" ~ "asphyxia",
-        cause=="Consumption" ~ "consumption",
-        cause==" Consumption" ~ "consumption",
-        cause=="Consumption" ~ "consumption",
-        cause=="Consumption after Malaria" ~ "consumption",
-        cause=="Heart failure" ~ "heart_failure",
-        cause=="And Pneumonia & Heart Failure" ~ "heart_failure",
-        cause=="Heart Failure" ~ "heart_failure",
-        cause=="Immediate: 2 heart failure" ~ "heart_failure",
-        cause=="Immediate: Heart failure" ~ "heart_failure",
-        cause=="Pneumonia and Heart failure" ~ "heart_failure",
-        cause==" Asthenia" ~ "asthenia",
-        cause==" Immediate: Asthenia" ~ "asthenia",
-        cause==" asthenia" ~ "asthenia",
-        cause=="Asthenia (27)" ~ "asthenia",
-        cause=="Don't know, Stomack inflama   lungs congested" ~ "lung_disease",
-        cause=="Oedema of Lungs" ~ "lung_disease",
-        cause=="Hem" ~ "hemorrhage",
-        cause=="rhage" ~ "hemorrhage",
-        cause=="Hemm" ~ "hemorrhage",
-        cause=="y Hemm" ~ "hemorrhage",
-        cause=="wound of groin by hog, hem" ~ "hemorrhage",
-        cause=="Influenza" ~ "Influenza",
-         is.na(cause) ~ "No_details",
-         TRUE ~ cause
+      #dl additions
+      str_detect(cause,"(?i)Encephalitis") ~ "encephalitis",
+      str_detect(cause,"(?i)malaria") ~ "malaria",
+      #consumption after malaria, malaria should be the primary cause
+      str_detect(cause,"(?i)consumption") ~ "consumption",
+      str_detect(cause,"(?i)Immediate: Asphyxia") ~ "asphyxia",
+      str_detect(cause,"(?i)asthenia") ~ "asthenia",
+      str_detect(cause,"(?i)rage of Lungs") ~ "rage of lungs",
+      str_detect(cause,"(?i)lungs") ~ "lung_disease",
+      str_detect(cause,"(?i)Oedema of Lungs") ~ "lung_disease",
+      str_detect(cause, "(?i)Hem|rhage|Hemm|y Hemm|wound of groin by hog, hem") ~ "hemorrhage",
+       str_detect(cause,"(?i)heart failure") ~ "heart_failure",
+       str_detect(cause,"(?i)NA") ~ "No_details",
+       str_detect(cause,"(?i)missing") ~ "No_details",
+      str_detect(cause,"(?i)unknown") ~ "No_details",
+      str_detect(cause,"(?i)information") ~ "No_details",
+       str_detect(cause,"(?i)Influenza") ~ "Influenza",
+      is.na(cause) ~ "No_details",   
+      TRUE ~ cause
          )) |> 
-   filter(if_any(everything(), ~!is.na(.))) |> 
+ filter(!is.na(category), category != "", category != "5 years") |>
+  filter(!is.na(category), category != "", category != "one day") |>
+   filter(!is.na(category), category != "") |>
   group_by(category) |> 
   summarize(total=sum(n)) |> 
-  arrange(desc(total))
-
+  arrange(desc(total)) 
 
 ```
 
@@ -175,6 +159,10 @@ death_categories_summary <- death_categories |>
 
 death_categories_summary
 
+```
+
+```{r}
+write_csv(death_categories_summary, "output/death_categories_summary_nov26.csv")
 ```
 
 
@@ -189,6 +177,66 @@ datatable(death_categories_summary,
 
 ```
 
+#higher level categories
+```{r}
+#dl code
+
+dc<-dc %>% 
+  mutate(category_broad = case_when(
+    str_detect(category, "tuberculosis|pneumonia|asthma|influenza|Immediate Asphyxia|Spinal Paralysis|Suffocation|lung_disease") ~ "respiratory",
+    str_detect(category, "meningitis|peritonitis|No further information given|encephalitis|Diptheria") ~ "infection",
+    str_detect(category, "typhoid|gastric_ulcer") ~ "intenstinal",
+    str_detect(category, "Chronic Nephritis|acute parenchymatous nephritis anasarca") ~ "kidney disease",
+    str_detect(category, "cardiac_issues") ~ "cardiac",
+    str_detect(category, "hemorrhage|Compression of the Brain") ~ "trauma",
+    str_detect(category, "exhaustion|delirium|asthenia|Accidental Drowning|Prematurely 6 weeks gestation|Immaturely 6 month baby") ~ "other"
+    )) 
+```
+
+#respiratory
+##tuberculosis
+##pneumonia
+##asthma
+##influenza
+##Immediate Asphyxia #(complications from phthisis)
+##Spinal Paralysis #(oedema of the lungs)
+##Suffocation #(pneumonia)
+##lung_disease
+
+
+#intenstinal
+##typhoid
+##gastric_ulcer
+
+
+#cardiac
+##cardiac_issues
+
+#trauma
+##hemorrhage
+##Compression of the Brain
+
+
+#infection
+##meningitis
+##peritonitis
+##No further information given #peritonitis
+##encephalitis
+##Diptheria
+
+#kidney disease
+##Chronic Nephritis
+##acute parenchymatous nephritis anasarca
+
+#other
+##exhaustion
+##delirium
+##asthenia
+##Accidental Drowning
+##Prematurely 6 weeks gestation
+##Immaturely 6 month baby
+
+#Not sure how you want me to prioritize
 
 
 ## Mapping place of origin
@@ -224,7 +272,7 @@ dc <- dc |>
          str_detect(origin, "(?i)Salisbury") ~ "Wicomico County",
          str_detect(origin, "(?i)Pocomoke") ~ "Worcester County",
          str_detect(origin, "(?i)Anne Arrundel County") ~ "Anne Arundel County",
-         str_detect(origin, "(?i)Chaptico, St. Marys County, Md.") ~ "St. Marys County",
+         str_detect(origin, "(?i)Chaptico, St. Marys County, Md.") ~ "St. Mary's County",
          str_detect(origin, "(?i)Dunkirk, Md.") ~ "Calvert County",
          str_detect(origin, "(?i)Elkton, Md.") ~ "Cecil County",
         str_detect(origin, "(?i)Ellicott City MD") ~ "Howard County",
@@ -238,8 +286,8 @@ dc <- dc |>
          str_detect(origin, "(?i)prince george") ~ "Prince George's County",
          str_detect(origin, "(?i)anne arr") ~ "Anne Arundel County",  # Catches misspelling
          str_detect(origin, "(?i)harford county") ~ "Harford County",
-         str_detect(origin, "(?i)st\\.? mary") ~ "St. Mary's County",
-        str_detect(origin, "(?i)St. Marys County") ~ "St. Mary's County",
+         str_detect(origin, "(?i)chaptico") ~ "St. Mary's County",
+       # str_detect(origin, "St.Marys County") ~ "St. Mary's County",
           # Non-Maryland locations
          str_detect(origin, "(?i)(^va\\.?$|virginia|^w\\.? ?va|washington.*d\\.?c|^del|^dc$|florida|^woodbine|^alabama)") ~ "Outside Maryland",
         str_detect(origin, "(?i)Not known") ~ "Unknown",
@@ -281,6 +329,12 @@ dc_map <- dc |>
 
 
 ```
+#save map file
+```{r}
+
+saveRDS(dc_map, "output/dc_map_nov_26.rds")
+
+```
 
 ```{r}
 dc_map <- dc_map |> 
@@ -288,6 +342,8 @@ dc_map <- dc_map |>
   sf::st_transform(4326) |> 
   add_count(county_origin, name = "county_count")
 ```
+
+
 
 
 # Updated map

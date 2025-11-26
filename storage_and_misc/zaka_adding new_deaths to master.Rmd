@@ -140,7 +140,7 @@ combined_data2 <- combined_data |>
 
 ```{r}
 
-write_csv(combined_data, "master_index_nov23.csv")
+write_csv(combined_data2, "master_index_nov24.csv")
 
 ```
 
