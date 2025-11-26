@@ -96,7 +96,7 @@ ggplot(aes(x = approx_age, y = total, fill = total)) +
 
 
 
-
+**fix to get rid of no_details**
 ## Top Causes of Death
 
 ```{r echo=FALSE}
@@ -108,6 +108,20 @@ datatable(summary_death,
           options = list(pageLength = 50))
 
 ```
+
+
+**add race of the boys**
+
+```{r}
+
+dc |> 
+  count(color_or_race) |> 
+  mutate(pct = (n/sum(n)))
+
+
+```
+
+
 
 
 ## Origins of the boys
