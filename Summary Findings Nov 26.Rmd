@@ -1,20 +1,22 @@
 ---
-title: "Summary Findings"
-author: "Wells and Jour 772 Class"
-date: "2025-11-26"
 output: html_document
 ---
 
 ```{r setup, include=FALSE}
+# title: "Summary Findings"
+# author: "Wells and Jour 772 Class"
+# date: "2025-11-30"
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Load libraries
+
+
 ```{r include=FALSE}
 # install.packages("htmlwidgets")
 # install.packages("leaflet")
 #install.packages("sf")
 #install.packages('DT')
+#install.packages("formattable")
 library(DT)
 library(tidyverse)
 library(rio)
@@ -23,58 +25,105 @@ library(htmlwidgets)
 library(leaflet)
 library(sf)
 library(googlesheets4)
+library(formattable)
 ```
-# Summary Data Analysis of Cheltenham, Jessup Death Certificates for Young Inmates
 
-<img src="images/Cheltenham_2025-11-25 10.29.24_Wells_.jpg" width="500" height="500" /> 
+<center>
 
-We analyzed **203 death certificates**, including 170 for Cheltenham and 31 for Jessup and 2 for Hickey
+# Death Certificates of Cheltenham, Jessup Youth
+
+### Draft analysis by Capital News Service
+
+<center>
+
+<img src="images/Cheltenham_2025-11-25 10.29.24_Wells_.jpg" width="500" height="500"/>
+
+</center>
+
+We have confirmed records for **172 deaths**, including 139 for Cheltenham and 31 for Jessup and 2 for Hickey
 
 ### Sample death certificate
 
-<img src="images/Ames Jr, Fred.jpg" width="500" height="500" />
+<img src="images/Ames Jr, Fred.jpg" width="500" height="500"/>
 
 ## Processed through Google Gemini AI
 
-<img src="images/ames_post_ai.png" width="500" height="500" />
+<img src="images/ames_post_ai.png" width="500" height="500"/>
 
 
 
-
-Import Extracted Death Certificate Data
 ```{r include=FALSE}
-
+#Import Extracted Death Certificate Data
 gs4_deauth()  
-extracted_dc <- read_sheet("https://docs.google.com/spreadsheets/d/1iSCOX71aGdY9t39qPS1ABvAzSDIOqeAV58zjv2LCxMc/edit?usp=sharing", col_types = "c") |> 
+extracted_dc <- read_sheet("https://docs.google.com/spreadsheets/d/13CthhhfLHiPZqr1P67SCa9BVUyb5Rl6OBhUwvqawDEk/edit?usp=sharing", col_types = "c") |> 
      clean_names() |> 
-  mutate(approx_age = as.numeric(approx_age),
-         death_year = as.numeric(death_year))
+  mutate(approx_age = as.numeric(str_extract(age_on_death_certificate, "^\\d+")),
+         death_date1 = death_date)
 
 
+```
+
+```{r include=FALSE}
+#Process and standardize dates
+library(lubridate)
+
+# Function to parse the different date formats
+standardize_date <- function(date_string) {
+  if (is.na(date_string) || date_string == "N/A") {
+    return(NA)
+  }
+  
+  # Try parsing as "d Mon yyyy" format first
+  parsed <- dmy(date_string, quiet = TRUE)
+  
+  # If that fails, try "m/d/yyyy" format
+  if (is.na(parsed)) {
+    parsed <- mdy(date_string, quiet = TRUE)
+  }
+  
+  # If still fails, try "Month yyyy" format (will default to 1st of month)
+  if (is.na(parsed)) {
+    parsed <- my(date_string, quiet = TRUE)
+  }
+  
+  return(parsed)
+}
+
+extracted_dc$death_date_clean <- sapply(extracted_dc$death_date1, standardize_date)
+extracted_dc$death_date_clean <- as.Date(extracted_dc$death_date_clean, origin = "1970-01-01")
 ```
 
 ## Statistics
-```{r}
+
+**Age 16 is the median age of death.**
+
+```{r echo=FALSE}
 summary(extracted_dc$approx_age, NA.rm=true)
 
-# Two infants died at birth at Jessup, being the youngest. The youngest died at about age 9 and the oldest at age 21. The average age was 15.5 years and the median was age 16
+# Two infants died at birth at Jessup, being the youngest. The youngest died at about age 9 and the oldest at age 21. The average age was 15.6 years and the median was age 16
 ```
 
-## Count of institution
 
-```{r}
+
+## Deaths by Institution
+
+```{r echo=FALSE}
 extracted_dc |> 
-  mutate(facility = tolower(facility)) |> 
+  mutate(facility = str_to_sentence(facility)) |> 
   count(facility) |> 
-  arrange(desc(n))
+  arrange(desc(n)) |> 
+  rename(Facility = facility, Total = n) |> 
+datatable(caption = "Total Deaths by Institution",
+          options = list(
+            pageLength = 5,
+              dom = 't' ))
 
 ```
-
 
 We have records for 170 deaths of boys and young men at Cheltenham, 31 at Jessup and 2 at Hickey.
 
-
 ## Graph of age
+
 ```{r echo=FALSE}
 extracted_dc |> 
   filter(approx_age!="NA") |> 
@@ -86,46 +135,57 @@ ggplot(aes(x = approx_age, y = total, fill = total)) +
   scale_x_continuous(breaks=c(9:21)) +
   labs(title = "Ages of Cheltenham, Jessup youth deaths",
        subtitle = "From 1880-1939, Approximate Ages",
-       caption = "n=203. Graph does not have ages for 53 individuals. Graphic by Rob Wells, 11-26-2023",
+       caption = "n=172. Graph does not have ages for 15 individuals. Graphic by Rob Wells, 11-30-2023",
        y="Number",
        x="Approximate Ages")
 
 
 ```
 
-
-
-
-**fix to get rid of no_details**
-## Top Causes of Death
+## Race of the boys
 
 ```{r echo=FALSE}
-summary_death <- read_csv("output/death_categories_summary_nov26.csv")
 
 
+extracted_dc |> 
+   mutate(race_color = case_when(
+     is.na(color_or_race) ~ "No Data", 
+     TRUE ~ color_or_race)
+         ) |> 
+  count(race_color) |> 
+  mutate(pct = formattable::percent(n/sum(n), digits=0)) |>
+   ggplot(aes(x = reorder(race_color, -n), y = n, fill =n))+
+  geom_col(position = "dodge") +
+  theme(legend.position = "none") +
+  scale_y_continuous(limits=c(0,170)) +
+  geom_text(aes(label = (n)), size = 4, vjust = -.5) +
+  labs(title = "Race of Cheltenham, Jessup youth deaths",
+       subtitle = "From 1880-1939, Approximate Ages",
+       caption = "n=172. Graphic by Rob Wells, 11-30-2023",
+       y="Number",
+       x="Race")
+
+
+
+```
+
+## Top Causes of Death
+
+```{r include=FALSE}
+summary_death <- read_csv("output/death_categories_summary_nov26.csv") |> 
+ mutate(category = str_to_sentence(category)) |> 
+  filter(!category =="No_details")
+```  
+
+```{r echo=FALSE}
 datatable(summary_death,
           caption = "Causes of Death, Cheltenham, Jessup",
           options = list(pageLength = 50))
 
 ```
 
-
-**add race of the boys**
-
-```{r}
-
-dc |> 
-  count(color_or_race) |> 
-  mutate(pct = (n/sum(n)))
-
-
-```
-
-
-
-
 ## Origins of the boys
-read map file
+
 ```{r echo=FALSE}
 
 map <- readRDS("output/dc_map_nov_26.rds")
