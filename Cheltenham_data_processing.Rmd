@@ -10,8 +10,19 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r}
+# install.packages("htmlwidgets")
+# install.packages("leaflet")
+#install.packages("sf")
+#install.packages('DT')
+library(DT)
 library(tidyverse)
+library(rio)
 library(janitor)
+library(htmlwidgets)
+library(leaflet)
+library(sf)
+library(googlesheets4)
+library(formattable)
 ```
 ### Import extracted data
 --data cleaning needs to remove a strange "" artifact and remove leading and trailing spaces
@@ -19,7 +30,7 @@ library(janitor)
 
 #master_index <- read_csv("MASTER_INDEX_11_3_2025.csv") |> 
 gs4_deauth()  
-master_index <- read_sheet("https://docs.google.com/spreadsheets/d/1LRSjhsrW1BJ2nKj78lGHR0C_8dxiaGhQFE2pzwSghx8/edit?usp=sharing", sheet = "Master_Index_11_19") |> 
+master_index <- read_sheet("https://docs.google.com/spreadsheets/d/1LRSjhsrW1BJ2nKj78lGHR0C_8dxiaGhQFE2pzwSghx8/edit?usp=sharing", sheet = "master_index_11_24", col_types ="c") |> 
      clean_names() |> 
    mutate(name = str_replace(name, "", ""),
    name = str_squish(name)) 
@@ -31,6 +42,52 @@ master_index <- read_sheet("https://docs.google.com/spreadsheets/d/1LRSjhsrW1BJ2
 	
 
 ```
+
+### Import Extracted Death Certificate Data
+```{r}
+
+gs4_deauth()  
+dc <- read_sheet("https://docs.google.com/spreadsheets/d/13CthhhfLHiPZqr1P67SCa9BVUyb5Rl6OBhUwvqawDEk/edit?usp=sharing", sheet = "Form Responses 1", col_types ="c") |> 
+     clean_names() |> 
+     mutate(name = str_replace(name, "", "")) |> 
+    mutate(approx_age = as.numeric(str_extract(age_on_death_certificate, "^\\d+")),
+         death_date1 = death_date)
+
+
+#imports 176 entries - Dec 4
+
+
+```
+
+
+### names that don't match
+
+```{r}
+no_match <- dc |> 
+  anti_join(master_index, by=c("name"))
+
+#only one name doesnt match and that's wm weinberg. that';s a valid entry. rsw 12-5
+
+```
+
+
+
+```{r}
+dc2 <- dc |> 
+  mutate(
+    primary_death = str_trim(str_split_i(cause_of_death, ";", 1)),
+    secondary_death = str_trim(str_replace(cause_of_death, "^[^;]+;\\s*", ""))
+  ) |>
+  mutate(secondary_death = if_else(secondary_death == primary_death | !str_detect(cause_of_death, ";"), 
+                                    NA_character_, 
+                                    secondary_death))
+
+write_csv(dc2, "dc2.csv")
+
+
+```
+
+
 
 ### Fix Names
 --AI code to extract the name into first, middle and last.

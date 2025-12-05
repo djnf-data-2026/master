@@ -55,10 +55,11 @@ We have confirmed records for **172 deaths**, including 139 for Cheltenham and 3
 ```{r include=FALSE}
 #Import Extracted Death Certificate Data
 gs4_deauth()  
-extracted_dc <- read_sheet("https://docs.google.com/spreadsheets/d/13CthhhfLHiPZqr1P67SCa9BVUyb5Rl6OBhUwvqawDEk/edit?usp=sharing", col_types = "c") |> 
+extracted_dc <- read_sheet("https://docs.google.com/spreadsheets/d/13CthhhfLHiPZqr1P67SCa9BVUyb5Rl6OBhUwvqawDEk/edit?usp=sharing", sheet = "master_deaths_dec_5", col_types ="c") |> 
      clean_names() |> 
-  mutate(approx_age = as.numeric(str_extract(age_on_death_certificate, "^\\d+")),
+    mutate(approx_age = as.numeric(str_extract(age_on_death_certificate, "^\\d+")),
          death_date1 = death_date)
+
 
 
 ```
@@ -120,7 +121,7 @@ datatable(caption = "Total Deaths by Institution",
 
 ```
 
-We have records for 170 deaths of boys and young men at Cheltenham, 31 at Jessup and 2 at Hickey.
+We have records for 142 deaths of boys and young men at Cheltenham, 35 at Jessup and 1 at Hickey.
 
 ## Graph of age
 
@@ -134,13 +135,35 @@ ggplot(aes(x = approx_age, y = total, fill = total)) +
   theme(legend.position = "none") +
   scale_x_continuous(breaks=c(9:21)) +
   labs(title = "Ages of Cheltenham, Jessup youth deaths",
-       subtitle = "From 1880-1939, Approximate Ages",
-       caption = "n=172. Graph does not have ages for 15 individuals. Graphic by Rob Wells, 11-30-2023",
+       subtitle = "From 1877-1941, Approximate Ages",
+       caption = "n=178. Graphic by Rob Wells, 12-5-2025",
        y="Number",
        x="Approximate Ages")
 
 
 ```
+
+## Distribution of Cases
+```{r echo=FALSE}
+
+extracted_dc |> 
+  mutate(death_year = year(death_date_clean),
+         death_decade = floor(death_year / 10) * 10) |> 
+  group_by(death_year) |> 
+  count() |> 
+ggplot(aes(x = death_year, y = n, fill = n)) +
+  geom_col(position = "dodge") +
+  theme(legend.position = "none") +
+  scale_x_continuous(breaks= seq(1870,1950, 5)) +
+  labs(title = "Total Documented Cheltenham, Jessup, Hickey Youth deaths",
+       subtitle = "From 1877-1941",
+       caption = "n=178. Graphic by Rob Wells, 12-5-2025",
+       y="",
+       x="death_year")
+
+```
+
+
 
 ## Race of the boys
 
@@ -169,25 +192,54 @@ extracted_dc |>
 
 ```
 
-## Top Causes of Death
+## Primary Causes of Death
 
 ```{r include=FALSE}
-summary_death <- read_csv("output/death_categories_summary_nov26.csv") |> 
+summary_death <- read_csv("output/primary_death_categories_summary_dec5.csv") |> 
+  rename(category = cause) |> 
  mutate(category = str_to_sentence(category)) |> 
   filter(!category =="No_details")
 ```  
 
 ```{r echo=FALSE}
 datatable(summary_death,
-          caption = "Causes of Death, Cheltenham, Jessup",
-          options = list(pageLength = 50))
+          caption = "Primary Causes of Death, Cheltenham, Jessup, 1877-1941",
+          options = list(pageLength = 10))
 
 ```
+
+## Occupations of Boys
+```{r echo=FALSE}
+
+extracted_dc |> 
+  rename(occupation = occupation_relation_was_disease_or_injury_in_any_way_related_to_occupation_of_deceased) |> 
+  group_by(occupation) |> 
+  count(occupation) |> 
+  arrange(desc(n)) |> 
+  datatable(caption = "Occupations of Cheltenham, Jessup Boys, 1877-1941",
+          options = list(pageLength = 10))
+
+```
+
+
+## Boys and Causes of Death
+```{r echo=FALSE}
+extracted_dc |> 
+  rename(Age = approx_age, Death_Date = death_date_clean, Name = name, Cause = cause_of_death, Race = color_or_race) |> 
+  select(Name, Age, Cause, Death_Date, Race) |> 
+  arrange(Death_Date) |> 
+   datatable(caption = "Names Deceased Boys Cheltenham, Jessup, Hickey, 1877-1941",
+          options = list(pageLength = 25))
+
+
+```
+
+
 
 ## Origins of the boys
 
 ```{r echo=FALSE}
-
+#needs an update
 map <- readRDS("output/dc_map_nov_26.rds")
 
 
