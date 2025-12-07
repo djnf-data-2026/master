@@ -266,6 +266,13 @@ extracted_dc |>
 
 <br>
 <br>
+**Infectious diseases all causes of death, primary and secondary**
+<br>
+<img src="images/infectious_diseases_dec_7.png" width="1000" height="500"/>
+
+
+<br>
+<br>
 
 ## Origins of the boys
 

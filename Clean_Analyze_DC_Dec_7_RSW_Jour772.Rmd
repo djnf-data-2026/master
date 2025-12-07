@@ -455,7 +455,7 @@ dc2 <- dc2 %>%
     cat_premature_birth = premature_birth,
     cat_exhaustion = exhaustion | asthenia,
     cat_other =  blood_disease  | spine_disease | drowning |             str_detect(cause_death_update, "(?i)No further information given | Spinal Paralysis"),
-    cat_no_details = no_details
+    cat_no_details = no_details | illegible_entry
   )
 ```
 
@@ -464,7 +464,7 @@ dc2 <- dc2 %>%
 ## Check higher level categories totals
 ```{r}
 # Summing higher level categories totals
-dc2 %>%
+summary_cat_dc2_long <- dc2 %>%
   summarise(
     cat_respiratory = sum(cat_respiratory, na.rm = TRUE),
     cat_infection = sum(cat_infection, na.rm = TRUE),
@@ -479,6 +479,28 @@ dc2 %>%
   ) %>%
   pivot_longer(everything(), names_to = "category", values_to = "count") %>%
   arrange(desc(count))
+summary_cat_dc2_long 
+```
+
+
+```{r}
+ dc2 %>%
+  group_by(death_year) %>%
+  summarise(
+    cat_respiratory = sum(cat_respiratory, na.rm = TRUE),
+    cat_infection = sum(cat_infection, na.rm = TRUE),
+    cat_intestinal_kidney = sum(cat_intestinal_kidney, na.rm = TRUE),
+    cat_cardiac = sum(cat_cardiac, na.rm = TRUE),
+    cat_violent = sum(cat_violent, na.rm = TRUE),
+    cat_trauma = sum(cat_trauma, na.rm = TRUE),
+    cat_exhaustion = sum(cat_exhaustion, na.rm = TRUE),
+    cat_other = sum(cat_other, na.rm = TRUE),
+    cat_premature_birth = sum(cat_premature_birth, na.rm = TRUE),
+    cat_no_details = sum(cat_no_details, na.rm = TRUE)
+  ) %>%
+  pivot_longer(-death_year, names_to = "category", values_to = "count") %>%
+  arrange(death_year, desc(count))
+# summary_cat_dc2_long
 ```
 
 
@@ -529,15 +551,15 @@ cardiac |>
 ### Tuberculosis by year
 ```{r}
 
-summary_long |> 
+summary_long_dc2 |> 
   filter(cause == "tuberculosis") |> 
   group_by(death_year) |> 
  ggplot(aes(x = death_year, y = count, fill = count)) +
   geom_col(position = "dodge") +
   theme(legend.position = "none") +
   labs(title = "Tuberculosis Deaths at Cheltenham, Jessup",
-       subtitle = "From 1880-1941",
-       caption = "Graphic by Rob Wells, 12-4-2025",
+       subtitle = "All mentions of TB on death certificates, from 1877-1941",
+       caption = "Graphic by Rob Wells, 12-7-2025",
        y="Number",
        x="")
 
@@ -546,85 +568,82 @@ summary_long |>
 
 
 
-# Broad category by year
+#1 Broad category by year, all causes
+
+Ruiz and Wells
 ```{r}
 #RR was here
 # Summarize by broad category and year
-category_summary <- category_new %>%
-  group_by(death_year, category_broad) %>%
-  summarise(total_count = sum(count, na.rm = TRUE), .groups = "drop") %>%
-  filter(!is.na(category_broad))
+# count_cat_dc2_long  <- summary_long_dc2 %>%
+#   group_by(death_year, cause) %>%
+#   summarise(total_count = sum(count, na.rm = TRUE), .groups = "drop") %>%
+#   filter(!is.na(cause))
+
+summary_cat_dc2_long <- dc2 %>%
+  group_by(death_year) %>%
+  summarise(
+    cat_respiratory = sum(cat_respiratory, na.rm = TRUE),
+    cat_infection = sum(cat_infection, na.rm = TRUE),
+    cat_intestinal_kidney = sum(cat_intestinal_kidney, na.rm = TRUE),
+    cat_cardiac = sum(cat_cardiac, na.rm = TRUE),
+    cat_violent = sum(cat_violent, na.rm = TRUE),
+    cat_trauma = sum(cat_trauma, na.rm = TRUE),
+    cat_exhaustion = sum(cat_exhaustion, na.rm = TRUE),
+    cat_other = sum(cat_other, na.rm = TRUE),
+    cat_premature_birth = sum(cat_premature_birth, na.rm = TRUE),
+    cat_no_details = sum(cat_no_details, na.rm = TRUE)
+  ) %>%
+  pivot_longer(-death_year, names_to = "category", values_to = "count") %>%
+  arrange(death_year, desc(count)) |> 
+  mutate(category = str_remove(category, "cat_"))
+
+
 
 # Create bar chart
-ggplot(category_summary, aes(x = death_year, y = total_count, fill = category_broad)) +
+ggplot(summary_cat_dc2_long, aes(x = death_year, y = count, fill = category)) +
   geom_col(position = "stack") +
-  labs(title = "Causes of Death by Category at Cheltenham, Jessup",
+    scale_x_continuous(breaks= seq(1870,1950, 5)) +
+  labs(title = "All Causes of Death by Category at Cheltenham, Jessup",
        subtitle = "Totals include multiple entries for individuals with more than one cause of death.",
-       caption = "Graphic by Raphael Romero Ruiz, 12-2-2025",
-       y = "Number",
-       x = "Year",
+       caption = "Graphic by Raphael Romero Ruiz & Rob Wells, 12-7-2025",
+       y = "Total Count",
+       x = "",
        fill = "Category") +
   theme_minimal() +
   theme(legend.position = "bottom",
-        plot.title = element_text(face = "bold", size = 16),
-        plot.subtitle = element_text(size = 11),
-        axis.text.x = element_text(angle = 45, hjust = 1))
-ggsave("category_summary.png",  width = 12, height = 6, dpi = 300)
+        legend.text = element_text(size = 6),
+        legend.title = element_text(size = 6),
+        legend.key.size = unit(0.3, "cm"),
+        plot.title = element_text(face = "bold", size = 14),
+        plot.subtitle = element_text(size = 8),
+        axis.text.x = element_text(angle = 45, hjust = 1)) +
+  guides(fill = guide_legend(nrow = 1, byrow = TRUE))
+ggsave("images/all_category_summary_dec_7.png",  width = 12, height = 6, dpi = 300)
 ```
 
 
-
-# Broad category by year
-```{r}
-#RR was here
-#DL edit with new table names
-# Summarize by broad category and year
-category_summary <- cat_summary_long %>%
-  group_by(death_year, cause) %>%
-  summarise(total_count = sum(count, na.rm = TRUE), .groups = "drop") %>%
-  filter(!is.na(death_year)) %>% 
-  mutate(cause= recode(cause,
-                               "cat_respiratory" = "Respiratory", 
-                               "cat_infection" = "Infection",
-                               "cat_intestinal" = "Intestinal",
-                               "cat_kidney_disease" = "Kidney Disease",
-                               "cat_cardiac" = "Cardiac",
-                               "cat_trauma" = "Trauma",
-                               "cat_exhaustion" = "Exhaustion",
-                               "cat_other" = "Other",
-                               "cat_no_details" = "No Details"))
-
-# Create bar chart
-ggplot(category_summary, aes(x = death_year, y = total_count, fill = cause)) +
-  geom_col(position = "stack") +
-  labs(title = "Causes of Death by Category at Cheltenham, Jessup",
-       subtitle = "Totals include multiple entries for individuals with more than one cause of death.",
-       caption = "Graphic by Raphael Romero Ruiz, 12-2-2025, Edited by David Landerman 12-5-2025",
-       y = "Number",
-       x = "Year",
-       fill = "Category") +
-  theme_minimal() +
-  theme(legend.position = "bottom",
-        plot.title = element_text(face = "bold", size = 16),
-        plot.subtitle = element_text(size = 11),
-        axis.text.x = element_text(angle = 45, hjust = 1))
-ggsave("category_summary.png",  width = 12, height = 6, dpi = 300)
-
-```
-
-
+# X - Facet Graphic: Causes of Death Over Time
+Sophie and Zaka
 ```{r}
 ##SH: LET ME KNOW IF THIS LOOKS, AND I CAN GO BACK AND CHANGE IT IF NEED BE.
-summary_long |>
-  ggplot(aes(x = death_year, y = count, fill = cause)) +
+summary_cat_dc2_long |>
+  ggplot(aes(x = death_year, y = count, fill = category)) +
   geom_col(alpha = 0.85) +
-  facet_wrap(~ cause, scales = "free_y", ncol = 3) +  # Creates separate panel for each cause
+  facet_wrap(~ category, scales = "free_y", ncol = 3) +  # Creates separate panel for each cause
   scale_fill_brewer(palette = "Set3") +
-  scale_x_continuous(breaks = seq(1880, 1940, by = 20)) +
-  labs(
+  scale_x_continuous(breaks = seq(1870, 1940, by = 10)) +
+   scale_y_continuous(breaks = function(x) {
+    max_val <- max(x, na.rm = TRUE)
+    if (max_val <= 3) {
+      0:ceiling(max_val)
+    } else {
+      scales::breaks_pretty(n = 5)(x)
+    }
+  }, labels = scales::label_number(accuracy = 1)) +
+ labs(
     title = "Causes of Death Over Time: Cheltenham, Jessup",
     subtitle = "Each disease shown in separate panel, 1880-1941",
-    caption = "Graphic by Sophia Hernandez-Piña and Zaka Hossain",
+    caption = "Graphic by Sophia Hernandez-Piña, Zaka Hossain & Rob Wells, Dec 7 2025",
     x = "Year",
     y = "Number of Deaths"
   ) +
@@ -635,72 +654,29 @@ summary_long |>
     plot.caption = element_text(hjust = 0, color = "gray50"),
     legend.position = "none",  # Remove legend since facet labels show causes
     panel.grid.minor = element_blank(),
-    axis.text.x = element_text(angle = 45, hjust = 1, size = 8),
+    axis.text.x = element_text(angle = 90, hjust = 1, size = 8),
+    axis.text.y = element_text(size = 7),
     strip.text = element_text(face = "bold", size = 9),  # Facet labels
     plot.margin = margin(10, 10, 10, 10)
   )
 
-ggsave("faceted_causes_of_death.png", width = 14, height = 10, dpi = 300)
-```
-
-### 2. Infectious Disease Trends - Line Chart with Annotations
-#rsw comment: make into a bar chart
-```{r}
-summary_long |>
-  filter(cause %in% c("tuberculosis", "pneumonia", "typhoid", "meningitis", "influenza")) |>
-  ggplot(aes(x = death_year, y = count, color = cause, group = cause)) +
-  geom_line(linewidth = 1.2, alpha = 0.9) +
-  # Add annotation for Spanish Flu
-  annotate("rect", xmin = 1918, xmax = 1920, ymin = -Inf, ymax = Inf, 
-           alpha = 0.15, fill = "red") +
-  annotate("text", x = 1919, y = 9.5, 
-           label = "Spanish Flu\nPandemic", size = 3, fontface = "italic", color = "darkred") +
-  scale_color_brewer(palette = "Set1",
-                     labels = c("Influenza", "Meningitis", "Pneumonia", 
-                               "Tuberculosis", "Typhoid")) +
-  scale_x_continuous(breaks = seq(1880, 1940, by = 10),
-                     limits = c(1875, 1945),  # Add padding on both sides
-                     expand = expansion(mult = 0.02)) +  # Extra spacing
-  scale_y_continuous(breaks = 1:10,  # Whole numbers 1-10
-                     limits = c(0, 10)) +
-  labs(
-    title = "Infectious Disease Deaths at Cheltenham, Jessup",
-    subtitle = "Tracking major infectious diseases from 1880-1941",
-    caption = "Graphic by Sophia Hernandez-Piña and Zaka Hossain",
-    x = "Year",
-    y = "Number of Deaths",
-    color = "Disease"
-  ) +
-  theme_minimal(base_size = 12) +
-  theme(
-    plot.title = element_text(face = "bold", size = 16, hjust = 0),
-    plot.subtitle = element_text(size = 11, hjust = 0, color = "gray40"),
-    plot.caption = element_text(hjust = 0, color = "gray50"),
-    legend.position = "right",
-    panel.grid.minor = element_blank(),
-    axis.text.x = element_text(angle = 45, hjust = 1, size = 10),
-    plot.margin = margin(10, 20, 10, 10)  # Extra margin for spacing
-  )
-
-#ggsave("infectious_diseases.png", width = 12, height = 6, dpi = 300)
+ggsave("images/faceted_causes_of_death_dec_7.png", width = 14, height = 10, dpi = 300)
 ```
 
 
+### 2. Infectious Diseases Over Time
+Sophie and Zaka
 ```{r}
-##NEW CODE
-summary_long |>
+summary_long_dc2 |>
   filter(cause %in% c("tuberculosis", "pneumonia", "typhoid", "meningitis", "influenza")) |>
-  ggplot(aes(x = death_year, y = count, fill = cause)) +
+  mutate(decade = floor(death_year / 10) * 10) |>
+  group_by(decade, cause) |>
+  summarise(count = sum(count, na.rm = TRUE), .groups = "drop") |>
+  ggplot(aes(x = decade, y = count, fill = cause)) +
   geom_col(position = "dodge", alpha = 0.9) +
-   geom_text(data = top_3_peaks, 
-            aes(label = count), 
-            position = position_dodge(width = 0.9),
-            vjust = -0.5, 
-            size = 3.5,
-            fontface = "bold") +
-   annotate("rect", xmin = 1918, xmax = 1920, ymin = -Inf, ymax = Inf, 
+  annotate("rect", xmin = 1915, xmax = 1925, ymin = -Inf, ymax = Inf, 
            alpha = 0.15, fill = "red") +
-  annotate("text", x = 1919, y = 9.5, 
+  annotate("text", x = 1920, y = max(summary_long_dc2$count) * 0.95, 
            label = "Spanish Flu\nPandemic", size = 3, fontface = "italic", color = "darkred") +
   scale_fill_brewer(palette = "Set1",
                      labels = c("Influenza", "Meningitis", "Pneumonia", 
@@ -708,173 +684,31 @@ summary_long |>
   scale_x_continuous(breaks = seq(1880, 1940, by = 10),
                      limits = c(1875, 1945),
                      expand = expansion(mult = 0.02)) +
-  scale_y_continuous(breaks = 1:10,
-                     limits = c(0, 11)) +
-   labs(
+  labs(
     title = "Infectious Disease Deaths at Cheltenham, Jessup",
-    subtitle = "Tracking major infectious diseases from 1880-1941",
+    subtitle = "Tracking major infectious diseases from 1877-1941, aggregated by decade",
     caption = "Graphic by Sophia Hernandez-Piña and Zaka Hossain",
-    x = "Year",
+    x = "",
     y = "Number of Deaths",
     fill = "Disease"
   ) +
-  theme_minimal(base_size = 12) +
-  theme(
-    plot.title = element_text(face = "bold", size = 16, hjust = 0),
-    plot.subtitle = element_text(size = 11, hjust = 0, color = "gray40"),
-    plot.caption = element_text(hjust = 0, color = "gray50"),
-    legend.position = "right",
-    panel.grid.minor = element_blank(),
-    axis.text.x = element_text(angle = 45, hjust = 1, size = 10),
-    plot.margin = margin(10, 20, 10, 10)
-  )
-ggsave("infectious_diseases.png", width = 12, height = 6, dpi = 300)
+  theme_minimal() +
+  theme(legend.position = "bottom",
+        legend.text = element_text(size = 8),
+        legend.title = element_text(size = 8),
+        legend.key.size = unit(0.3, "cm"),
+        plot.title = element_text(face = "bold", size = 16),
+        plot.subtitle = element_text(size = 11, color = "gray40"),
+        axis.text.x = element_text(angle = 45, hjust = 1)) +
+  guides(fill = guide_legend(nrow = 1, byrow = TRUE))
+
+ggsave("images/infectious_diseases_dec_7.png", width = 12, height = 6, dpi = 300)
 ```
 
-### 2. Infectious Disease Trends - Line Chart with Annotations
-#rsw comment: make into a bar chart
-```{r}
-summary_long |>
-  filter(cause %in% c("tuberculosis", "pneumonia", "typhoid", "meningitis", "influenza")) |>
-  ggplot(aes(x = death_year, y = count, color = cause, group = cause)) +
-  geom_line(linewidth = 1.2, alpha = 0.9) +
-  # Add annotation for Spanish Flu
-  annotate("rect", xmin = 1918, xmax = 1920, ymin = -Inf, ymax = Inf, 
-           alpha = 0.15, fill = "red") +
-  annotate("text", x = 1919, y = 9.5, 
-           label = "Spanish Flu\nPandemic", size = 3, fontface = "italic", color = "darkred") +
-  scale_color_brewer(palette = "Set1",
-                     labels = c("Influenza", "Meningitis", "Pneumonia", 
-                               "Tuberculosis", "Typhoid")) +
-  scale_x_continuous(breaks = seq(1880, 1940, by = 10),
-                     limits = c(1875, 1945),  # Add padding on both sides
-                     expand = expansion(mult = 0.02)) +  # Extra spacing
-  scale_y_continuous(breaks = 1:10,  # Whole numbers 1-10
-                     limits = c(0, 10)) +
-  labs(
-    title = "Infectious Disease Deaths at Cheltenham, Jessup",
-    subtitle = "Tracking major infectious diseases from 1880-1941",
-    caption = "Graphic by Sophia Hernandez-Piña and Zaka Hossain",
-    x = "Year",
-    y = "Number of Deaths",
-    color = "Disease"
-  ) +
-  theme_minimal(base_size = 12) +
-  theme(
-    plot.title = element_text(face = "bold", size = 16, hjust = 0),
-    plot.subtitle = element_text(size = 11, hjust = 0, color = "gray40"),
-    plot.caption = element_text(hjust = 0, color = "gray50"),
-    legend.position = "right",
-    panel.grid.minor = element_blank(),
-    axis.text.x = element_text(angle = 45, hjust = 1, size = 10),
-    plot.margin = margin(10, 20, 10, 10)  # Extra margin for spacing
-  )
-
-#ggsave("infectious_diseases.png", width = 12, height = 6, dpi = 300)
-```
-
-
-### 3. Comparative Heatmap - Disease Intensity Over Time
-#rsw comment : we will remake make this by decade but will have to wait until monday.
-```{r}
-summary_long |>
-  filter(cause %in% c("tuberculosis", "pneumonia", "typhoid", 
-                      "meningitis", "influenza", "cardiac_issues",
-                      "heart_failure", "hemorrhage")) |>
-  mutate(cause_label = str_to_title(str_replace_all(cause, "_", " "))) |>
-  ggplot(aes(x = death_year, y = cause_label, fill = count)) +
-  geom_tile(color = "white", linewidth = 0.5) +
-  geom_text(aes(label = ifelse(count > 0, count, "")), 
-            color = "white", size = 3, fontface = "bold") +
-  scale_fill_gradient2(
-    low = "#f7f7f7", 
-    mid = "#fc8d59", 
-    high = "#b30000",
-    midpoint = 5,
-    na.value = "white",
-    name = "Deaths"
-  ) +
-  scale_x_continuous(breaks = seq(1880, 1940, by = 5), expand = c(0,0)) +
-  # Add vertical line for Spanish Flu
-  geom_vline(xintercept = c(1918, 1920), color = "darkred", 
-             linetype = "dashed", linewidth = 0.8, alpha = 0.5) +
-  labs(
-    title = "Disease Mortality Heatmap: Cheltenham, Jessup (1880-1941)",
-    subtitle = "Darker colors indicate higher death counts | Dashed vertical lines mark Spanish Flu pandemic (1918-1920)",
-    caption = "Graphic by Sophia Hernandez-Piña and Zaka Hossain",
-    x = "Year",
-    y = "Cause of Death"
-  ) +
-  theme_minimal(base_size = 11) +
-  theme(
-    plot.title = element_text(face = "bold", size = 16),
-    plot.subtitle = element_text(size = 10, color = "gray40"),
-    plot.caption = element_text(hjust = 0, color = "gray50"),
-    axis.text.x = element_text(angle = 45, hjust = 1),
-    axis.text.y = element_text(size = 10),
-    panel.grid = element_blank(),
-    legend.position = "right"
-  )
-#ggsave("heat_map_infectious_diseases.png", width = 12, height = 6, dpi = 300)
-```
-
-# Average Annual Deaths by Time Period
-#make this a tuberculosis only graphic
-
-```{r}
-summary_long |>
-  filter(cause %in% c("tuberculosis", "pneumonia", "influenza")) |>
-  mutate(
-    period = case_when(
-      death_year < 1918 ~ "Pre-Pandemic (1880-1917)",
-      death_year >= 1918 & death_year <= 1920 ~ "Pandemic (1918-1920)",
-      death_year > 1920 ~ "Post-Pandemic (1921-1941)"
-    ),
-    # Reorder the periods
-    period = factor(period, levels = c("Pre-Pandemic (1880-1917)", 
-                                       "Pandemic (1918-1920)", 
-                                       "Post-Pandemic (1921-1941)")),
-    cause_label = case_when(
-      cause == "tuberculosis" ~ "Tuberculosis",
-      cause == "pneumonia" ~ "Pneumonia",
-      cause == "influenza" ~ "Influenza"
-    )
-  ) |>
-  group_by(period, cause_label) |>
-  summarise(avg_deaths = mean(count, na.rm = TRUE), .groups = "drop") |>
-  ggplot(aes(x = cause_label, y = avg_deaths, fill = period)) +
-  geom_col(position = "dodge", width = 0.7) +
-  geom_text(aes(label = round(avg_deaths, 1)), 
-            position = position_dodge(width = 0.7),
-            vjust = -0.5, size = 3.5, fontface = "bold") +
-  scale_fill_manual(
-    values = c("Pre-Pandemic (1880-1917)" = "skyblue",
-               "Pandemic (1918-1920)" = "red",
-               "Post-Pandemic (1921-1941)" = "lightblue")
-  ) +
-  labs(
-    title = "Average Annual Deaths by Time Period",
-    subtitle = "Comparing respiratory disease mortality before, during, and after the Spanish Flu pandemic",
-    caption = "Graphic by Sophia Hernandez-Piña and Zaka Hossain",
-    x = "Disease",
-    y = "Average Deaths Per Year",
-    fill = "Time Period"
-  ) +
-  theme_minimal(base_size = 12) +
-  theme(
-    plot.title = element_text(face = "bold", size = 16, hjust = 0),
-    plot.subtitle = element_text(size = 11, hjust = 0, color = "gray40"),
-    plot.caption = element_text(hjust = 0, color = "gray50"),
-    legend.position = "bottom",
-    panel.grid.minor = element_blank(),
-    panel.grid.major.x = element_blank()
-  )
-#ggsave("pandemic_deaths_comparison.png", width = 12, height = 6, dpi = 300)
-```
-
+## 5: Tuberculosis only
 ```{r}
 ## SH: NEW CODE
-summary_long |>
+summary_long_dc2|>
   filter(cause == "tuberculosis") |>  # Only tuberculosis
   mutate(
     period = case_when(
@@ -915,7 +749,7 @@ summary_long |>
     panel.grid.major.x = element_blank(),
     axis.text.x = element_text(angle = 15, hjust = 1)
   )
-ggsave("tuberculosis_by_period.png", width = 10, height = 6, dpi = 300)
+ggsave("images/tuberculosis_by_period_dec_7.png", width = 10, height = 6, dpi = 300)
 ```
 
 ## Mapping place of origin
@@ -1069,3 +903,53 @@ leafMap <- leaflet(data = dc_map) %>%
 leafMap
 saveWidget(leafMap, "inmates_map_nov_18.html")
 ```
+
+
+#------------------------------------------------------------------------------
+# Notes
+
+### 3. Comparative Heatmap - Disease Intensity Over Time
+#rsw comment : we will remake make this by decade but will have to wait until monday.
+```{r}
+summary_long |>
+  filter(cause %in% c("tuberculosis", "pneumonia", "typhoid", 
+                      "meningitis", "influenza", "cardiac_issues",
+                      "heart_failure", "hemorrhage")) |>
+  mutate(cause_label = str_to_title(str_replace_all(cause, "_", " "))) |>
+  ggplot(aes(x = death_year, y = cause_label, fill = count)) +
+  geom_tile(color = "white", linewidth = 0.5) +
+  geom_text(aes(label = ifelse(count > 0, count, "")), 
+            color = "white", size = 3, fontface = "bold") +
+  scale_fill_gradient2(
+    low = "#f7f7f7", 
+    mid = "#fc8d59", 
+    high = "#b30000",
+    midpoint = 5,
+    na.value = "white",
+    name = "Deaths"
+  ) +
+  scale_x_continuous(breaks = seq(1880, 1940, by = 5), expand = c(0,0)) +
+  # Add vertical line for Spanish Flu
+  geom_vline(xintercept = c(1918, 1920), color = "darkred", 
+             linetype = "dashed", linewidth = 0.8, alpha = 0.5) +
+  labs(
+    title = "Disease Mortality Heatmap: Cheltenham, Jessup (1880-1941)",
+    subtitle = "Darker colors indicate higher death counts | Dashed vertical lines mark Spanish Flu pandemic (1918-1920)",
+    caption = "Graphic by Sophia Hernandez-Piña and Zaka Hossain",
+    x = "Year",
+    y = "Cause of Death"
+  ) +
+  theme_minimal(base_size = 11) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    plot.subtitle = element_text(size = 10, color = "gray40"),
+    plot.caption = element_text(hjust = 0, color = "gray50"),
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    axis.text.y = element_text(size = 10),
+    panel.grid = element_blank(),
+    legend.position = "right"
+  )
+#ggsave("heat_map_infectious_diseases.png", width = 12, height = 6, dpi = 300)
+```
+
+
