@@ -239,6 +239,19 @@ extracted_dc |>
 
 ```
 
+<br>
+
+## All Causes of Death
+
+**A summary of all causes of death, primary and secondary, written on the death certificates**
+
+<br>
+
+<center>
+
+<img src="output/all_category_summary_dec_7.png" width="1000" height="500"/>
+
+</center>
 
 
 ## Origins of the boys
