@@ -249,10 +249,23 @@ extracted_dc |>
 
 <center>
 
-<img src="output/all_category_summary_dec_7.png" width="1000" height="500"/>
+<img src="images/all_category_summary_dec_7.png" width="1000" height="500"/>
 
 </center>
 
+<br>
+**Decade breakdown all causes of death, primary and secondary**
+
+<br>
+
+<center>
+
+<img src="images/faceted_causes_of_death_dec_7.png" width="1000" height="500"/>
+
+</center>
+
+<br>
+<br>
 
 ## Origins of the boys
 
