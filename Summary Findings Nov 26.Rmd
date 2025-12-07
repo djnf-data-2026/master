@@ -30,14 +30,14 @@ library(formattable)
 
 <center>
 
-### NOT FOR PUBLICATION: DEC 4 2025 DRAFT 
+### NOT FOR PUBLICATION: DEC 7 2025 DRAFT 
 
 # Death Certificates of Cheltenham, Jessup Youth
 
 ### Draft analysis by Capital News Service
 
-### NOT FOR PUBLICATION: DEC 4 2025 DRAFT 
-### NOT FOR PUBLICATION: DEC 4 2025 DRAFT 
+### NOT FOR PUBLICATION: DEC 7 2025 DRAFT 
+### NOT FOR PUBLICATION: DEC 7 2025 DRAFT 
 
 <center>
 
@@ -45,7 +45,7 @@ library(formattable)
 
 </center>
 
-We have confirmed records for **172 deaths**, including 139 for Cheltenham and 31 for Jessup and 2 for Hickey
+We have confirmed records for **177 deaths**, including 142 for Cheltenham and 34 for Jessup and 1 for Hickey
 
 ### Sample death certificate
 
@@ -126,7 +126,7 @@ datatable(caption = "Total Deaths by Institution",
 
 ```
 
-We have records for 142 deaths of boys and young men at Cheltenham, 35 at Jessup and 1 at Hickey.
+We have records for 142 deaths of boys and young men at Cheltenham, 34 at Jessup and 1 at Hickey.
 
 ## Graph of age
 
@@ -297,5 +297,5 @@ leafMap
 ```
 
 
-### NOT FOR PUBLICATION: DEC 4 2025 DRAFT 
-### NOT FOR PUBLICATION: DEC 4 2025 DRAFT 
+### NOT FOR PUBLICATION: DEC 7 2025 DRAFT 
+### NOT FOR PUBLICATION: DEC 7 2025 DRAFT 
