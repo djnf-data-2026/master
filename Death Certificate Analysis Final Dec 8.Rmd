@@ -248,7 +248,7 @@ dc <- dc %>%
     drowning = str_detect(primary_death_update, "(?i)drowning"),
     appendicitis = str_detect(primary_death_update, "(?i)appendicitis"),
     spine_disease = str_detect(primary_death_update, "(?i)disease of the spine|spinal"),
-    blood_disease = str_detect(primary_death_update, "(?i)leusocythacenia|leuko|hemophilia"),  # NEW - for leukemia variations and hemophilia
+    blood_condition = str_detect(primary_death_update, "(?i)leusocythacenia|leuko|hemophilia"),  
     violent_injury = str_detect(primary_death_update, "(?i)wound.*groin|brick|Brain|bullet|shot|stab*|wound.*heart"), 
      premature_birth = str_detect(primary_death_update,"(?i)Prematurely 6 weeks gestation|Immaturely \\(6 month baby\\)"), # NEW - premature birth
     no_details = is.na(primary_death_update) | str_detect(primary_death_update, "(?i)\\bNA\\b|N/A|missing|illegible|information|no_details|unknown")
@@ -286,7 +286,7 @@ summary_long <- dc |>
     drowning = sum(drowning, na.rm = TRUE),
     appendicitis = sum(appendicitis, na.rm = TRUE),
     spine_disease = sum(spine_disease, na.rm = TRUE),
-    blood_disease = sum(blood_disease, na.rm = TRUE),
+    blood_condition = sum(blood_condition, na.rm = TRUE),
     premature_birth = sum(premature_birth, na.rm = TRUE),
     violent_injury = sum(violent_injury, na.rm = TRUE),
     no_details = sum(no_details, na.rm = TRUE)
@@ -328,7 +328,7 @@ dc <- dc %>%
     cat_trauma = hemorrhage | drowning,
     cat_premature_birth = premature_birth,
     cat_exhaustion = exhaustion | asthenia,
-    cat_other =  blood_disease  | spine_disease |               str_detect(primary_death_update, "(?i)No further information given | Spinal Paralysis"),
+    cat_other =  blood_condition  | spine_disease |               str_detect(primary_death_update, "(?i)No further information given | Spinal Paralysis"),
     cat_no_details = no_details
   )
 ```
@@ -434,7 +434,7 @@ dc2 <- dc2 %>%
     drowning = str_detect(cause_death_update, "(?i)drowning"),
     appendicitis = str_detect(cause_death_update, "(?i)appendicitis"),
     spine_disease = str_detect(cause_death_update, "(?i)disease of the spine|spinal"),
-    blood_disease = str_detect(cause_death_update, "(?i)leusocythacenia|leuko|hemophilia"),  # NEW - for leukemia variations and hemophilia
+    blood_condition = str_detect(cause_death_update, "(?i)leusocythacenia|leuko|hemophilia"),  # NEW - for leukemia variations and hemophilia
     violent_injury = str_detect(cause_death_update, "(?i)wound.*groin|brick|Brain|bullet|shot|stab*|wound.*heart"), 
      premature_birth = str_detect(cause_death_update,"(?i)Prematurely 6 weeks gestation|Immaturely \\(6 month baby\\)"), 
     illegible_entry = str_detect(cause_death_update,"(?i)illegible"), # NEW - premature birth
@@ -471,7 +471,7 @@ summary_long_dc2 <- dc2 |>
     drowning = sum(drowning, na.rm = TRUE),
     appendicitis = sum(appendicitis, na.rm = TRUE),
     spine_disease = sum(spine_disease, na.rm = TRUE),
-    blood_disease = sum(blood_disease, na.rm = TRUE),
+    blood_condition = sum(blood_condition, na.rm = TRUE),
     premature_birth = sum(premature_birth, na.rm = TRUE),
     violent_injury = sum(violent_injury, na.rm = TRUE),
     illegible_entry = sum(illegible_entry, na.rm = TRUE),
@@ -512,7 +512,7 @@ dc2 <- dc2 %>%
     cat_trauma = hemorrhage | drowning,
     cat_premature_birth = premature_birth,
     cat_exhaustion = exhaustion | asthenia,
-    cat_other =  blood_disease  | spine_disease | drowning |             str_detect(cause_death_update, "(?i)No further information given | Spinal Paralysis"),
+    cat_other =  blood_condition  | spine_disease | drowning |             str_detect(cause_death_update, "(?i)No further information given | Spinal Paralysis"),
     cat_no_details = no_details | illegible_entry
   )
 ```
@@ -655,7 +655,7 @@ summary_cat_dc2_long <- dc2 %>%
 ggplot(summary_cat_dc2_long, aes(x = death_year, y = count, fill = category)) +
   geom_col(position = "stack") +
     scale_x_continuous(breaks= seq(1870,1950, 5)) +
-  labs(title = "All Causes of Death by Category at Cheltenham, Jessup",
+  labs(title = "All Causes of Death by Category at Cheltenham, Jessup, Hickey",
        subtitle = "Totals include multiple entries for individuals with more than one cause of death.",
        caption = "Graphic by Raphael Romero Ruiz & Rob Wells, 12-7-2025",
        y = "Total Count",
@@ -670,7 +670,7 @@ ggplot(summary_cat_dc2_long, aes(x = death_year, y = count, fill = category)) +
         plot.subtitle = element_text(size = 8),
         axis.text.x = element_text(angle = 45, hjust = 1)) +
   guides(fill = guide_legend(nrow = 1, byrow = TRUE))
-ggsave("images/all_category_summary_dec_7.png",  width = 12, height = 6, dpi = 300)
+ggsave("images/all_category_summary_dec_7.png",  width = 12, height = 6, dpi = 600)
 ```
 
 
@@ -737,7 +737,7 @@ summary_long_dc2 |>
                      limits = c(1875, 1945),
                      expand = expansion(mult = 0.02)) +
   labs(
-    title = "Infectious Disease Deaths at Cheltenham, Jessup",
+    title = "Infectious Disease Deaths at Cheltenham, Jessup, Hickey",
     subtitle = "Tracking major infectious diseases from 1877-1941, aggregated by decade",
     caption = "Graphic by Sophia Hernandez-Piña and Zaka Hossain",
     x = "",
