@@ -92,6 +92,11 @@ standardize_birth_date <- function(date_string) {
     return(NA)
   }
   
+  # Check if birth_date contains "no_details"
+  if (grepl("no_details", date_string, ignore.case = TRUE)) {
+    return(NA)
+  }
+  
   # Try parsing as "d Mon yyyy" format first
   parsed <- dmy(date_string, quiet = TRUE)
   
@@ -103,6 +108,14 @@ standardize_birth_date <- function(date_string) {
   # If still fails, try "Month yyyy" format (will default to 1st of month)
   if (is.na(parsed)) {
     parsed <- my(date_string, quiet = TRUE)
+  }
+  
+  # If still fails, check if it's just a year (4 digits)
+  if (is.na(parsed)) {
+    if (grepl("^\\d{4}$", date_string)) {
+      # For year-only entries, default to January 1st of that year
+      parsed <- ymd(paste0(date_string, "-01-01"), quiet = TRUE)
+    }
   }
   
   # Fix 2-digit year issues - if year > 1950, assume it's 1800s
@@ -117,8 +130,7 @@ standardize_birth_date <- function(date_string) {
 }
 
 dc$birth_date_clean <- sapply(dc$birth_date, standardize_birth_date)
-dc$birth_date_clean <- as.Date(dc$birth_date_clean)
-
+dc$birth_date_clean <- as.Date(dc$birth_date_clean, origin = "1970-01-01")
 dc <- dc |> 
   mutate(birth_year = year(birth_date_clean))
 ```
@@ -133,6 +145,50 @@ dc |>
 
 #James Evans. One entry #39 and the other #199. Both are separate
 ```
+
+fix
+occupation
+age = approx_age,
+death_date = death_date_clean
+birth_place = birth_place_city_or_town_and_state_write_it_as_bowie_md
+
+#checking birth dates
+
+```{r}
+bd <- dc |> 
+  select(name, birth_date, birth_date_clean, birth_year)
+
+death <- dc |> 
+  select(name, death_date, death_date1, death_date_clean, death_year, death_decade)
+
+```
+
+
+
+## Clean, create final dataset for GitHub
+```{r}
+dc_clean <- dc |> 
+  rename(occupation = occupation_relation_was_disease_or_injury_in_any_way_related_to_occupation_of_deceased, age = approx_age, birth_place = birth_place_city_or_town_and_state_write_it_as_bowie_md, time_residing_death_place = place_of_death_length_of_residence_in_city_or_town_where_death_occurred, external_causes_violence = external_causes_if_death_was_due_to_external_causes_violence_fill_in_also_the_following, death_in_home_work = location_of_death_specify_whether_injury_occurred_in_industry_in_home_or_in_public_place, official_signature = name_of_person_who_signed_it) |> 
+  select(personal_id, facility, name, first, last, occupation, cause_of_death, primary_death, secondary_death, age, death_date_clean, birth_date_clean, death_year, death_decade, birth_year, birth_place, sex, color_or_race, place_of_death_county, time_residing_death_place, external_causes_violence, death_in_home_work, informant_cheltenham_official, official_signature, combined_notes) |> 
+  rename(death_date = death_date_clean, birth_date = birth_date_clean)
+  
+write_csv(dc_clean, ("input/master_dc_data_dec_8.csv"))
+
+```
+
+
+
+# Data import
+
+```{r}
+
+dc <- read_csv("input/master_dc_data_dec_8.csv")
+
+
+```
+
+
+
 
 #------------------------------------------------------------------------------
 # Primary Cause of Death
@@ -160,7 +216,7 @@ all_causes <- dc %>%
   filter(!is.na(primary_death_update)) %>%
   distinct() %>%
   arrange(primary_death_update)
-#87 primary causes
+#86 primary causes
 #for all 114 different causes and groupings Dec 5
 ```
 
@@ -515,20 +571,14 @@ no_cat <- dc2 %>%
   select(name, cause_death_update, tuberculosis:no_details)
 ```
 
-## Compare asphyxia detection
-```{r}
-# Check if asphyxia is now being detected properly
-dc2 %>%
-  filter(asphyxia == TRUE) %>%
-  select(name, cause_death_update, asphyxia, cat_respiratory)
-```
+
 
 ## Check cardiac
 ```{r}
 
 cardiac <- dc2 |> 
   filter(cardiac_issues=="TRUE") |> 
-  select(facility, personal_id, name, death_date_clean, death_year, cause_of_death, cardiac_issues, age_on_death_certificate)
+  select(facility, personal_id, name, death_date, death_year, cause_of_death, cardiac_issues, age)
 
 cardiac |> 
   group_by(death_year) |> 
@@ -759,7 +809,7 @@ ggsave("images/tuberculosis_by_period_dec_7.png", width = 10, height = 6, dpi = 
 ```{r}
 
 dc |> 
-  mutate(origin = birth_place_city_or_town_and_state_write_it_as_bowie_md) |> 
+  mutate(origin = birth_place) |> 
   count(origin) |> 
   arrange(desc(n))
 
@@ -770,7 +820,7 @@ dc |>
 
 ```{r}
 dc <- dc |> 
-  mutate(origin = str_squish(birth_place_city_or_town_and_state_write_it_as_bowie_md)) |> 
+  mutate(origin = str_squish(birth_place)) |> 
   mutate(county_origin = case_when(
          str_detect(origin, "(?i)^md\\.?$") ~ "Maryland", 
          str_detect(origin, "(?i)baltimore county") ~ "Baltimore County",  # Check this FIRST
@@ -816,7 +866,7 @@ dc <- dc |>
          )) |> 
       mutate(county_origin = str_remove_all(county_origin, ", Md.")) 
 ```
-#st marys? 
+
 
 ```{r}
 dc |> 
@@ -847,7 +897,7 @@ dc_map <- dc |>
 #save map file
 ```{r}
 
-saveRDS(dc_map, "output/dc_map_nov_26.rds")
+saveRDS(dc_map, "output/dc_map_dec_8.rds")
 
 ```
 

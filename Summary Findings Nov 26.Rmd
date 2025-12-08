@@ -30,14 +30,14 @@ library(formattable)
 
 <center>
 
-### NOT FOR PUBLICATION: DEC 7 2025 DRAFT 
+### NOT FOR PUBLICATION: DEC 8 2025 DRAFT 
 
 # Death Certificates of Cheltenham, Jessup, Hickey Youth
 
 ### Draft analysis by Capital News Service
 
-### NOT FOR PUBLICATION: DEC 7 2025 DRAFT 
-### NOT FOR PUBLICATION: DEC 7 2025 DRAFT 
+### NOT FOR PUBLICATION: DEC 8 2025 DRAFT 
+### NOT FOR PUBLICATION: DEC 8 2025 DRAFT 
 
 <center>
 
@@ -59,44 +59,10 @@ We have confirmed records for **177 deaths**, including 142 for Cheltenham and 3
 
 ```{r include=FALSE}
 #Import Extracted Death Certificate Data
-gs4_deauth()  
-extracted_dc <- read_sheet("https://docs.google.com/spreadsheets/d/13CthhhfLHiPZqr1P67SCa9BVUyb5Rl6OBhUwvqawDEk/edit?usp=sharing", sheet = "master_deaths_dec_5", col_types ="c") |> 
-     clean_names() |> 
-    mutate(approx_age = as.numeric(str_extract(age_on_death_certificate, "^\\d+")),
-         death_date1 = death_date)
+
+extracted_dc <- read_csv("input/master_dc_data_dec_8.csv")
 
 
-
-```
-
-```{r include=FALSE}
-#Process and standardize dates
-library(lubridate)
-
-# Function to parse the different date formats
-standardize_date <- function(date_string) {
-  if (is.na(date_string) || date_string == "N/A") {
-    return(NA)
-  }
-  
-  # Try parsing as "d Mon yyyy" format first
-  parsed <- dmy(date_string, quiet = TRUE)
-  
-  # If that fails, try "m/d/yyyy" format
-  if (is.na(parsed)) {
-    parsed <- mdy(date_string, quiet = TRUE)
-  }
-  
-  # If still fails, try "Month yyyy" format (will default to 1st of month)
-  if (is.na(parsed)) {
-    parsed <- my(date_string, quiet = TRUE)
-  }
-  
-  return(parsed)
-}
-
-extracted_dc$death_date_clean <- sapply(extracted_dc$death_date1, standardize_date)
-extracted_dc$death_date_clean <- as.Date(extracted_dc$death_date_clean, origin = "1970-01-01")
 ```
 
 ## Statistics
@@ -104,7 +70,7 @@ extracted_dc$death_date_clean <- as.Date(extracted_dc$death_date_clean, origin =
 **Age 16 is the median age of death.**
 
 ```{r echo=FALSE}
-summary(extracted_dc$approx_age, NA.rm=true)
+summary(extracted_dc$age, NA.rm=true)
 
 # Two infants died at birth at Jessup, being the youngest. The youngest died at about age 9 and the oldest at age 21. The average age was 15.6 years and the median was age 16
 ```
@@ -132,10 +98,10 @@ We have records for 142 deaths of boys and young men at Cheltenham, 34 at Jessup
 
 ```{r echo=FALSE}
 extracted_dc |> 
-  filter(approx_age!="NA") |> 
-  group_by(approx_age) |> 
+  filter(age!="NA") |> 
+  group_by(age) |> 
   summarise(total = n()) |> 
-ggplot(aes(x = approx_age, y = total, fill = total)) +
+ggplot(aes(x = age, y = total, fill = total)) +
   geom_col(position = "dodge") +
   theme(legend.position = "none") +
   scale_x_continuous(breaks=c(9:21)) +
@@ -152,7 +118,7 @@ ggplot(aes(x = approx_age, y = total, fill = total)) +
 ```{r echo=FALSE}
 
 extracted_dc |> 
-  mutate(death_year = year(death_date_clean),
+  mutate(death_year = year(death_date),
          death_decade = floor(death_year / 10) * 10) |> 
   group_by(death_year) |> 
   count() |> 
@@ -217,7 +183,6 @@ datatable(summary_death,
 ```{r echo=FALSE}
 
 extracted_dc |> 
-  rename(occupation = occupation_relation_was_disease_or_injury_in_any_way_related_to_occupation_of_deceased) |> 
   group_by(occupation) |> 
   count(occupation) |> 
   arrange(desc(n)) |> 
@@ -230,7 +195,7 @@ extracted_dc |>
 ## Boys and Causes of Death
 ```{r echo=FALSE}
 extracted_dc |> 
-  rename(Age = approx_age, Death_Date = death_date_clean, Name = name, Cause = cause_of_death, Race = color_or_race) |> 
+  rename(Age = age, Death_Date = death_date, Name = name, Cause = cause_of_death, Race = color_or_race) |> 
   select(Name, Age, Cause, Death_Date, Race) |> 
   arrange(Death_Date) |> 
    datatable(caption = "Names Deceased Boys Cheltenham, Jessup, Hickey, 1877-1941",
@@ -278,7 +243,7 @@ extracted_dc |>
 
 ```{r echo=FALSE}
 #needs an update
-map <- readRDS("output/dc_map_nov_26.rds")
+map <- readRDS("output/dc_map_dec_8.rds")
 
 
 map <- map |> 
@@ -330,5 +295,5 @@ leafMap
 ```
 
 
-### NOT FOR PUBLICATION: DEC 7 2025 DRAFT 
-### NOT FOR PUBLICATION: DEC 7 2025 DRAFT 
+### NOT FOR PUBLICATION: DEC 82025 DRAFT 
+### NOT FOR PUBLICATION: DEC 82025 DRAFT 
