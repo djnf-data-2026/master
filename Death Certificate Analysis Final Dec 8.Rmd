@@ -1,11 +1,13 @@
 ---
-title: "Clean_Analyze_Death_Certificates"
+title: "Death Certificate Analysis Master Code"
 author: "Wells and Jour 772"
 date: "2025-12-7"
 output: html_document
 ---
 
-Wells, Ruiz, Hossain, Landerman master code Dec 7 2025
+This is the master code for Jour 772, Fall 2025, analysis of the Cheltenham, Jessup and Hickey death certificates
+
+Wells, Ruiz, Hossain, Landerman, Ramos master code Dec 7 2025: Previously Clean_Analyze_Death_Certificates_Dec_3.rmd
 
 
 ```{r setup, include=FALSE}

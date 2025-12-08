@@ -32,7 +32,7 @@ library(formattable)
 
 ### NOT FOR PUBLICATION: DEC 7 2025 DRAFT 
 
-# Death Certificates of Cheltenham, Jessup Youth
+# Death Certificates of Cheltenham, Jessup, Hickey Youth
 
 ### Draft analysis by Capital News Service
 
