@@ -89,10 +89,12 @@ datatable(caption = "Total Deaths by Institution",
           options = list(
             pageLength = 5,
               dom = 't' ))
-
+# An estimated 300 deaths at Cheltenham, according to Sen. Smith. This data represents 177 documented cases from three institutions
 ```
 
-We have records for 142 deaths of boys and young men at Cheltenham, 34 at Jessup and 1 at Hickey.
+make a box out of this.
+
+**There are an estimated 300 deaths at Cheltenham, according to Sen. Smith. This CNS analysis represents 177 documented cases from three institutions: 142 deaths of boys and young men at Cheltenham, 34 at Jessup and 1 at Hickey.
 
 ## Graph of age
 
@@ -107,7 +109,7 @@ ggplot(aes(x = age, y = total, fill = total)) +
   scale_x_continuous(breaks=c(9:21)) +
   labs(title = "Ages of Cheltenham, Jessup youth deaths",
        subtitle = "From 1877-1941, Approximate Ages",
-       caption = "n=178. Graphic by Rob Wells, 12-5-2025",
+       caption = "n=177. Graphic by Rob Wells, 12-5-2025",
        y="Number",
        x="Approximate Ages")
 
@@ -128,11 +130,12 @@ ggplot(aes(x = death_year, y = n, fill = n)) +
   scale_x_continuous(breaks= seq(1870,1950, 5)) +
   labs(title = "Total Documented Cheltenham, Jessup, Hickey Youth deaths",
        subtitle = "From 1877-1941",
-       caption = "n=178. Graphic by Rob Wells, 12-5-2025",
+       caption = "n=177**. Graphic by Rob Wells, 12-8-2025",
        y="",
        x="death_year")
 
 ```
+
 
 
 
