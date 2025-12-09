@@ -183,16 +183,65 @@ datatable(summary_death,
 ```
 
 ## Occupations of Boys
-```{r echo=FALSE}
 
-extracted_dc |> 
-  group_by(occupation) |> 
-  count(occupation) |> 
+```{r}
+
+jobs <- extracted_dc |>
+  mutate(occupation_category = case_when(
+    # Institutional/Incarcerated
+    occupation %in% c("inmate", "Inmate", "prisoner", "house of reformation", 
+                      "in reformatory", "illegible; shop at reformatory") ~ "incarcerated",
+    
+    # Manufacturing/Factory
+    occupation %in% c("factory", "Factory", "Cannery", "shop") ~ "manufacturing",
+    
+        occupation %in% c("chair factory", "caning chairs", 
+                      "Broom shop", "broom maker") ~ "broom_chair_shop",
+    
+    # Unskilled Labor
+    occupation %in% c("Laborer", "laborer",
+                      "Day Laborer", "General Labor", "Laborer Mining") ~ "unskilled_ labor",
+        # Farm
+    occupation %in% c("Farm Laborer", "farm worker") ~ "farm_ labor",
+    
+    # Service Work
+    occupation %in% c("Laundry", "laundry boy", "house boy", "waiter", 
+                      "Barber", "boot black") ~ "service_work",
+    
+    # Student/School
+    occupation %in% c("student", "school") ~ "student",
+    
+    # Missing/Unknown
+    occupation %in% c("none", "no_details", "no_entry", "Unknown", 
+                      "illegible", NA) ~ "missing_unknown",
+    
+    TRUE ~ "Other"
+  )) |> 
+  mutate(occupation_category = str_to_sentence(occupation_category))
+
+
+
+
+```
+
+
+
+```{r echo=FALSE}
+jobs_table <- jobs |> 
+  group_by(occupation_category) |> 
+  count(occupation_category) |> 
   arrange(desc(n)) |> 
   datatable(caption = "Occupations of Cheltenham, Jessup Boys, 1877-1941",
           options = list(pageLength = 10))
 
+
+
+saveWidget(jobs_table, "images/jobs_table.html", selfcontained = TRUE)
+
+jobs_table
+#embed into wordpress: <iframe seamless src="YOUR_DATATABLE_URL" width="100%" height="500px"></iframe>
 ```
+
 
 
 ## Boys and Causes of Death
