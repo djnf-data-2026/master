@@ -239,7 +239,7 @@ jobs_table <- jobs |>
 saveWidget(jobs_table, "images/jobs_table.html", selfcontained = TRUE)
 
 jobs_table
-#embed into wordpress: <iframe seamless src="YOUR_DATATABLE_URL" width="100%" height="500px"></iframe>
+#embed into wordpress: <iframe seamless src="https://github.com/wellsdata/Cheltenham/blob/main/images/jobs_table.html" width="100%" height="500px"></iframe>
 ```
 
 
