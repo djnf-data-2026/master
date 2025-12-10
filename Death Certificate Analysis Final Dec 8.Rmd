@@ -179,15 +179,7 @@ death_categories_summary <- summary_long |>
   arrange(desc(total))
 
 #write_csv(death_categories_summary, "output/primary_death_categories_summary_dec9.csv")
-
-summary_long |> 
-  group_by(cause) |> 
-  summarise(total = sum(count)) |>
-  arrange(desc(total)) |>
-  datatable(caption = "Primary Causes of Death, Cheltenham, Jessup",
-            options = list(pageLength = 50))
 ```
-
 
 # Primary cause Higher level categories
 ```{r}
@@ -447,27 +439,6 @@ no_cat <- dc2 %>%
 ```
 
 
-
-## Check cardiac
-```{r}
-
-cardiac <- dc2 |> 
-  filter(cardiac_issues=="TRUE") |> 
-  select(facility, personal_id, name, death_date, death_year, cause_of_death, cardiac_issues, age)
-
-cardiac |> 
-  group_by(death_year) |> 
-  count() |> 
- ggplot(aes(x = death_year, y = n, fill = n)) +
-  geom_col(position = "dodge") +
-  theme(legend.position = "none") +
-  labs(title = "Cardiac Related Deaths at Cheltenham, Jessup",
-       subtitle = "From 1880-1941",
-       caption = "Graphic by Rob Wells, 12-4-2025",
-       y="Number",
-       x="Year")
-
-```
 
 #---------------------------------------------------------
 #---Graphics----------------------------------------------
@@ -784,7 +755,7 @@ leafMap <- leaflet(data = dc_map) %>%
   addControl(html = table_html, position = "bottomleft")
 
 leafMap
-saveWidget(leafMap, "inmates_map_nov_18.html")
+saveWidget(leafMap, "final_map_dec_10.html")
 ```
 
 # Graph by age
@@ -792,19 +763,24 @@ saveWidget(leafMap, "inmates_map_nov_18.html")
 Sophie - Fix the age distribution - the x scale is off with the premature deaths. Fix underscore in legends
 
 ```{r}
-dc |> 
-  filter(age!="NA") |> 
-  group_by(age) |> 
-  summarise(total = n()) |> 
-ggplot(aes(x = age, y = total, fill = total)) +
+ages_dist <- dc |>
+  filter(age != "NA") |>
+  group_by(age) |>
+  summarise(total = n()) |>
+  ggplot(aes(x = age, y = total, fill = total)) +
   geom_col(position = "dodge") +
+  scale_fill_gradient(low = "#FFEDA0", high = "#800026") +  
+  theme_minimal() +
   theme(legend.position = "none") +
-  scale_x_continuous(breaks=c(9:21)) +
-  labs(title = "Ages of Cheltenham, Jessup youth deaths",
-       subtitle = "From 1877-1941, Approximate Ages",
-       caption = "n=177. Graphic by Rob Wells, 12-5-2025",
-       y="Number",
-       x="Approximate Ages")
+  scale_x_continuous(breaks = seq(9, 21, by = 1), limits = c(8.5, 21.5)) +
+  labs(
+    title = "Ages of Cheltenham, Jessup, Hickey Youth Deaths",
+    subtitle = "From 1877-1941, Approximate Ages",
+    caption = "Total Cases Examined=177. Graphic by Rob Wells and Sophia Hernandez-Piña, 12-5-2025",
+    y = "Number",
+    x = "Ages"
+  )
+ggsave("images/ages_dist_dec.10.png", width = 12, height = 6, dpi = 600)
 ```
 
 #distribution of the data
@@ -875,25 +851,6 @@ summary_long_dc2 |>
   guides(fill = guide_legend(nrow = 1, byrow = TRUE))
 ggsave("images/infectious_diseases_dec_10.png", width = 12, height = 6, dpi = 600)
 ```
-
-
-```{r echo=FALSE}
-jobs_table <- jobs |> 
-  group_by(occupation_category) |> 
-  count(occupation_category) |> 
-  arrange(desc(n)) |> 
-  datatable(caption = "Occupations of Cheltenham, Jessup Youth, 1877-1941",
-          options = list(pageLength = 10))
-
-
-
-saveWidget(jobs_table, "images/jobs_table.html", selfcontained = TRUE)
-
-jobs_table
-#embed into wordpress: <iframe seamless src="https://github.com/wellsdata/Cheltenham/blob/main/images/jobs_table.html" width="100%" height="500px"></iframe>
-```
-
-
 
 ## Youth and Causes of Death
 ```{r echo=FALSE}
@@ -978,6 +935,6 @@ summary_death <- death_categories_summary |>
 primary_cause_table <- datatable(summary_death,
           caption = "Primary Causes of Death, Cheltenham, Jessup, Hickey 1877-1941",
           options = list(pageLength = 25, dom = 'ftip'))
-saveWidget(sum, "images/primary_cause_table.html", selfcontained = TRUE)
+saveWidget(primary_cause_table, "images/primary_cause_table.html", selfcontained = TRUE)
 
 ```
