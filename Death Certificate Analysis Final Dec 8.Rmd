@@ -175,7 +175,7 @@ death_categories_summary <- summary_long |>
   summarise(total = sum(count)) |>
   arrange(desc(total))
 
-#write_csv(death_categories_summary, "output/primary_death_categories_summary_dec5.csv")
+#write_csv(death_categories_summary, "output/primary_death_categories_summary_dec9.csv")
 
 summary_long |> 
   group_by(cause) |> 
@@ -714,7 +714,7 @@ dc_map <- dc |>
 #save map file
 ```{r}
 
-#saveRDS(dc_map, "output/dc_map_dec_8.rds")
+#saveRDS(dc_map, "output/dc_map_dec_9.rds")
 
 ```
 
