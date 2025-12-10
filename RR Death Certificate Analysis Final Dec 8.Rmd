@@ -1,13 +1,13 @@
 ---
-title: "Death Certificate Analysis Master Code"
+title: "RR Death Certificate Analysis Master Code"
 author: "Wells and Jour 772"
-date: "2025-12-9"
+date: "2025-12-7"
 output: html_document
 ---
 
 This is the master code for Jour 772, Fall 2025, analysis of the Cheltenham, Jessup and Hickey death certificates
 
-Wells, Ruiz, Hossain, Landerman, Ramos master code Dec 9 2025: Previously Clean_Analyze_Death_Certificates_Dec_3.rmd
+Wells, Ruiz, Hossain, Landerman, Ramos master code Dec 7 2025: Previously Clean_Analyze_Death_Certificates_Dec_3.rmd
 
 
 ```{r setup, include=FALSE}
@@ -31,17 +31,157 @@ library(googlesheets4)
 library(formattable)
 ```
 
+### Import Extracted Death Certificate Data
+```{r}
+
+gs4_deauth()  
+dc <- read_sheet("https://docs.google.com/spreadsheets/d/13CthhhfLHiPZqr1P67SCa9BVUyb5Rl6OBhUwvqawDEk/edit?usp=sharing", sheet = "master_deaths_dec_5", col_types ="c") |> 
+     clean_names() |> 
+     mutate(approx_age = as.numeric(str_extract(age_on_death_certificate, "^\\d+")))
+
+
+
+#imports 177 entries - Dec 7
+
+
+```
+
+
+```{r include=FALSE}
+# Function to parse the different date formats
+standardize_date <- function(date_string) {
+  if (is.na(date_string) || date_string == "N/A") {
+    return(NA)
+  }
+  
+  # Try parsing as "d Mon yyyy" format first
+  parsed <- dmy(date_string, quiet = TRUE)
+  
+  # If that fails, try "m/d/yyyy" format
+  if (is.na(parsed)) {
+    parsed <- mdy(date_string, quiet = TRUE)
+  }
+  
+  # If still fails, try "Month yyyy" format (will default to 1st of month)
+  if (is.na(parsed)) {
+    parsed <- my(date_string, quiet = TRUE)
+  }
+  
+  return(parsed)
+}
+
+dc$death_date_clean <- sapply(dc$death_date1, standardize_date)
+dc$death_date_clean <- as.Date(dc$death_date_clean)
+```
+
+### Death year
+```{r}
+dc <- dc |> 
+  mutate(death_year = year(death_date_clean),
+         death_decade = floor(death_year / 10) * 10)
+```
+
+#### Birth dates
+Using the date cleaning sequence above, do the same processing for birth dates**
+
+```{r}
+standardize_birth_date <- function(date_string) {
+  if (is.na(date_string) || date_string == "N/A") {
+    return(NA)
+  }
+  
+  # Check if birth_date contains "no_details"
+  if (grepl("no_details", date_string, ignore.case = TRUE)) {
+    return(NA)
+  }
+  
+  # Try parsing as "d Mon yyyy" format first
+  parsed <- dmy(date_string, quiet = TRUE)
+  
+  # If that fails, try "m/d/yyyy" format
+  if (is.na(parsed)) {
+    parsed <- mdy(date_string, quiet = TRUE)
+  }
+  
+  # If still fails, try "Month yyyy" format (will default to 1st of month)
+  if (is.na(parsed)) {
+    parsed <- my(date_string, quiet = TRUE)
+  }
+  
+  # If still fails, check if it's just a year (4 digits)
+  if (is.na(parsed)) {
+    if (grepl("^\\d{4}$", date_string)) {
+      # For year-only entries, default to January 1st of that year
+      parsed <- ymd(paste0(date_string, "-01-01"), quiet = TRUE)
+    }
+  }
+  
+  # Fix 2-digit year issues - if year > 1950, assume it's 1800s
+  if (!is.na(parsed)) {
+    year_val <- year(parsed)
+    if (year_val > 1950) {
+      parsed <- parsed - years(100)
+    }
+  }
+  
+  return(parsed)
+}
+
+dc$birth_date_clean <- sapply(dc$birth_date, standardize_birth_date)
+dc$birth_date_clean <- as.Date(dc$birth_date_clean, origin = "1970-01-01")
+dc <- dc |> 
+  mutate(birth_year = year(birth_date_clean))
+```
+
+
+## Check for duplicate names
+```{r}
+
+dc |> 
+  count(name) |> 
+  filter(n > 1)
+
+#James Evans. One entry #39 and the other #199. Both are separate
+```
+
+fix
+occupation
+age = approx_age,
+death_date = death_date_clean
+birth_place = birth_place_city_or_town_and_state_write_it_as_bowie_md
+
+#checking birth dates
+
+```{r}
+bd <- dc |> 
+  select(name, birth_date, birth_date_clean, birth_year)
+
+death <- dc |> 
+  select(name, death_date, death_date1, death_date_clean, death_year, death_decade)
+
+```
+
+
+
+## Clean, create final dataset for GitHub
+```{r}
+dc_clean <- dc |> 
+  rename(occupation = occupation_relation_was_disease_or_injury_in_any_way_related_to_occupation_of_deceased, age = approx_age, birth_place = birth_place_city_or_town_and_state_write_it_as_bowie_md, time_residing_death_place = place_of_death_length_of_residence_in_city_or_town_where_death_occurred, external_causes_violence = external_causes_if_death_was_due_to_external_causes_violence_fill_in_also_the_following, death_in_home_work = location_of_death_specify_whether_injury_occurred_in_industry_in_home_or_in_public_place, official_signature = name_of_person_who_signed_it) |> 
+  select(personal_id, facility, name, first, last, occupation, cause_of_death, primary_death, secondary_death, age, death_date_clean, birth_date_clean, death_year, death_decade, birth_year, birth_place, sex, color_or_race, place_of_death_county, time_residing_death_place, external_causes_violence, death_in_home_work, informant_cheltenham_official, official_signature, combined_notes) |> 
+  rename(death_date = death_date_clean, birth_date = birth_date_clean)
+  
+write_csv(dc_clean, ("input/master_dc_data_dec_8.csv"))
+```
+
+
+
 # Data import
 
+#rsw change
 ```{r}
 
 dc <- read_csv("https://raw.githubusercontent.com/wellsdata/Cheltenham/refs/heads/main/input/master_dc_data_dec_8.csv")
 
-
-dc <- dc %>%
-  mutate(primary_death = if_else(personal_id == 211, 
-                                  "Pulmonary Tuberculosis", 
-                                  primary_death))
 
 ```
 
@@ -55,7 +195,7 @@ dc <- dc %>%
 ```{r}
 # Combine cause of death columns, cleaning up semicolons and "NA" entries
 dc <- dc |> 
-   mutate(primary_death_update = tolower(primary_death)) |> 
+   mutate(primary_death_update = primary_death) |> 
    mutate(primary_death_update= str_replace_all(primary_death_update, "(?i) & ", "; ")) |>
   mutate(primary_death_update= str_replace_all(primary_death_update, "NA", "")) |> 
   #removing pesky leading, trailing semicolons
@@ -84,7 +224,7 @@ all_causes <- dc %>%
 
 dc <- dc %>% 
   mutate(
-    tuberculosis = str_detect(primary_death_update, "(?i)tuberculosis|tubercul|phthisis|pthisis|consumption|terberculosis|pulmonary tuberculosis"),
+    tuberculosis = str_detect(primary_death_update, "(?i)tubercul|phthisis|pthisis|consumption|terberculosis"),
     pneumonia = str_detect(primary_death_update, "(?i)pneumonia"), 
     typhoid = str_detect(primary_death_update, "(?i)typhoid"),
     asthma = str_detect(primary_death_update, "(?i)asthma"),
@@ -106,28 +246,12 @@ dc <- dc %>%
     drowning = str_detect(primary_death_update, "(?i)drowning"),
     appendicitis = str_detect(primary_death_update, "(?i)appendicitis"),
     spine_disease = str_detect(primary_death_update, "(?i)disease of the spine|spinal"),
-    blood_condition = str_detect(primary_death_update, "(?i)leusocythacenia|leuko|hemophilia"),  
+    blood_condition = str_detect(primary_death_update, "(?i)leusocythacenia|leuko|hemophilia"),  # NEW - for leukemia variations and hemophilia
     violent_injury = str_detect(primary_death_update, "(?i)wound.*groin|brick|Brain|bullet|shot|stab*|wound.*heart"), 
      premature_birth = str_detect(primary_death_update,"(?i)Prematurely 6 weeks gestation|Immaturely \\(6 month baby\\)"), # NEW - premature birth
-    no_details = is.na(primary_death_update) | str_detect(primary_death_update, "(?i)\\bNA\\b|N/A|missing|information|no_details|unknown")
+    no_details = is.na(primary_death_update) | str_detect(primary_death_update, "(?i)\\bNA\\b|N/A|missing|illegible|information|no_details|unknown")
   )
-
 ```
-
-### Lower Level Category Integrity Check
-```{r}
-  death_category_unknown<-dc %>%
-  filter(if_all(27:52, ~ . ==FALSE)) 
-
-death_category_no_details<-dc %>%
-  filter(no_details==TRUE) #make sure that no_details really means no_details and that the deaths marked with TRUE for this column can't/don't fit into other categories
-
-death_category_illegible<-dc %>%
-  filter(str_detect(primary_death_update,"(?i)illegible")) #%>%
-  #filter(if_all(30:57, ~ . ==FALSE)) #double check to make sure all the illegibles actually belong to another category, optional second check
-```
-
-
 
 ### Calculate death causes by year
 
@@ -493,9 +617,16 @@ summary_long_dc2 |>
 
 
 #1 Broad category by year, all causes
-DONE: Ruiz and Wells
 
+Ruiz and Wells
 ```{r}
+#RR was here
+# Summarize by broad category and year
+# count_cat_dc2_long  <- summary_long_dc2 %>%
+#   group_by(death_year, cause) %>%
+#   summarise(total_count = sum(count, na.rm = TRUE), .groups = "drop") %>%
+#   filter(!is.na(cause))
+
 summary_cat_dc2_long <- dc2 %>%
   group_by(death_year) %>%
   summarise(
@@ -524,7 +655,7 @@ ggplot(summary_cat_dc2_long, aes(x = death_year, y = count, fill = category)) +
     scale_x_continuous(breaks= seq(1870,1950, 5)) +
   labs(title = "All Causes of Death by Category at Cheltenham, Jessup, Hickey",
        subtitle = "Totals include multiple entries for individuals with more than one cause of death.",
-       caption = "Graphic by Raphael Romero Ruiz & Rob Wells, 12-9-2025",
+       caption = "Graphic by Raphael Romero Ruiz & Rob Wells, 12-7-2025",
        y = "Total Count",
        x = "",
        fill = "Category") +
@@ -537,13 +668,14 @@ ggplot(summary_cat_dc2_long, aes(x = death_year, y = count, fill = category)) +
         plot.subtitle = element_text(size = 8),
         axis.text.x = element_text(angle = 45, hjust = 1)) +
   guides(fill = guide_legend(nrow = 1, byrow = TRUE))
-ggsave("images/all_category_summary_dec_9.png",  width = 12, height = 6, dpi = 600)
 ```
 
 
-# Facet Graphic: Causes of Death Over Time
-Done: Sophie and Zaka AND RAPHAEL
+# X - Facet Graphic: Causes of Death Over Time
+Sophie and Zaka
 ```{r}
+##SH: LET ME KNOW IF THIS LOOKS, AND I CAN GO BACK AND CHANGE IT IF NEED BE.
+
 # Define custom colors for specific categories
 custom_colors <- c(
   "Respiratory" = "#4E9A8A",
@@ -616,9 +748,55 @@ plot_data |>
     strip.text = element_text(face = "bold", size = 9),
     plot.margin = margin(10, 10, 10, 10)
   )
-ggsave("images/causes_death_facet_dec_9.png", width = 10, height = 6, dpi = 300)
+ggsave("causes_death_facet_dec_9.png", width = 10, height = 6, dpi = 300)
 ```
 
+### 2. Infectious Diseases Over Time
+Sophie and Zaka
+```{r}
+summary_long_dc2 |>
+  filter(cause %in% c("tuberculosis", "pneumonia", "typhoid", "meningitis", "influenza")) |>
+  mutate(decade = floor(death_year / 10) * 10) |>
+  group_by(decade, cause) |>
+  summarise(count = sum(count, na.rm = TRUE), .groups = "drop") |>
+  # Clean up cause names - remove underscores and capitalize
+  mutate(cause = str_to_title(str_replace_all(cause, "_", " "))) |>
+  ggplot(aes(x = decade, y = count, fill = cause)) +
+  geom_col(position = "dodge", alpha = 0.9) +
+  # Highlight the 1920 decade (1920-1929) where Spanish Flu deaths appear
+  annotate("rect", xmin = 1917.5, xmax = 1922.5, ymin = -Inf, ymax = Inf, 
+           alpha = 0.15, fill = "red") +
+  annotate("text", x = 1920, y = 18, 
+           label = "Spanish Flu\nPandemic\n(1918-1920)", size = 3, fontface = "italic", color = "darkred") +
+  # Add horizontal arrow pointing at TB bar in 1910
+  annotate("segment", x = 1900, y = 25, xend = 1908, yend = 25,
+           arrow = arrow(length = unit(0.3, "cm")), color = "darkblue", linewidth = 0.8) +
+  annotate("text", x = 1890, y = 25, 
+           label = "Tuberculosis was a leading cause\nof death in the U.S.\nduring this period", 
+           size = 3.5, fontface = "italic", color = "darkblue", hjust = 0) +
+  scale_fill_brewer(palette = "Set1") +
+  scale_x_continuous(breaks = seq(1880, 1940, by = 10),
+                     limits = c(1875, 1945),
+                     expand = expansion(mult = 0.02)) +
+  labs(
+    title = "Infectious Disease Deaths at Cheltenham, Jessup, Hickey",
+    subtitle = "Tracking major infectious diseases from 1877-1941, aggregated by decade",
+    caption = "Graphic by Sophia Hernandez-Piña and Zaka Hossain",
+    x = "",
+    y = "Number of Deaths",
+    fill = "Disease"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "bottom",
+        legend.text = element_text(size = 8),
+        legend.title = element_text(size = 8),
+        legend.key.size = unit(0.3, "cm"),
+        plot.title = element_text(face = "bold", size = 16),
+        plot.subtitle = element_text(size = 11, color = "gray40"),
+        axis.text.x = element_text(angle = 45, hjust = 1)) +
+  guides(fill = guide_legend(nrow = 1, byrow = TRUE))
+ggsave("infectious_disease_deaths_dec_9.png", width = 10, height = 6, dpi = 300)
+```
 
 
 ## Mapping place of origin
@@ -719,6 +897,8 @@ dc_map <- dc |>
 ```
 
 ```{r}
+dc_map <- readRDS("output/dc_map_dec_8.rds")
+
 dc_map <- dc_map |> 
   st_as_sf() |> 
   sf::st_transform(4326) |> 
@@ -728,7 +908,7 @@ dc_map <- dc_map |>
 
 
 
-# Final map
+# Updated map
 ```{r}
 # Use colorBin for better visual differentiation with distinct breaks
 pal <- colorBin(
@@ -783,91 +963,3 @@ leafMap
 saveWidget(leafMap, "inmates_map_nov_18.html")
 ```
 
-# Graph by age
-
-Sophie - Fix the age distribution - the x scale is off with the premature deaths. Fix underscore in legends
-
-```{r}
-dc |> 
-  filter(age!="NA") |> 
-  group_by(age) |> 
-  summarise(total = n()) |> 
-ggplot(aes(x = age, y = total, fill = total)) +
-  geom_col(position = "dodge") +
-  theme(legend.position = "none") +
-  scale_x_continuous(breaks=c(9:21)) +
-  labs(title = "Ages of Cheltenham, Jessup youth deaths",
-       subtitle = "From 1877-1941, Approximate Ages",
-       caption = "n=177. Graphic by Rob Wells, 12-5-2025",
-       y="Number",
-       x="Approximate Ages")
-```
-
-#distribution of the data
-Sophie - Distribution of data: stack with each institution, color. Fix underscore in legends
-```{r}
-dc |> 
-  mutate(death_year = year(death_date),
-         death_decade = floor(death_year / 10) * 10) |> 
-  group_by(death_year) |> 
-  count() |> 
-ggplot(aes(x = death_year, y = n, fill = n)) +
-  geom_col(position = "dodge") +
-  theme(legend.position = "none") +
-  scale_x_continuous(breaks= seq(1870,1950, 5)) +
-  labs(title = "Total Documented Cheltenham, Jessup, Hickey Youth deaths",
-       subtitle = "From 1877-1941",
-       caption = "n=177. Graphic by Rob Wells, 12-8-2025",
-       y="",
-       x="death_year")
-
-
-```
-
-### 2. Infectious Diseases Over Time
-Done: Raphael- Fix spanish flu annotation at 1910. Fix underscore in legends
-Sophie: Add small numerical annotations for the three peak values. 
-```{r}
-summary_long_dc2 |>
-  filter(cause %in% c("tuberculosis", "pneumonia", "typhoid", "meningitis", "influenza")) |>
-  mutate(decade = floor(death_year / 10) * 10) |>
-  group_by(decade, cause) |>
-  summarise(count = sum(count, na.rm = TRUE), .groups = "drop") |>
-  # Clean up cause names - remove underscores and capitalize
-  mutate(cause = str_to_title(str_replace_all(cause, "_", " "))) |>
-  ggplot(aes(x = decade, y = count, fill = cause)) +
-  geom_col(position = "dodge", alpha = 0.9) +
-  # Highlight the 1920 decade (1920-1929) where Spanish Flu deaths appear
-  annotate("rect", xmin = 1917.5, xmax = 1922.5, ymin = -Inf, ymax = Inf, 
-           alpha = 0.15, fill = "red") +
-  annotate("text", x = 1920, y = 18, 
-           label = "Spanish Flu\nPandemic\n(1918-1920)", size = 3, fontface = "italic", color = "darkred") +
-  # Add horizontal arrow pointing at TB bar in 1910
-  annotate("segment", x = 1900, y = 25, xend = 1908, yend = 25,
-           arrow = arrow(length = unit(0.3, "cm")), color = "darkblue", linewidth = 0.8) +
-  annotate("text", x = 1890, y = 25, 
-           label = "Tuberculosis was a leading cause\nof death in the U.S.\nduring this period", 
-           size = 3.5, fontface = "italic", color = "darkblue", hjust = 0) +
-  scale_fill_brewer(palette = "Set1") +
-  scale_x_continuous(breaks = seq(1880, 1940, by = 10),
-                     limits = c(1875, 1945),
-                     expand = expansion(mult = 0.02)) +
-  labs(
-    title = "Infectious Disease Deaths at Cheltenham, Jessup, Hickey",
-    subtitle = "Tracking major infectious diseases from 1877-1941, aggregated by decade",
-    caption = "Graphic by Sophia Hernandez-Piña and Zaka Hossain",
-    x = "",
-    y = "Number of Deaths",
-    fill = "Disease"
-  ) +
-  theme_minimal() +
-  theme(legend.position = "bottom",
-        legend.text = element_text(size = 8),
-        legend.title = element_text(size = 8),
-        legend.key.size = unit(0.3, "cm"),
-        plot.title = element_text(face = "bold", size = 16),
-        plot.subtitle = element_text(size = 11, color = "gray40"),
-        axis.text.x = element_text(angle = 45, hjust = 1)) +
-  guides(fill = guide_legend(nrow = 1, byrow = TRUE))
-ggsave("images/infectious_diseases_dec_9.png", width = 12, height = 6, dpi = 600)
-```
