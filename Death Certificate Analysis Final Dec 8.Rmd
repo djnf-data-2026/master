@@ -797,10 +797,11 @@ ggplot(aes(x = death_year, y = n, fill = n)) +
   scale_x_continuous(breaks= seq(1870,1950, 5)) +
   labs(title = "Total Documented Cheltenham, Jessup, Hickey Youth deaths",
        subtitle = "From 1877-1941",
-       caption = "n=177. Graphic by Rob Wells, 12-8-2025",
+       caption =  "Total Cases Examined = 177. Graphic by Rob Wells and Sophia Hernandez-Piña, 12-10-2025",
        y="",
        x="death_year")
 
+ggsave("images/total_cases_dec.10.png", width = 12, height = 6, dpi = 600)
 
 ```
 
