@@ -35,15 +35,8 @@ library(formattable)
 
 ```{r}
 
-dc <- read_csv("https://raw.githubusercontent.com/wellsdata/Cheltenham/refs/heads/main/input/master_dc_data_dec_8.csv")
-
-
-dc <- dc %>%
-  mutate(primary_death = if_else(personal_id == 211, 
-                                  "Pulmonary Tuberculosis", 
-                                  primary_death))|>
-    # NEW Fix age for Infant Young - should be 0 not 1 according to Nicole
-  mutate(age = if_else(personal_id == 209, 0, age))
+dc <- read_csv("https://raw.githubusercontent.com/wellsdata/Cheltenham/refs/heads/main/input/master_dc_data_dec_10.csv") |> 
+  subset(select = -c(1))
 
 
 ```
