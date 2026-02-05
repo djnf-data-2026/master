@@ -40,6 +40,27 @@ dc <- read_csv("https://raw.githubusercontent.com/wellsdata/Cheltenham/refs/head
 
 
 ```
+### Join with parents' names
+
+```{r}
+parents <- read_csv("./input/Class Version Death Certificate Names - Sheet2.csv") |> 
+  clean_names() |> 
+  rename(father_name = fathers_name_if_missing_type_na_if_unsure_of_name_type_unsure, mother_name = mothers_name_if_missing_type_na_if_unsure_of_name_type_unsure) |> 
+  select(personal_id, name, father_name, father_age, mother_name, mother_birthplace, burial_details, corrections_notes_for_anything_of_interest) |> 
+  mutate(personal_id = as.numeric(personal_id))
+
+
+```
+
+
+```{r}
+
+dc_plus <- dc |> 
+  left_join(parents, by=c("personal_id"))
+
+write_csv(dc_plus, "./input/master_dc_data_feb_4.csv")
+
+```
 
 
 
