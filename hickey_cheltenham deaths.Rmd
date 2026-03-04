@@ -22,15 +22,57 @@ library(googlesheets4)
 library(formattable)
 ```
 
-#death certificates
+# Load death certificate data
 ```{r}
-library(googlesheets4)
-
 gs4_deauth()
 
 death_certs <- read_sheet("https://docs.google.com/spreadsheets/d/1Qu7FSUzCAeU4gdZ9BpIvfxI5kBp5rAOgEiaQ2h0ff4k/edit?gid=0#gid=0") |> 
-     clean_names()
+     clean_names() |> 
+      # Select all the list columns
+    mutate(across(
+      c(birth_date, age, birth_year),
+      ~ .x |> 
+      as.character() |>              # Pull it out of the 'list' box into a string
+      str_remove_all("\\*") |>       # Remove those asterisks (e.g., "56*" becomes "56")
+      na_if("NA") |>                 # Convert the string "NA" to a real R NA
+      na_if("na") |>                 # Handle lowercase "na"
+      na_if("N/A") |>                # Handle "N/A"
+      as.numeric()                   # Finally, turn it into a number
+  ))|> 
+  mutate(
+    birth_date_clean = as_datetime(birth_date) %>% as.Date(),
+    birth_year = year(birth_date_clean)
+    )
+```
 
+# Deaths vs Census
+
+## Load 1930 Census
+**verify we have the full run for 1930 at Cheltenham**
+```{r}
+
+census1930 <- read_sheet("https://docs.google.com/spreadsheets/d/1PSOeq5WZXk6i4HPoSHq-y2eEnm-bTx0ET3C7Sgnkzy8/edit?usp=sharing") |> 
+     clean_names() |> 
+  rename(birth_year = birth_like_date)
+
+
+```
+
+## Join 1930 census and death certs
+```{r}
+
+joined <- death_certs |> 
+  inner_join(census1930, by=c("last"="last_name", "birth_year"))
+
+```
+
+
+
+
+# Deaths total - Tiasia and Ela
+
+# Total deaths from annual reports, Cheltenham, Hickey
+```{r}
 chelt_deaths <- read_sheet("https://docs.google.com/spreadsheets/d/1qy17Gwxyb-W6P2tDqaI6jUymK4n7cmnFToNIkJ5GCI4/edit?usp=sharing", sheet="chelt_deaths") |> 
      clean_names() |> 
   mutate(across(
@@ -80,30 +122,4 @@ I am assuming the chelt_deaths is a pretty complete listof deaths except for 191
 
 Next steps:
 --group the cheltenham death_certs by year, compare to the chelt deaths. see if there are any years where the death_certs exceed totals for chelt deaths that year.  if so, then create a new total table where the death certs data fills in the blanks in the chelt-deaths dataframe
-
-
-# Deaths vs Census
-```{r}
-
-census1930 <- read_sheet("https://docs.google.com/spreadsheets/d/1PSOeq5WZXk6i4HPoSHq-y2eEnm-bTx0ET3C7Sgnkzy8/edit?usp=sharing") |> 
-     clean_names() 
-
-
-
-|> 
-  mutate(across(
-    # Select all the list columns
-    c(number_of_inmates, total_deaths, total_escapes, total_hired_out, total_sent_to_hospital),
-    ~ .x |> 
-      as.character() |>              # Pull it out of the 'list' box into a string
-      str_remove_all("\\*") |>       # Remove those asterisks (e.g., "56*" becomes "56")
-      na_if("NA") |>                 # Convert the string "NA" to a real R NA
-      na_if("na") |>                 # Handle lowercase "na"
-      na_if("N/A") |>                # Handle "N/A"
-      as.numeric()                   # Finally, turn it into a number
-  ))
-
-
-
-```
 
