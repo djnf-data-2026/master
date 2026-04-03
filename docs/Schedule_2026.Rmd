@@ -158,18 +158,19 @@ Bridget Lang, assistant
     - Lunch with Schleuss
     
 -   **1:30 p.m. - 2:30 p.m.**:  Introduction to business reporting. Wells
-    proposals. Room 2103, 2107
--   **2:30 p.m. - 6 p.m.**:  Workshop on your projects. Wells / Lang / Denny
+    proposals. Eaton Theater
+-   **2:30 p.m. - 3 p.m.**: Digital accessibility for data visualization. Lang. Eaton Theater
+-   **3 p.m. - 6 p.m.**:  Workshop on your projects. Wells / Lang / Denny
 -   **6 p.m.**: Dinner on campus
 -   **11:59 p.m.**: [Second draft of story pitch memos
     due](https://docs.google.com/document/d/1A-dlzWX7ksOt6LRHYpuPDk7SPPWxyZEmGt2wC0lM7Mg/edit),
     emailed to Wells and .
 
-**Thursday June 4, 2026** TK TK TK
+**Thursday June 4, 2026** 
 
 -   **Breakfast**: On your own at dorm
 -   **8:15 a.m.**: Meet at Knight Hall, board van, depart for College Park Metro (Wells driving)
--   **10 a.m.**:  TK TK TK -- Tour of AP D.C. bureau with Chad Day, AP's elections team. TK TK TK
+-   **10 a.m.**:  Tour of AP D.C. bureau with Chad Day, AP's elections team. 
 -   **Noon**: Lunch.
 -   **1:30 p.m.**: Tour U.S. Capitol press galleries TK TK TK with Stephen Neukam, Axios and Ed Kachinske, U.S. House Press Gallery.
 -   **6 p.m.**: Dinner in Washington D.C.
@@ -217,7 +218,7 @@ Bridget Lang, assistant
 
 **Campus Map**
 
-<img src="../images/marked_campus_map.PNG"/>
+<img src="../images/campus_map_2025.PNG"/>
 
 <br> **Data Journalism Text**
 
