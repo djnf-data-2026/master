@@ -11,7 +11,7 @@ editor_options:
 ### Dow Jones News Fund \@ Merrill College
 
 #### Sunday, May 31 - Sunday, June 7, 2026
-(ver March 26, 2026)
+(ver April 23, 2026)
 :::
 
 <br>  
@@ -118,13 +118,16 @@ Bridget Lang, assistant
         -   Use R to link to a LLM and process data.
         -   Knight Hall Room 2103
         
-    -   New to Coding Track: Data cleaning. (TK TK) 
+    -   New to Coding Track: Data cleaning. (Aidan Hughes, the Howard Center) 
         -   Use Open Refine, R to clean data
         -   Knight Hall Room 2107 
 
--   **10:30 a.m.**: Break. Coffee served.
+-   **10:30 a.m.**: Heather Taylor, DJNF, discussion.
+        -- Eaton Theater
+        
+-   **10:45 a.m.**: Break. Coffee served.
 
--   **11 a.m.**: Workshop. Students work on data gathering story pitches. (Wells, Willis, TA as coaches). Room 1101
+-   **11 a.m.**: Workshop. Students work on data gathering story pitches. (Wells, Willis, Hughes, TA as coaches). Room 1101
 
 -   **1 p.m.-2:30 p.m.: Data Visualization. **. 
     Using Datawrapper for data visualization. (Adam Marton). All attend. Room 2103
