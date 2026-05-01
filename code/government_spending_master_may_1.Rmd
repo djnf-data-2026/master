@@ -1,0 +1,35 @@
+---
+title: "Government Spending Master DJNF"
+author: "Wells"
+date: "2026-05-01"
+output: html_document
+---
+
+# load libraries
+```{r}
+library(tidyverse)
+library(tidycensus)
+library(janitor)
+```
+
+#load spending data
+```{r}
+
+spending <- read_csv("../data/federal_spending_by_county_2020 2024 rob_0416_v2.csv") |> 
+     clean_names()
+
+```
+
+# pokin around
+```{r}
+
+spending |> 
+group_by(agency) |> 
+  summarize(
+    n = n(),
+    total_spent = sum(spending_total, na.rm = TRUE)
+  ) |> 
+  arrange(desc(total_spent))
+
+```
+
