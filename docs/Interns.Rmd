@@ -8,7 +8,7 @@ editor_options:
 ::: {style="text-align: center; color: #2ba9dc;"}
 # Dow Jones News Fund Data Interns 2026
 
-[(ver May 22, 2025)]{style="font-size: 8pt;"}
+[(ver May 3, 2026)]{style="font-size: 8pt;"}
 :::
 
 ::: {style="display: flex; align-items: center; justify-content: center; gap: 20px; margin-top: 30px;"}
@@ -19,6 +19,7 @@ editor_options:
 
 ::: {style="text-align: center; color: #2ba9dc;"}
 :::
+
 ::: {style="float:right; padding:10px;"}
 <img src="../images/interns/profileTemp.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Emily Wilson studies at Craig Newmark Graduate School of Journalism at CUNY and will intern at the Advertising Specialty Institute
 :::
