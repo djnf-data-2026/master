@@ -20,7 +20,7 @@ editor_options:
 ::: {style="text-align: center; color: #2ba9dc;"}
 :::
 ::: {style="float:right; padding:10px;"}
-<img src="../images/interns/EmilyWilson.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Emily Wilson studies at Craig Newmark Graduate School of Journalism at CUNY and will intern at the Advertising Specialty Institute
+<img src="../images/interns/profileTemp.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Emily Wilson studies at Craig Newmark Graduate School of Journalism at CUNY and will intern at the Advertising Specialty Institute
 :::
 
 ::: {style="float:right; padding:10px;"}
@@ -28,31 +28,31 @@ editor_options:
 :::
 
 ::: {style="float:right; padding:10px;"}
-<img src="../images/interns/LaineCibulskis.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Laine Cibulskis studies at University of Missouri - Columbia and will intern at Detroit News
+<img src="../images/interns/profileTemp.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Laine Cibulskis studies at University of Missouri - Columbia and will intern at Detroit News
 :::
 
 ::: {style="float:right; padding:10px;"}
-<img src="../images/interns/JulieLee.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>/nJulie Lee studies at Columbia University and will intern at the Howard Center for Investigative Journalism
+<img src="../images/interns/JulieLee.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Julie Lee studies at Columbia University and will intern at the Howard Center for Investigative Journalism
 :::
 
 ::: {style="float:right; padding:10px;"}
-<img src="../images/interns/DiegoTorrealba.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Diego Torrealba studies at University of Texas at Austin and will intern at the Howard Center for Investigative Journalism
+<img src="../images/interns/profileTemp.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Diego Torrealba studies at University of Texas at Austin and will intern at the Howard Center for Investigative Journalism
 :::
 
 ::: {style="float:right; padding:10px;"}
-<img src="../images/interns/TiasiaSaunders.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Tiasia Saunders studies at University of Maryland and will intern at the Investigative Project on Race and Equity
+<img src="../images/interns/profileTemp.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Tiasia Saunders studies at University of Maryland and will intern at the Investigative Project on Race and Equity
 :::
 
 ::: {style="float:right; padding:10px;"}
-<img src="../images/interns/ElaJalil.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Ela Jalil studies at University of Maryland and will intern at the Investigative Reporting Workshop
+<img src="../images/interns/profileTemp.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Ela Jalil studies at University of Maryland and will intern at the Investigative Reporting Workshop
 :::
 
 ::: {style="float:right; padding:10px;"}
-<img src="../images/interns/WillHammann.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Will Hammann studies at University of Maryland and will intern at the Maryland Matters
+<img src="../images/interns/profileTemp.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Will Hammann studies at University of Maryland and will intern at the Maryland Matters
 :::
 
 ::: {style="float:right; padding:10px;"}
-<img src="../images/interns/IzzyFarina.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Izzy Farina studies at University of Georgia and will intern at the NJ Advance Media
+<img src="../images/interns/profileTemp.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Izzy Farina studies at University of Georgia and will intern at the NJ Advance Media
 :::
 
 ::: {style="float:right; padding:10px;"}
@@ -60,15 +60,15 @@ editor_options:
 :::
 
 ::: {style="float:right; padding:10px;"}
-<img src="../images/interns/SamuelGauntt.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>/nSamuel Gauntt studies at University of Maryland and will intern at the States Newsroom D.C. Bureau
+<img src="../images/interns/profileTemp.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>/Samuel Gauntt studies at University of Maryland and will intern at the States Newsroom D.C. Bureau
 :::
 
 ::: {style="float:right; padding:10px;"}
-<img src="../images/interns/KatelynnWinebrenner.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Katelynn Winebrenner studies at University of Maryland and will intern at The Frederick News-Post
+<img src="../images/interns/profileTemp.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Katelynn Winebrenner studies at University of Maryland and will intern at The Frederick News-Post
 :::
 
 ::: {style="float:right; padding:10px;"}
-<img src="../images/interns/TeresaDo.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Teresa Do  studies at University of Texas at Austin and will intern at The Trace
+<img src="../images/interns/profileTemp.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Teresa Do studies at University of Texas at Austin and will intern at The Trace
 :::
 
 ::::
