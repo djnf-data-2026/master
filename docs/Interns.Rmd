@@ -6,7 +6,7 @@ editor_options:
 ---
 
 ::: {style="text-align: center; color: #2ba9dc;"}
-# Dow Jones News Fund Data Interns 2025
+# Dow Jones News Fund Data Interns 2026
 
 [(ver May 22, 2025)]{style="font-size: 8pt;"}
 :::
@@ -19,115 +19,58 @@ editor_options:
 
 ::: {style="text-align: center; color: #2ba9dc;"}
 :::
-
 ::: {style="float:right; padding:10px;"}
-<img src="../images/interns/Sasha Allen.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>
-**Sasha Allen** studies at University of Maryland College Park and will
-intern with the Connecticut Mirror.
+<img src="../images/interns/EmilyWilson.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Emily Wilson studies at Craig Newmark Graduate School of Journalism at CUNY and will intern at the Advertising Specialty Institute
 :::
 
 ::: {style="float:right; padding:10px;"}
-<img src="../images/interns/Hannah Bensen.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>
-**Hannah Bensen** studies at Stanford University and will intern with
-the Washington Post through the Investigative Reporting Workshop. See
-[Hannah's data
-project.](https://djnf-data-2025.github.io/hannah-bensen/)
+<img src="../images/interns/CaseyMann.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Casey Mann studies at University of Arkansas - Fayetteville and will intern at the Arkansas Democrat-Gazette
 :::
 
 ::: {style="float:right; padding:10px;"}
-<img src="../images/interns/Olivia Borgula.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>
-**Olivia Borgula** studies at University of Maryland, College Park and
-will intern with the Advertising Specialty Institute newsroom. See [her
-data project.](https://djnf-data-2025.github.io/olivia-borgula/)
+<img src="../images/interns/LaineCibulskis.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Laine Cibulskis studies at University of Missouri - Columbia and will intern at Detroit News
 :::
 
 ::: {style="float:right; padding:10px;"}
-<img src="../images/interns/Declan Bradley.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>
-**Declan Bradley** studies at Reed College and will intern with the
-Howard Center for Investigative Reporting newsroom. [Profile of Declan
-by Levi
-Jiang.](https://docs.google.com/document/d/101qUFtB46zNAwCP8MoTQNxHVwo2T3SqFSKPVOy7opTE/edit?usp=sharing)
+<img src="../images/interns/JulieLee.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>/nJulie Lee studies at Columbia University and will intern at the Howard Center for Investigative Journalism
 :::
 
 ::: {style="float:right; padding:10px;"}
-<img src="../images/interns/Emma Ferschweiler.png" width="25%" height="25%" align="left" style="padding:10px;"/>
-**Emma Morgan Ferschweiler** studies at The College of New Jersey and
-will intern with the New Jersey Advance Media.
+<img src="../images/interns/DiegoTorrealba.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Diego Torrealba studies at University of Texas at Austin and will intern at the Howard Center for Investigative Journalism
 :::
 
 ::: {style="float:right; padding:10px;"}
-<img src="../images/interns/Cooper Gant.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>
-**Cooper Gant** studies at University of Arkansas and will intern with
-the Arkansas Democrat Gazette.
+<img src="../images/interns/TiasiaSaunders.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Tiasia Saunders studies at University of Maryland and will intern at the Investigative Project on Race and Equity
 :::
 
 ::: {style="float:right; padding:10px;"}
-<img src="../images/interns/Nate Harrington.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>
-**Nathaniel Harrington** studies at Syracuse University and will intern
-with WHYY.
+<img src="../images/interns/ElaJalil.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Ela Jalil studies at University of Maryland and will intern at the Investigative Reporting Workshop
 :::
 
 ::: {style="float:right; padding:10px;"}
-<img src="../images/interns/Ava Hu.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>
-**Ava (Xiaoman) Hu** studies at University of California, Berkeley and
-will intern with the Houston Chronicle. Profile of Ava by Ethan Hylton
+<img src="../images/interns/WillHammann.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Will Hammann studies at University of Maryland and will intern at the Maryland Matters
 :::
 
 ::: {style="float:right; padding:10px;"}
-<img src="../images/interns/Ethan Hylton.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>
-**Ethan James Hylton** studies at Goldsmiths, University of London and
-will intern with the Indianapolis Star. [Ethan's profile by Ava
-Hu.](https://docs.google.com/document/d/1ztsovng3dKfH4jMs6eRNzFUwPZdt99iw5Eo2VsWrr7g/edit?usp=sharing)
-:::
-
-:::::::::: {style="float:right; padding:10px;"}
-<img src="../images/interns/Levi Jiang.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>
-**Levi Jiang** studies at University of Washington and will intern with
-the Philadelphia Inquirer.
-
-<div>
-
-::: {style="float:right; padding:10px;"}
-<img src="../images/interns/Lauren Lifke.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>
-**Lauren Lifke** studies at University of New Mexico and will intern
-with the Maryland Matters newsroom. [Profile of Lauren by Hannah
-Bensen](https://docs.google.com/document/d/1KpAog5S57ONW_B18uNwXz1jLak-QbnuF_yoanXDA8VA/edit?usp=sharing)
+<img src="../images/interns/IzzyFarina.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Izzy Farina studies at University of Georgia and will intern at the NJ Advance Media
 :::
 
 ::: {style="float:right; padding:10px;"}
-<img src="../images/interns/Apurva Mahajan.png" width="25%" height="25%" align="left" style="padding:10px;"/>
-**Apurva Mahajan** studies at University of Maryland and will intern
-with the The Detroit News. [Apurva's profile by Yasmeen
-Saadi.](https://docs.google.com/document/d/1l-0mNqCJ0oDHyfGD1MtxuuEh6RJxjlopVWAJEzF3v-Y/edit?tab=t.0)
+<img src="../images/interns/YaelleTang.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Yaelle Tang studies at University of California, Berkeley and will intern at the Philadelphia Inquirer
 :::
 
 ::: {style="float:right; padding:10px;"}
-<img src="../images/interns/Patrick McCaslin.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>
-**Patrick McCaslin** studies at University of Miami and will intern with
-the Baltimore Banner. [Profile of Patrick by Nate
-Harrington.](https://docs.google.com/document/d/1cGbEk3aE87GiOsoSYUqH3230IFsffTtUAEd9hVmpjpk/edit?usp=drivesdk)
+<img src="../images/interns/SamuelGauntt.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>/nSamuel Gauntt studies at University of Maryland and will intern at the States Newsroom D.C. Bureau
 :::
 
 ::: {style="float:right; padding:10px;"}
-<img src="../images/interns/Sophia Nabours.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>
-**Sophia Nabours** studies at University of Arkansas and will intern
-with the The Marshall Project. [Profile of Sophia by Sasha
-Allen.](https://docs.google.com/document/d/1w13eQ6WBpSC_pp6u_maU90IBDucs4X2ryKBWNmw-3Po/edit?usp=sharing)
+<img src="../images/interns/KatelynnWinebrenner.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Katelynn Winebrenner studies at University of Maryland and will intern at The Frederick News-Post
 :::
-
-:::: {style="float:right; padding:10px;"}
-<img src="../images/interns/Diego Perdomo.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>
-**Diego Perdomo** studies at University of Florida and will intern with
-the Futuro Media. [Read his profile by Olivia
-Borgula](https://docs.google.com/document/d/1iP5efSFNN2lFfGRhU3VZnD5M65P93Tsky_oeqvTgDno/edit?usp=sharing)
 
 ::: {style="float:right; padding:10px;"}
-<img src="../images/interns/Yasmeen Saadi.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>
-**Yasmeen Saadi** studies at University of Missouri-Columbia and will
-intern with the Investigative Project on Race and Equity newsroom. [Here
-is Yasmeen's data project for the
-week.](https://djnf-data-2025.github.io/yasmeen-saadi/)
+<img src="../images/interns/TeresaDo.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Teresa Do  studies at University of Texas at Austin and will intern at The Trace
 :::
+
 ::::
 
 </div>
