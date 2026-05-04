@@ -29,7 +29,7 @@ editor_options:
 :::
 
 ::: {style="float:right; padding:10px;"}
-<img src="../images/interns/profileTemp.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Laine Cibulskis studies at University of Missouri - Columbia and will intern at Detroit News
+<img src="../images/interns/LaineCibulskis.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Laine Cibulskis studies at University of Missouri - Columbia and will intern at Detroit News
 :::
 
 ::: {style="float:right; padding:10px;"}
