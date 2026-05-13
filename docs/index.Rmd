@@ -216,13 +216,6 @@ Speakers</a></button>
 -   Breakfast available at dining hall.
 -   Depart on your own schedule
 
-::: {style="text-align: center; color: #337DFF;"} TK TK TK
-<button><a href="https://djnf-data-2025.github.io/djnf_master_2025/Intructors.html" target="_blank">Instructors</a></button>
-# <a href="https://djnf-data-2025.github.io/djnf_master_2025/Intructors.html" target="_blank">Instructors</a>
-# <a href="https://djnf-data-2025.github.io/djnf_master_2025/Intructors.html" target="_blank">Instructors</a>
-
-
-:::
 
 ::: {style="text-align: center; color: #337DFF;"}
 # Resources
