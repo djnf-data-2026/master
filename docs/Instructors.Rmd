@@ -8,7 +8,7 @@ editor_options:
 ::: {style="text-align: center; color: #036ffc;"}
 # Dow Jones News Fund Data Instructors
 
-[(ver May 12, 2026)]{style="font-size: 8pt;"}
+[(ver May 17, 2026)]{style="font-size: 8pt;"}
 :::
 
 ::: {style="display: flex; align-items: center; justify-content: center; gap: 20px; margin-top: 30px;"}
@@ -17,6 +17,8 @@ editor_options:
 :::
 
 ::: {style="text-align:center"}
+<button><a href="https://djnf-data-2026.github.io/master/">Home</a></button>
+
 <button><a href="https://djnf-data-2026.github.io/master/Instructors">Instructors</a></button>
 
 <button><a href="https://djnf-data-2026.github.io/master/GuestSpeakers">Guest
@@ -27,7 +29,7 @@ Speakers</a></button>
 
 **Kevin Blackistone**
 
-<img src="../images/Kevin_Blackstone.jpeg" width="300" height="300"/>
+<img src="../images/instructors/Kevin_Blackstone.jpeg" width="300" height="300"/>
 
 Kevin Blackistone is a longtime national sports columnist now at The
 Washington Post, a panelist on ESPN’s “Around the Horn,” a contributor
@@ -48,7 +50,7 @@ enterprise reporting from the National Association of Black Journalists.
 
 **Karen Denny**
 
-<img src="../images/Karen_Denny.jpg" width="300" height="300"/>
+<img src="../images/instructors/Karen_Denny.jpg" width="300" height="300"/>
 
 Karen Denny is Merrill College's director of internships and career
 development. She previously served as the Annapolis bureau director of
@@ -67,7 +69,7 @@ Ju, South Korea.
 
 **Adam Marton**
 
-<img src="../images/Adam_Marton.jpg" width="300" height="300"/>
+<img src="../images/instructors/Adam_Marton.jpg" width="300" height="300"/>
 
 Adam Marton is an award-winning journalist and graphic designer who
 joined the Philip Merrill College of Journalism in 2018 after 13 years
@@ -82,7 +84,7 @@ visualization, front-end development and information graphics.
 
 **Bridget Lang**
 
-<img src="../images/bridget_lang.jpg" width="262" height="265"/>
+<img src="../images/instructors/bridget_lang.jpg" width="262" height="265"/>
 
 Bridget Lang is a software developer for the University of Maryland. In
 2024, she earned her bachelor’s degree in computer science with an
@@ -96,7 +98,7 @@ research project about an influential conservative journalist.
 
 **Christoph Mergerson**
 
-<img src="../images/Christoph_Mergerson.jpg" width="300" height="300"/>
+<img src="../images/instructors/Christoph_Mergerson.jpg" width="300" height="300"/>
 
 Christoph Mergerson, who completed his Ph.D. in Communication,
 Information and Media at Rutgers University, joined the Philip Merrill
@@ -115,7 +117,7 @@ and Global News.
 
 **Daniel Trielli**
 
-<img src="../images/daniel_trielli.jpg" width="300" height="300"/>
+<img src="../images/instructors/daniel_trielli.jpg" width="300" height="300"/>
 
 Daniel Trielli joined the Philip Merrill College of Journalism's faculty
 in Fall 2023 as assistant professor of media and democracy.
@@ -132,7 +134,7 @@ Estado de S. Paulo, and the regional newspaper, Diário do Grande ABC.
 
 **Rob Wells**
 
-<img src="../images/Rob_Wells.jpg" width="300" height="300"/>
+<img src="../images/instructors/Rob_Wells.jpg" width="300" height="300"/>
 
 Rob Wells, a 2016 Ph.D. alum of Merrill College, returned to the
 university in the Spring 2022 semester after more than five years at the
@@ -150,7 +152,7 @@ Street" (2022).
 
 **Derek Willis**
 
-<img src="../images/Derek_Willis.jpg" width="300" height="300"/>
+<img src="../images/instructors/Derek_Willis.jpg" width="300" height="300"/>
 
 Derek Willis, one of the nation’s leading data journalists and an
 experienced educator, joined the Philip Merrill College of Journalism in
