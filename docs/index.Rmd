@@ -17,13 +17,13 @@ editor_options:
 <br>  
 
 
-::: {style="font-weight:bold;"}
-``` markdown
-Rob Wells, director
-Karen Denny, co-director  
-Bridget Lang, assistant  
-```
-:::
+
+<!-- ``` markdown -->
+<!-- Rob Wells, director -->
+<!-- Karen Denny, co-director   -->
+<!-- Bridget Lang, assistant   -->
+<!-- ``` -->
+<!-- ::: -->
 
 ::: {style="text-align:center"}
 <button><a href="https://djnf-data-2026.github.io/master/Instructors">Instructors</a></button>
