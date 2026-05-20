@@ -98,34 +98,30 @@ top_wide <- primary |>
 Chart
 ```{r}
 top_wide |> 
-  # 1. Pivot the columns back to long format for ggplot
   pivot_longer(
     cols = -precinct, 
     names_to = "candidate", 
     values_to = "votes"
   ) |> 
-  # 2. Clean up the messy, long ID numbers from the candidate names
   mutate(candidate = case_when(
     stringr::str_detect(candidate, "Biden") ~ "Joe Biden",
     stringr::str_detect(candidate, "Trump") ~ "Donald Trump",
     TRUE ~ candidate
   )) |> 
-  # 3. Plot with fill mapped to candidate
   ggplot(aes(x = precinct, y = votes, fill = candidate)) +
   geom_col(position = "dodge") +
   labs(
-    title = "Candidate votes",
-    caption = "Graphic by Rob Wells, 12-22-19",
+    title = "Primary candidate votes",
+    caption = "Graphic by Rob Wells, 5-20-2026",
     y = "Votes",
     x = "Precinct",
-    fill = "Candidate" # Adds a clean title to the legend
+    fill = "Candidate"
   ) +
-  theme_minimal()
-
+    theme(axis.text.x = element_text(angle=90, size=6)) 
 ```
 
 
-
+#Notes only - 
 
 # Wrangling to get it into R
 
@@ -151,54 +147,4 @@ primary <- read_excel("/Users/gizmofo/Library/CloudStorage/GoogleDrive-robwells@
 
 
 write_csv(primary, "../data/PRIMARY_11PP24_Prov_CVR_SBE.csv")
-```
-
-
-
-
-
-
-
-```{r}
-gs4_deauth()
-library(googledrive)
-library(readr)
-
-# Tell the googledrive package to access files publicly (matching your gs4_deauth)
-drive_deauth()
-
-# Download the file locally
-drive_download(
-  file = "https://drive.google.com/file/d/1Ipevjtn-MdnOVXM8-AXXid9dzTQFMwUb/view?usp=sharing",
-  path = "general1.csv",
-  overwrite = TRUE
-)
-
-# Read the local CSV file
-general1 <- read_csv("general1.csv")
-
-
-
-```
-```{r}
-# Download the file locally
-drive_download(
-  file = "https://drive.google.com/file/d/151_wMKcmzyf821rNIWEsiOE6XLSGb1Tb/view?usp=sharing",
-  path = "general2.csv",
-  overwrite = TRUE
-)
-
-# Read the local CSV file
-general2 <- read_csv("general2.csv")
-```
-```{r}
-# Download the file locally
-drive_download(
-  file = "https://drive.google.com/file/d/1bKVAeKb4cbsZQe0TXxAVWWTLtl6Q1XDr/view?usp=sharing",
-  path = "primary.csv",
-  overwrite = TRUE
-)
-
-# Read the local CSV file
-primary <- read_csv("primary.csv")
 ```
