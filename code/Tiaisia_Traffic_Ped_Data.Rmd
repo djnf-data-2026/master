@@ -1,0 +1,178 @@
+---
+title: "Traffic and Pedestrian Data"
+author: "Wells"
+date: "2026-05-20"
+output: html_document
+---
+We talked with Katelynn when she visited us about a project looking at election data.
+
+```{r}
+library(tidyverse)
+library(readxl)
+library(googlesheets4)
+library(googledrive)
+library(janitor)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#Import data
+```{r}
+
+general1 <- read_csv("https://raw.githubusercontent.com/djnf-data-2026/master/refs/heads/main/data/GENERAL_11PG24_Prov_CVR_SBE_1.csv") |> 
+  clean_names()
+
+
+general2 <- read_csv("https://raw.githubusercontent.com/djnf-data-2026/master/refs/heads/main/data/GENERAL_11PG24_Prov_CVR_SBE.csv") |> 
+  clean_names()
+
+primary <- read_csv("https://raw.githubusercontent.com/djnf-data-2026/master/refs/heads/main/data/PRIMARY_11PP24_Prov_CVR_SBE.csv") |> 
+  clean_names()
+
+```
+
+# Pokin around
+
+```{r}
+precincts <- primary |> 
+  group_by(precinct) |> 
+  count()
+
+#write_csv(precincts, "../data/precincts.csv")
+```
+
+
+
+```{r}
+top <- primary |> 
+  group_by(precinct) |> 
+  count(
+    dem_president_of_the_united_states_6_500001630106, 
+    rep_president_of_the_united_states_6_500001630206
+  ) |> 
+  filter(
+    dem_president_of_the_united_states_6_500001630106 == "Joe Biden (10066066.0000254)" | 
+    rep_president_of_the_united_states_6_500001630206 == "Donald J. Trump (10066066.0000246)"
+  ) |> 
+  pivot_longer(
+    cols = c(
+      dem_president_of_the_united_states_6_500001630106, 
+      rep_president_of_the_united_states_6_500001630206
+    ),
+    names_to = "candidate_type",  # Changed from "precinct" to avoid clashing
+    values_to = "candidate_name", # Moves the actual name strings here
+    values_drop_na = TRUE         # Optional: Drops the messy 'NA' rows seen in your output
+  )
+  
+
+
+
+```
+
+
+Wider
+```{r}
+
+top_wide <- primary |> 
+  group_by(precinct) |> 
+  count(
+    dem_president_of_the_united_states_6_500001630106, 
+    rep_president_of_the_united_states_6_500001630206
+  ) |> 
+  filter(
+    dem_president_of_the_united_states_6_500001630106 == "Joe Biden (10066066.0000254)" | 
+    rep_president_of_the_united_states_6_500001630206 == "Donald J. Trump (10066066.0000246)"
+  ) |> 
+  mutate(candidate = coalesce(
+    dem_president_of_the_united_states_6_500001630106, 
+    rep_president_of_the_united_states_6_500001630206
+  )) |> 
+  # 2. Pivot wider using 'id_cols' to force exactly one row per precinct
+  pivot_wider(
+    id_cols = precinct,
+    names_from = candidate,
+    values_from = n
+  ) |> 
+  rename(Biden = 2, Trump =3)
+
+```
+
+
+Chart
+```{r}
+top_wide |> 
+  pivot_longer(
+    cols = -precinct, 
+    names_to = "candidate", 
+    values_to = "votes"
+  ) |> 
+  mutate(candidate = case_when(
+    stringr::str_detect(candidate, "Biden") ~ "Joe Biden",
+    stringr::str_detect(candidate, "Trump") ~ "Donald Trump",
+    TRUE ~ candidate
+  )) |> 
+  ggplot(aes(x = precinct, y = votes, fill = candidate)) +
+  geom_col(position = "dodge") +
+  labs(
+    title = "Primary candidate votes",
+    caption = "Graphic by Rob Wells, 5-20-2026",
+    y = "Votes",
+    x = "Precinct",
+    fill = "Candidate"
+  ) +
+    theme(axis.text.x = element_text(angle=90, size=6)) 
+```
+
+
+#Notes only - 
+
+# Wrangling to get it into R
+
+#GENERAL_11PG24_Prov_CVR_SBE - 1
+```{r}
+general1 <- read_excel("/Users/gizmofo/Library/CloudStorage/GoogleDrive-robwells@umd.edu/My Drive/DJNF 2026/Katelynn Winebrenner/2024 Cast Vote Record/GENERAL_11PG24_Prov_CVR_SBE - 1.xlsx")
+
+write_csv(general1, "../data/GENERAL_11PG24_Prov_CVR_SBE_1.csv")
+```
+
+GENERAL_11PG24_Prov_CVR_SBE
+```{r}
+general2 <- read_excel("/Users/gizmofo/Library/CloudStorage/GoogleDrive-robwells@umd.edu/My Drive/DJNF 2026/Katelynn Winebrenner/2024 Cast Vote Record/GENERAL_11PG24_Prov_CVR_SBE.xlsx")
+
+
+write_csv(general2, "../data/GENERAL_11PG24_Prov_CVR_SBE.csv")
+```
+
+PRIMARY_11PP24_Prov_CVR_SBE
+```{r}
+
+primary <- read_excel("/Users/gizmofo/Library/CloudStorage/GoogleDrive-robwells@umd.edu/My Drive/DJNF 2026/Katelynn Winebrenner/2024 Cast Vote Record/PRIMARY_11PP24_Prov_CVR_SBE.xlsx")
+
+
+write_csv(primary, "../data/PRIMARY_11PP24_Prov_CVR_SBE.csv")
+```
