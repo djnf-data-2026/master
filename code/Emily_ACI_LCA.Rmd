@@ -1,0 +1,203 @@
+---
+title: "LCA "
+author: "Wells"
+date: "2026-05-19"
+output: html_document
+---
+
+FOR EMILY WILSON
+Memo from your newsroom describing the project:
+
+We recently released our 2026 Ad Impressions Study, an end-user/consumer survey that measures the effectiveness/longevity of promotional products, in comparison to other advertising mediums.
+ 
+I’ve attached the raw Ad Impressions data, and here’s the article we published about the study: https://members.asicentral.com/news/strategy/march-2026/asi-s-2026-ad-impressions-study-5-compelling-takeaways/
+ 
+We were thinking it would be cool to come up with a sustainability angle for this data. Perhaps there’s a way to look at the materials/resources required to create a promo product and measure that against the longevity of the product and number of impressions it generates in its lifetime to determine its environmental impact? Maybe she could pick a couple of the top products to examine more closely?
+
+More details from your newsroom are here:
+https://docs.google.com/document/d/1Y5me4y6shnXXO5rHXkZjO4r7HTcAU-EZz18jxrTC24Q/edit?usp=sharing
+
+
+```{r}
+library(tidyverse)
+library(readxl)
+library(googlesheets4)
+library(googledrive)
+library(janitor)
+```
+
+
+
+#Import data
+
+After some poking around, I think this Bonsai project has the most user friendly LCA data
+https://bonsai.uno/gtdr
+
+
+```{r}
+
+footprint <- read_csv("/Users/gizmofo/Library/CloudStorage/GoogleDrive-robwells@umd.edu/My Drive/DJNF 2026/Emily Wilson/footprints-v2.1.6.csv") |> 
+  clean_names()
+
+glimpse(footprint)
+
+```
+
+So the dataset is:
+
+1,538 products/sectors × 54 countries × 2 metrics = theoretically 166,104 combinations — close to your 188,924 rows, so coverage is fairly complete but not every product exists in every country
+GTP20 is worth knowing about:
+
+Metric	Full Name	What it measures
+GWP100	Global Warming Potential, 100-year	Standard carbon accounting — cumulative heat trapped over 100 years
+GTP20	Global Temperature Potential, 20-year	Temperature change at 20 years — weights short-lived gases (like methane) much more heavily
+GWP100 is the standard used in most climate policy (Paris Agreement, IPCC reports). GTP20 is more useful if you're interested in near-term climate impacts.
+
+You'll likely want to filter to one metric for most analyses:
+
+footprint_gwp <- footprint |> filter(metric == "GWP100")
+footprint_gtp <- footprint |> filter(metric == "GTP20")
+
+
+Use this web interface to check on cotton:
+https://www.bonsai.uno/?mode=product&metric=GWP100&version=v2.1.6&product=C_Cotton&region=US&advanced=1&unit=kg
+
+
+
+An explanation of the data fields
+https://search.lca.aau.dk/web/concept/https%3A//glossary.bonsai.uno/Bonsut-v2.1.3-flowobjects/fm?concept_scheme=https%3A%2F%2Fglossary.bonsai.uno%2FBonsut-v2.1.3-flowobjects&language=en
+
+
+# Pokin around
+
+```{r}
+footprint |> 
+  filter(metric == "GWP100") |> 
+  filter(str_detect(flow_code, "Cotton"))
+
+#write_csv(precincts, "../data/precincts.csv")
+```
+
+
+```{r}
+
+library(rvest)
+
+page <- read_html("https://search.lca.aau.dk/web/concept/https%3A//glossary.bonsai.uno/Bonsut-v2.1.3-flowobjects/fm?concept_scheme=https%3A%2F%2Fglossary.bonsai.uno%2FBonsut-v2.1.3-flowobjects&language=en")
+
+# Extract table if present
+flow_labels <- page |> html_table() |> pluck(1)
+
+
+
+```
+
+
+```{r}
+top <- primary |> 
+  group_by(precinct) |> 
+  count(
+    dem_president_of_the_united_states_6_500001630106, 
+    rep_president_of_the_united_states_6_500001630206
+  ) |> 
+  filter(
+    dem_president_of_the_united_states_6_500001630106 == "Joe Biden (10066066.0000254)" | 
+    rep_president_of_the_united_states_6_500001630206 == "Donald J. Trump (10066066.0000246)"
+  ) |> 
+  pivot_longer(
+    cols = c(
+      dem_president_of_the_united_states_6_500001630106, 
+      rep_president_of_the_united_states_6_500001630206
+    ),
+    names_to = "candidate_type",  # Changed from "precinct" to avoid clashing
+    values_to = "candidate_name", # Moves the actual name strings here
+    values_drop_na = TRUE         # Optional: Drops the messy 'NA' rows seen in your output
+  )
+  
+
+
+
+```
+
+
+Wider
+```{r}
+
+top_wide <- primary |> 
+  group_by(precinct) |> 
+  count(
+    dem_president_of_the_united_states_6_500001630106, 
+    rep_president_of_the_united_states_6_500001630206
+  ) |> 
+  filter(
+    dem_president_of_the_united_states_6_500001630106 == "Joe Biden (10066066.0000254)" | 
+    rep_president_of_the_united_states_6_500001630206 == "Donald J. Trump (10066066.0000246)"
+  ) |> 
+  mutate(candidate = coalesce(
+    dem_president_of_the_united_states_6_500001630106, 
+    rep_president_of_the_united_states_6_500001630206
+  )) |> 
+  # 2. Pivot wider using 'id_cols' to force exactly one row per precinct
+  pivot_wider(
+    id_cols = precinct,
+    names_from = candidate,
+    values_from = n
+  ) |> 
+  rename(Biden = 2, Trump =3)
+
+```
+
+
+Chart
+```{r}
+top_wide |> 
+  pivot_longer(
+    cols = -precinct, 
+    names_to = "candidate", 
+    values_to = "votes"
+  ) |> 
+  mutate(candidate = case_when(
+    stringr::str_detect(candidate, "Biden") ~ "Joe Biden",
+    stringr::str_detect(candidate, "Trump") ~ "Donald Trump",
+    TRUE ~ candidate
+  )) |> 
+  ggplot(aes(x = precinct, y = votes, fill = candidate)) +
+  geom_col(position = "dodge") +
+  labs(
+    title = "Primary candidate votes",
+    caption = "Graphic by Rob Wells, 5-20-2026",
+    y = "Votes",
+    x = "Precinct",
+    fill = "Candidate"
+  ) +
+    theme(axis.text.x = element_text(angle=90, size=6)) 
+```
+
+
+#Notes only - 
+
+# Wrangling to get it into R
+
+#GENERAL_11PG24_Prov_CVR_SBE - 1
+```{r}
+general1 <- read_excel("/Users/gizmofo/Library/CloudStorage/GoogleDrive-robwells@umd.edu/My Drive/DJNF 2026/Katelynn Winebrenner/2024 Cast Vote Record/GENERAL_11PG24_Prov_CVR_SBE - 1.xlsx")
+
+write_csv(general1, "../data/GENERAL_11PG24_Prov_CVR_SBE_1.csv")
+```
+
+GENERAL_11PG24_Prov_CVR_SBE
+```{r}
+general2 <- read_excel("/Users/gizmofo/Library/CloudStorage/GoogleDrive-robwells@umd.edu/My Drive/DJNF 2026/Katelynn Winebrenner/2024 Cast Vote Record/GENERAL_11PG24_Prov_CVR_SBE.xlsx")
+
+
+write_csv(general2, "../data/GENERAL_11PG24_Prov_CVR_SBE.csv")
+```
+
+PRIMARY_11PP24_Prov_CVR_SBE
+```{r}
+
+primary <- read_excel("/Users/gizmofo/Library/CloudStorage/GoogleDrive-robwells@umd.edu/My Drive/DJNF 2026/Katelynn Winebrenner/2024 Cast Vote Record/PRIMARY_11PP24_Prov_CVR_SBE.xlsx")
+
+
+write_csv(primary, "../data/PRIMARY_11PP24_Prov_CVR_SBE.csv")
+```
