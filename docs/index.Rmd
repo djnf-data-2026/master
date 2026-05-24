@@ -5,27 +5,20 @@ editor_options:
     wrap: 72
 ---
 
-::: {style="text-align: center; color: #337DFF;"}
+::::::::: {style="text-align: center; color: #E21833;"}
 # Merrill College Data Journalism Training
 
+::: {style="text-align: center; color: #ff9500;"}
 ### Dow Jones News Fund \@ Merrill College
 
 #### Sunday, May 31 - Sunday, June 7, 2026
-(ver May 17, 2026)
+
+(ver May 24, 2026)
 :::
 
-<br>  
+<br>
 
-
-
-<!-- ``` markdown -->
-<!-- Rob Wells, director -->
-<!-- Karen Denny, co-director   -->
-<!-- Bridget Lang, assistant   -->
-<!-- ``` -->
-<!-- ::: -->
-
-::: {style="text-align:center"}
+::: {style="text-align:center; color: #000000"}
 <button><a href="https://djnf-data-2026.github.io/master/Instructors">Instructors</a></button>
 
 <button><a href="https://djnf-data-2026.github.io/master/GuestSpeakers">Guest
@@ -34,185 +27,239 @@ Speakers</a></button>
 <button><a href="https://djnf-data-2026.github.io/master/Interns">Interns</a></button>
 :::
 
-::: {style="text-align: center; color: #337DFF;"}
-# Itinerary
+::: {style="text-align: center; color: #E21833;"}
+## Itinerary
 :::
 
+::: {style="text-align: left;color: #000000;"}
 **Pre-Conference**
 
--   **By Monday May 25**: Students will have [data assignments
-    described](https://docs.google.com/document/d/1NATRDMhUr8XSpkI-_bKfJCM8YVu9028QHKlk_7sbdw0/edit?usp=sharing).
--   **By May 25**: Students will be sent a data starter kit to load
-    relevant software on their laptops and test out their equipment.
--   **By May 27**: Students profiles due, 11:59 p.m.
+- **By May 25**: Students will be sent a data starter kit to load
+  relevant software on their laptops and test out their equipment.
+- **By May 27**: Students profiles due, 11:59 p.m.
+- **By May 29**: Students will have data assignments described.
 
 **Sunday, May 31, 2026**
 
--   **2 p.m.**: Welcome at Knight Hall Eaton Theater. Wells
-    Denny, Lang and Shirley Carswell, DJNF Executive Director
-    -   Logistics. The week ahead. Rooms meals.
-    -   Student introductions.
--   **3:30 p.m.**: Break
--   **3:45 p.m.**: Investigate Your Community.
-    -   Review starter code, data memos, develop story ideas. Wells. Eaton Theater  
--   **4:30 p.m.**: Break and then independent work
-    -   Produce draft story ideas by 11:59 p.m.
--   **5:30 p.m.**: Break
--   **6:00 p.m.**: Dinner in Hyattsville - (Meet at Knight Hall board van)
--   **11:59 p.m.**: One paragraph draft story ideas. 
-    - This will reflect that you have read the data memo in your Google Doc folder, the guidance from your newsroom and have conducted a preliminary review of the data. This one paragraph will show you have engaged with this material and produced a story idea that could be discussed with an editor. Don't worry, you can change and refine your idea as the week goes on. This is a first step. Submit as a Google Doc or an R Markdown document. Remember to allow permission sharing for Google Docs. Email links to Wells: robwells@umd.edu
+- **2 p.m.**: Welcome at Knight Hall Eaton Theater. Wells Denny, Lang
+  and Shirley Carswell, DJNF Executive Director
+  - Logistics. The week ahead. Rooms meals.
+  - Student introductions.
+- **3:30 p.m.**: Break
+- **3:45 p.m.**: Investigate Your Community.
+  - Review starter code, data memos, develop story ideas. Wells. Eaton
+    Theater\
+- **4:30 p.m.**: Break and then independent work
+  - Produce draft story ideas by 11:59 p.m.
+- **5:30 p.m.**: Break
+- **6:00 p.m.**: Dinner in Hyattsville - (Meet at Knight Hall board van)
+- **11:59 p.m.**: One paragraph draft story ideas.
+  - This will reflect that you have read the data memo in your Google
+    Doc folder, the guidance from your newsroom and have conducted a
+    preliminary review of the data. This one paragraph will show you
+    have engaged with this material and produced a story idea that could
+    be discussed with an editor. Don't worry, you can change and refine
+    your idea as the week goes on. This is a first step. Submit as a
+    Google Doc or an R Markdown document. Remember to allow permission
+    sharing for Google Docs. Email links to Wells:
+    [robwells\@umd.edu](mailto:robwells@umd.edu){.email} and
+    [kdenny12\@umd.edu](mailto:kdenny12@umd.edu){.email}
 
 **Monday, June 1, 2026**
 
--   **Breakfast**: On your own
+- **Breakfast**: On your own
 
--   **9 a.m.**: Meet at Knight Hall
+- **9 a.m.**: Meet at Knight Hall
 
--   **Skills sessions. Pick one**    
+- **Skills sessions. Pick one**
 
-    -   Coding Experienced Track: Data Driven Reporting. (Aidan Hughes, the Howard Center)
-        -   Bring material into R and make sense of it.
-        -   Basic webscraping, PDF data extraction
-        -   Knight Hall Room 2103
-        
-    -   New to Coding Track: Importing Data. (Wells) 
-        -   Basic R.
-        -   Knight Hall Room 2107 
-        
+  - Coding Experienced Track: Data Driven Reporting. (Aidan Hughes, the
+    Howard Center)
+    - Bring material into R and make sense of it.
+    - Basic webscraping, PDF data extraction
+    - Knight Hall Room 2103
+  - New to Coding Track: Importing Data. (Wells)
+    - Basic R.
+    - Knight Hall Room 2107
 
--   **10:30 a.m.**: Break. Coffee served. Lobby. 
+- **10:30 a.m.**: Break. Coffee served. Lobby.
 
--   **11 a.m.**: Workshops: Use data to find stories. (Wells, Hughes).
-    Rooms 2103, 2107
+- **11 a.m.**: Workshops: Use data to find stories. (Wells, Hughes).
+  Rooms 2103, 2107
 
--   **12:30 p.m.**: Lunch in Knight Hall.
+- **12:30 p.m.**: Lunch in Knight Hall.
 
--   **1:30 p.m.**: Writing a story pitch memo. All attend. (Denny). Room 2103
+- **1:30 p.m.**: Writing a story pitch memo. All attend. (Denny). Room
+  2103
 
-    -   [Slides for
-        talk](https://docs.google.com/presentation/d/1zdlk2Ss9jE_SZL2HuHvUbZeUteEO0OBasFKpXtjuZIY/edit?usp=sharing)
+  - [Slides for
+    talk](https://docs.google.com/presentation/d/1zdlk2Ss9jE_SZL2HuHvUbZeUteEO0OBasFKpXtjuZIY/edit?usp=sharing)
 
+- **2:15 p.m.**: Using GitHub. All attend. (Wells/Lang) [GitHub
+  refresher](https://wellsdata.github.io/data_journalism_class/_book/github.html)
 
--   **2:15 p.m.**: Using GitHub. All attend. (Wells/Lang) [GitHub
-        refresher](https://wellsdata.github.io/data_journalism_class/_book/github.html)
+- **2:45 p.m.**: Workshop for [story pitch memo due at 11:59
+  p.m.](https://docs.google.com/document/d/1A-dlzWX7ksOt6LRHYpuPDk7SPPWxyZEmGt2wC0lM7Mg/edit)
+  (Wells, Denny, Lang coach). Rooms 2103, 2107
 
--   **2:45 p.m.**: Workshop for [story pitch memo due at 11:59
-    p.m.](https://docs.google.com/document/d/1A-dlzWX7ksOt6LRHYpuPDk7SPPWxyZEmGt2wC0lM7Mg/edit)
-    (Wells, Denny, Lang coach). Rooms 2103, 2107
+- **4 p.m.**: Diversity is Good Journalism: Covering All of the
+  Community. (Prof. Christoph Mergerson). All attend. Room 2103
 
--   **4 p.m.**: Diversity is Good Journalism: Covering All of the Community. (Prof.
-    Christoph Mergerson). All attend. Room 2103
-    
-    -   [Readings before
-        talk](https://drive.google.com/drive/folders/1VjenaNF-IahhdVl6TQHrQK5_ygELl2JD?usp=drive_link)
+  - [Readings before
+    talk](https://drive.google.com/drive/folders/1VjenaNF-IahhdVl6TQHrQK5_ygELl2JD?usp=drive_link)
 
--   **5:30 p.m.**: Break
+- **5:30 p.m.**: Break
 
--   **6:30 p.m.**: Dinner on campus 
+- **6:30 p.m.**: Dinner on campus
 
--   **11:59 p.m.**:  Draft a story pitch memo due.
-  - A minimum of 400 words, building on the story idea paragraph, that incorporates some of the best practices in pitching a story and generally follows the story pitch template and process as described in Monday’s lecture. This draft pitch will reflect a deeper exploration of the assigned data and hopefully some independent research. The best story pitches will have some context about recent coverage of this topic. Submit as an R Markdown document, providing a link to your GitHub account; entry level interns have the option of submitting a Google Doc. Email links to Wells: robwells@umd.edu
+- **11:59 p.m.**: Draft a story pitch memo due.
 
+- A minimum of 400 words, building on the story idea paragraph, that
+  incorporates some of the best practices in pitching a story and
+  generally follows the story pitch template and process as described in
+  Monday’s lecture. This draft pitch will reflect a deeper exploration
+  of the assigned data and hopefully some independent research. The best
+  story pitches will have some context about recent coverage of this
+  topic. Submit as an R Markdown document, providing a link to your
+  GitHub account; entry level interns have the option of submitting a
+  Google Doc. Email links to Wells:
+  [robwells\@umd.edu](mailto:robwells@umd.edu){.email} and
+  [kdenny12\@umd.edu](mailto:kdenny12@umd.edu){.email}
 
 **Tuesday June 2, 2026**
 
--   **Breakfast**: On your own
--   **9 a.m. - 10:30 a.m.: Skills sessions**
+- **Breakfast**: On your own
 
-    -   Coding Experienced Track: Using AI with R. (Derek Willis, the Howard Center)
-        -   Use R to link to a LLM and process data.
-        -   Knight Hall Room 2103
-        
-    -   New to Coding Track: Data cleaning. (Aidan Hughes, the Howard Center) 
-        -   Use Open Refine, R to clean data
-        -   Knight Hall Room 2107 
+- **9 a.m. - 10:30 a.m.: Skills sessions**
 
--   **10:30 a.m.**: Heather Taylor, DJNF, discussion.
-        -- Eaton Theater
-        
--   **10:45 a.m.**: Break. Coffee served.
+  - Coding Experienced Track: Using AI with R. (Derek Willis, the Howard
+    Center)
+    - Use R to link to a LLM and process data.
+    - Knight Hall Room 2103
+  - New to Coding Track: Data cleaning. (Aidan Hughes, the Howard
+    Center)
+    - Use Open Refine, R to clean data
+    - Knight Hall Room 2107
 
--   **11 a.m.**: Workshop. Students work on data gathering story pitches. (Wells, Willis, Hughes, TA as coaches). Room 1101
+- **10:30 a.m.**: Heather Taylor, DJNF, discussion. -- Eaton Theater
 
--   **1 p.m.-2:30 p.m.: Data Visualization. **. 
-    Using Datawrapper for data visualization. (Adam Marton). All attend. Room 2103
+- **10:45 a.m.**: Break. Coffee served.
 
--   **2:30 p.m.-2:45 p.m. **: Break
+- **11 a.m.**: Workshop. Students work on data gathering story pitches.
+  (Wells, Willis, Hughes, TA as coaches). Room 1101
 
--   **2:45 p.m.-4 p.m. **: Workshop on your projects. (Wells / Marton / Lang) 
+- **1 p.m.-2:30 p.m.: Data Visualization.** . Using Datawrapper for data
+  visualization. (Adam Marton). All attend. Room 2103
 
--   **4 p.m.-5 p.m.**: Speaker: Prof. Kevin Blackistone on racial justice in sports
-        business
--   **5:30 p.m.**: Break
--   **6:30 p.m.**: Dinner in Hyattsville. (Meet at Knight Hall board van. Wells /  driving)
+- **2:30 p.m.-2:45 p.m.** : Break
+
+- **2:45 p.m.-4 p.m.** : Workshop on your projects. (Wells / Marton /
+  Lang)
+
+- **4 p.m.-5 p.m.**: Speaker: Prof. Kevin Blackistone on racial justice
+  in sports business
+
+- **5:30 p.m.**: Break
+
+- **6:30 p.m.**: Dinner in Hyattsville. (Meet at Knight Hall board van.
+  Wells / driving)
 
 **Wednesday June 3, 2026**
 
--   **Breakfast**: On your own 
--   **9 a.m.-10:15 a.m.: Skills sessions**
+- **Breakfast**: On your own
 
-    -   Coding Experienced Track: Using AI with R. (Daniel Trielli, Merrill College)
-        -   Use R to link to a LLM and process data.
-        -   Knight Hall Room 2103
-        
-    -   New to Coding Track: Analyzing your data (Wells) 
-        -   Using the Tidyverse to summarize and analyze data.
-        -   Knight Hall Room 2107 
+- **9 a.m.-10:15 a.m.: Skills sessions**
 
--   **10:15 a.m.**: Break. Coffee served.
--   **10:30 a.m.**: Workshop. Open workshop on projects. (Wells, Trielli, Lang coach). Rooms 2103, 2107
--   **11:30 a.m. - 12:30 p.m.**: Keynote speaker: [Jon Schleuss, President, The News Guild](https://newsguild.org/staff/). All attend. Eaton Theater.  
-    -  [Readings before Jon Schleuss talk](TK TK TK) TK TK TK
-    - Lunch with Schleuss
-    
--   **1:30 p.m. - 2:30 p.m.**:  Introduction to business reporting. Wells
-    proposals. Eaton Theater
--   **2:30 p.m. - 3 p.m.**: Digital accessibility for data visualization. Lang. Eaton Theater
--   **3 p.m. - 6 p.m.**:  Workshop on your projects. Wells / Lang / Denny
--   **6 p.m.**: Dinner on campus
--   **11:59 p.m.**: Second draft of story pitch memos due. 
-    –A minimum of 600 words, this will build on Monday’s work. It will include at least one graphic, building on the Tuesday graphics workshop, and some summary data analysis, building on the data workshops since Sunday. This pitch should include summary tables, basic analysis, questions, and a discussion of potential holes. The best pitches will cover two topics and have a rendered page from your GitHub account. Submit as an R Markdown document, providing a link to your GitHub account. Email links to Wells: robwells@umd.edu
+  - Coding Experienced Track: Using AI with R. (Daniel Trielli, Merrill
+    College)
+    - Use R to link to a LLM and process data.
+    - Knight Hall Room 2103
+  - New to Coding Track: Analyzing your data (Wells)
+    - Using the Tidyverse to summarize and analyze data.
+    - Knight Hall Room 2107
 
-**Thursday June 4, 2026** 
+- **10:15 a.m.**: Break. Coffee served.
 
--   **Breakfast**: On your own at dorm
--   **8:15 a.m.**: Meet at Knight Hall, board van, depart for College Park Metro (Wells driving)
--   **10 a.m.**:  Tour of AP D.C. bureau with Chad Day, AP's elections team. 
--   **Noon**: Lunch.
--   **1:30 p.m.**: Tour U.S. Senate press gallery with Prof. Deborah Berry, Philip Merrill College of Journalism.
--   **6 p.m.**: Dinner in Washington D.C.
+- **10:30 a.m.**: Workshop. Open workshop on projects. (Wells, Trielli,
+  Lang coach). Rooms 2103, 2107
+
+- **11:30 a.m. - 12:30 p.m.**: Keynote speaker: [Jon Schleuss,
+  President, The News Guild](https://newsguild.org/staff/). All attend.
+  Eaton Theater.
+
+  - [Readings before Jon Schleuss talk](TK%20TK%20TK) TK TK TK
+  - Lunch with Schleuss
+
+- **1:30 p.m. - 2:30 p.m.**: Introduction to business reporting. Wells
+  proposals. Eaton Theater
+
+- **2:30 p.m. - 3 p.m.**: Digital accessibility for data visualization.
+  Lang. Eaton Theater
+
+- **3 p.m. - 6 p.m.**: Workshop on your projects. Wells / Lang / Denny
+
+- **6 p.m.**: Dinner on campus
+
+- **11:59 p.m.**: Second draft of story pitch memos due. –A minimum of
+  600 words, this will build on Monday’s work. It will include at least
+  one graphic, building on the Tuesday graphics workshop, and some
+  summary data analysis, building on the data workshops since Sunday.
+  This pitch should include summary tables, basic analysis, questions,
+  and a discussion of potential holes. The best pitches will cover two
+  topics and have a rendered page from your GitHub account. Submit as an
+  R Markdown document, providing a link to your GitHub account. Email
+  links to Wells: [robwells\@umd.edu](mailto:robwells@umd.edu){.email}
+  and [kdenny12\@umd.edu](mailto:kdenny12@umd.edu){.email}
+
+**Thursday June 4, 2026**
+
+- **Breakfast**: On your own at dorm
+- **8:15 a.m.**: Meet at Knight Hall, board van, depart for College Park
+  Metro (Wells driving)
+- **10 a.m.**: Tour of AP D.C. bureau with Chad Day, AP's elections
+  team.
+- **Noon**: Lunch.
+- **1:30 p.m.**: Tour U.S. Senate press gallery with Prof. Deborah
+  Berry, Philip Merrill College of Journalism.
+- **6 p.m.**: Dinner in Washington D.C.
 
 **Friday June 5, 2026**
 
--   **Breakfast**: On your own at dorm
--   **9 a.m.-10 a.m.**: Skills to survive in the newsroom. Time management, deadlines. All attend. (Denny) Eaton Theater.
--   **10:00 a.m. - 10:15 a.m.**: Break
--   **10:15 a.m.-12:30 p.m.**: Workshop on projects (Wells, Denny, Lang coach)
--   **12:30 p.m.-1:30 p.m.**: Lunch in Knight Hall
--   **3:30 p.m.**: Meet at Knight Hall, board van, depart for College
-    Park Metro, dinner in Washington D.C., attend a community jazz show
-    at [Westminster Church](https://westminsterdc.org/our-pastor). Meet
-    with Pastor Brian E. Hamilton beforehand to discuss Southwest D.C.
-    history
+- **Breakfast**: On your own at dorm
+- **9 a.m.-10 a.m.**: Skills to survive in the newsroom. Time
+  management, deadlines. All attend. (Denny) Eaton Theater.
+- **10:00 a.m. - 10:15 a.m.**: Break
+- **10:15 a.m.-12:30 p.m.**: Workshop on projects (Wells, Denny, Lang
+  coach)
+- **12:30 p.m.-1:30 p.m.**: Lunch in Knight Hall
+- **3:30 p.m.**: Meet at Knight Hall, board van, depart for College Park
+  Metro, dinner in Washington D.C., attend a community jazz show at
+  [Westminster Church](https://westminsterdc.org/our-pastor). Meet with
+  Pastor Brian E. Hamilton beforehand to discuss Southwest D.C. history
 
 **Saturday June 6, 2026**
 
--   **Breakfast**: On your own at dorm
--   **9:00 a.m.**: Present your story pitch to the group. 
-    –This will be a webpage rendered from your GitHub account that includes at least three graphics, several summary tables, and a written analysis. Entry level interns have the option of presenting slides. Two separate story pitches will be presented, along with questions and a discussion of potential holes. Email links to Wells: robwells@umd.edu Shirley Carswell, DJNF Executive Director, visits
--   **12:15 p.m.**: Lunch in Knight Hall
--   **1 p.m.**: On the van for D.C.
--   **2:30 p.m.**: Tour of African-American History Museum, D.C.
--   **5:30 p.m.**: Dinner (Meet at Knight Hall board van)
+- **Breakfast**: On your own at dorm
+- **9:00 a.m.**: Present your story pitch to the group. –This will be a
+  webpage rendered from your GitHub account that includes at least three
+  graphics, several summary tables, and a written analysis. Entry level
+  interns have the option of presenting slides. Two separate story
+  pitches will be presented, along with questions and a discussion of
+  potential holes. Email links to Wells:
+  [robwells\@umd.edu](mailto:robwells@umd.edu){.email} Shirley Carswell,
+  DJNF Executive Director, visits
+- **12:15 p.m.**: Lunch in Knight Hall
+- **1 p.m.**: On the van for D.C.
+- **2:30 p.m.**: Tour of African-American History Museum, D.C.
+- **5:30 p.m.**: Dinner (Meet at Knight Hall board van)
 
 **Sunday June 7, 2026**
 
--   Breakfast available at dining hall.
--   Depart on your own schedule
+- Breakfast available at dining hall.
+- Depart on your own schedule
 
-
-::: {style="text-align: center; color: #337DFF;"}
-# Resources
+::: {style="text-align: center; color: #ff9500;"}
+## Resources
 :::
 
 **Campus Map**
@@ -222,7 +269,7 @@ Speakers</a></button>
 <br> **Data Journalism Text**
 
 [Data Journalism with R and the
-Tidyverse](https://wellsdata.github.io/data_journalism_class/_book/)
+Tidyverse](https://thescoop.org/data_journalism_book/)
 
 <br>
 
@@ -238,36 +285,32 @@ Tidyverse](https://wellsdata.github.io/data_journalism_class/_book/)
 **Karen Denny, 301-775-8483. email:
 [kdenny12\@umd.edu](mailto:kdenny12@umd.edu){.email}**
 
-
 **Bridget Lang, 301-314-7573. email:
-[blang@umd.edu](mailto:blang@umd.edu){.email}**
+[blang\@umd.edu](mailto:blang@umd.edu){.email}**
 
 **Residence Halls & Campus**
 
-<div>
+::: {}
+- Jennifer Bradley Senior Program Manager Office:301-314-0323 Mobile:
+  301-440-9276 Email:
+  [jarsen17\@umd.edu](mailto:jarsen17@umd.edu){.email}
 
--   Jennifer Bradley Senior Program Manager Office:301-314-0323 Mobile:
-    301-440-9276 Email:
-    [jarsen17\@umd.edu](mailto:jarsen17@umd.edu){.email}
+- Rakshanda Hedawoo Assistant Program Manager Mobile: 301-440-9277
+  Email: [rhedawoo\@umd.edu](mailto:rhedawoo@umd.edu){.email}
 
--   Rakshanda Hedawoo Assistant Program Manager Mobile: 301-440-9277
-    Email: [rhedawoo\@umd.edu](mailto:rhedawoo@umd.edu){.email}
+- Queen Anne’s Hall (For mail/key/access-related questions):
+  301-314-4455 (HILL)
 
--   Queen Anne’s Hall (For mail/key/access-related questions):
-    301-314-4455 (HILL)
-
--   Residential Facilities (To report an issue with your room/residence
-    hall) 301-314-9675 (WORK) Campus Information 301-405-1000
-
-</div>
+- Residential Facilities (To report an issue with your room/residence
+  hall) 301-314-9675 (WORK) Campus Information 301-405-1000
+:::
 
 **Medical/Emergency Contacts**
 
-<div>
-
--   Emergency (University of Maryland Police) 301-405-3333
--   Emergency (Prince George’s County Police) 911
--   Non-Emergency (University of Maryland Police) 301-405-3555
--   University Health Center 301-314-8180
-
-</div>
+::: {}
+- Emergency (University of Maryland Police) 301-405-3333
+- Emergency (Prince George’s County Police) 911
+- Non-Emergency (University of Maryland Police) 301-405-3555
+- University Health Center 301-314-8180
+:::
+:::::::::
