@@ -73,7 +73,7 @@ Let's pull in the data and examine it
 #Load libraries
 library(tidyverse)
 library(readxl)
-libary(janitor)
+library(janitor)
 ```
 
 
