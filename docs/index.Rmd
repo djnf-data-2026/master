@@ -52,7 +52,7 @@ Speakers</a></button>
 - **3:30 p.m.**: Break
 - **3:45 p.m.**: Investigate Your Community.
   - Review starter code, data memos, develop story ideas. (Wells)
-  - New to Coding Track, getting started with R. (Lang) Knight 2103  
+  - New to Coding Track, getting started with R: Casey, Izzy, Laine (Lang) Knight 2103  
 - **4:30 p.m.**: Break and then independent work
   - Produce draft story ideas by 11:59 p.m.
 - **5:30 p.m.**: Break
