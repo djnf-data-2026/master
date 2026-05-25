@@ -111,9 +111,7 @@ income_vacancy %>%
 
 ## REVEL IN YOUR NERD POWERS  
 
-# Part 2 - Thursday. 
-
-### Embedding Images  
+# Part 2: Embedding Images  
 
 * create a folder in your repository's main branch, call it images
 
@@ -154,6 +152,7 @@ From a **Datawrapper Map**
 <iframe width="560" height="315" src="https://www.youtube.com/embed/DIDHbEZYFSc?si=a-KNzlQgoGjXD6VV" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 :::
 
+Now replace these two videos with something you selected. The embed code is in the video share feature
 
 
 ```{r text_to_columns.gif, out.width="100%", echo=FALSE}
@@ -163,3 +162,8 @@ From a **Datawrapper Map**
 
 ```
 
+
+This is a very basic starter but it will get you to the finish line on Saturday.
+Good luck!
+
+--30--
