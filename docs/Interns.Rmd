@@ -48,7 +48,7 @@ Speakers</a></button>
 :::
 
 ::: {style="float:right; padding:10px;"}
-<img src="../images/interns/profileTemp.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Tiasia Saunders studies at University of Maryland and will intern at the Investigative Project on Race and Equity
+<img src="../images/interns/TiasiaSaunders.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Tiasia Saunders studies at University of Maryland and will intern at the Investigative Project on Race and Equity
 :::
 
 ::: {style="float:right; padding:10px;"}
