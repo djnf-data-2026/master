@@ -5,21 +5,25 @@ editor_options:
     wrap: 72
 ---
 
-::::::::::: {style="text-align: center; color: #E21833;"}
-# Dow Jones News Fund 
+::: {style="text-align: center; color: #E21833;"}
+# Dow Jones News Fund
+
 # Data Journalism Training
 :::
+
 ::: {style="display: flex; align-items: center; justify-content: center; gap: 20px; margin-top: 30px;"}
 <img src="../images/DJNF_Logo.png" style="height: 170px; width: auto;"/>
 <img src="../images/Merrill_logo.png" style="height: 130px; width: auto;"/>
 :::
+
 ::: {style="text-align: center; color: #ff9500;"}
 ### Dow Jones News Fund \@ Merrill College
 
 #### Sunday, May 31 - Sunday, June 7, 2026
 
-(ver May 24, 2026)
+(ver May 25, 2026)
 :::
+
 <br>
 
 ::: {style="text-align:center; color: #000000"}
@@ -36,14 +40,14 @@ Speakers</a></button>
 :::
 
 :::::: {style="text-align: left;color: #000000;"}
-**Pre-Conference**
+### Pre-Conference
 
 - **By May 25**: Students will be sent a data starter kit to load
   relevant software on their laptops and test out their equipment.
 - **By May 27**: Students profiles due, 11:59 p.m.
 - **By May 29**: Students will have data assignments described.
 
-**Sunday, May 31, 2026**
+### Sunday, May 31, 2026
 
 - **2 p.m.**: Welcome at Knight Hall Eaton Theater. (Wells, Denny, Lang
   and Shirley Carswell, DJNF Executive Director)
@@ -52,7 +56,8 @@ Speakers</a></button>
 - **3:30 p.m.**: Break
 - **3:45 p.m.**: Investigate Your Community.
   - Review starter code, data memos, develop story ideas. (Wells)
-  - New to Coding Track, getting started with R: Casey, Izzy, Laine (Lang) Knight 2103  
+  - New to Coding Track, getting started with R: Casey, Izzy, Laine
+    (Lang) Knight 2103\
 - **4:30 p.m.**: Break and then independent work
   - Produce draft story ideas by 11:59 p.m.
 - **5:30 p.m.**: Break
@@ -69,7 +74,7 @@ Speakers</a></button>
     [robwells\@umd.edu](mailto:robwells@umd.edu){.email} and
     [kdenny12\@umd.edu](mailto:kdenny12@umd.edu){.email}
 
-**Monday, June 1, 2026**
+### Monday, June 1, 2026
 
 - **Breakfast**: On your own
 
@@ -80,17 +85,16 @@ Speakers</a></button>
   - Coding Experienced Track: Data Driven Reporting. (Aidan Hughes, the
     Howard Center) Room 2103
     - Web scraping in R
-    - PDF data extraction.  
-  
+    - PDF data extraction.
   - New to Coding Track: Importing Data. (Wells) Room 2107
     - Creating a R Markdown notebook
     - Importing and analyzing data
-    - Basic queries.  
+    - Basic queries.
 
 - **10:30 a.m.**: Break. Coffee served. Lobby.
 
-- **11 a.m.**: Workshops: Use data to find stories. (Wells, Hughes, Lang)
-  Rooms 2103, 2107
+- **11 a.m.**: Workshops: Use data to find stories. (Wells, Hughes,
+  Lang) Rooms 2103, 2107
 
 - **12:30 p.m.**: Lunch in Knight Hall.
 
@@ -110,14 +114,14 @@ Speakers</a></button>
 - **4 p.m.**: Diversity is Good Journalism: Covering All of the
   Community. (Prof. Christoph Mergerson). All attend. Eaton Theater.
 
-  - [Readings before Mergerson 
+  - [Readings before Mergerson
     talk](https://drive.google.com/drive/folders/1VjenaNF-IahhdVl6TQHrQK5_ygELl2JD?usp=drive_link)
 
 - **5:30 p.m.**: Break
 
 - **6:30 p.m.**: Dinner on campus
 
-- **11:59 p.m.**: Draft a story pitch memo due.   
+- **11:59 p.m.**: Draft a story pitch memo due.
 
 - A minimum of 400 words, building on the story idea paragraph, that
   incorporates some of the best practices in pitching a story and
@@ -131,7 +135,7 @@ Speakers</a></button>
   [robwells\@umd.edu](mailto:robwells@umd.edu){.email} and
   [kdenny12\@umd.edu](mailto:kdenny12@umd.edu){.email}
 
-**Tuesday June 2, 2026**
+### Tuesday June 2, 2026
 
 - **Breakfast**: On your own
 
@@ -141,7 +145,6 @@ Speakers</a></button>
     Center) Room 2103
     - Render a basic web page using R and GitHub pages.
     - Use R to link to a LLM and process data.
-    
   - New to Coding Track: Data cleaning. (Hughes) Room 2017
     - Use Open Refine, R to clean data
     - Render a basic web page using R and GitHub pages.
@@ -152,11 +155,12 @@ Speakers</a></button>
 
 - **11 a.m.**: Workshop. Students work on data gathering story pitches.
   (Wells, Willis, Hughes, TA as coaches). Room 2103, 2107
-  
+
 - **12 p.m.**: Lunch in Knight Hall.
 
 - **1 p.m.-2:30 p.m.: Data Visualization.** . Using Datawrapper for data
   visualization. (Adam Marton). All attend. Room 2103
+
   - Embedding Datawrapper into GitHub pages
 
 - **2:30 p.m.-2:45 p.m.** : Break
@@ -172,7 +176,7 @@ Speakers</a></button>
 - **6:30 p.m.**: Dinner in Hyattsville. (Meet at Knight Hall board van.
   Wells / driving)
 
-**Wednesday June 3, 2026**
+### Wednesday June 3, 2026
 
 - **Breakfast**: On your own
 
@@ -181,7 +185,6 @@ Speakers</a></button>
   - Coding Experienced Track: Using AI with R. (Daniel Trielli, Merrill
     College) Room 2103
     - Use R to link to a LLM and process data.
-    
   - New to Coding Track: Analyzing your data (Wells) Room 2107
     - Using the Tidyverse to summarize and analyze data.
     - More on rendering web page using R and GitHub pages.
@@ -192,13 +195,15 @@ Speakers</a></button>
   Lang coach). Rooms 2103, 2107
 
 - **11:30 a.m. - 12:30 p.m.**: Keynote speaker: [Jon Schleuss,
-  President, The News Guild](https://newsguild.org/staff/). Eaton Theater.
+  President, The News Guild](https://newsguild.org/staff/). Eaton
+  Theater.
 
   - [Readings before Jon Schleuss talk](TK%20TK%20TK) TK TK TK
-  
+
 - **12:30 p.m.**: Lunch with Schleuss
 
-- **1:30 p.m. - 2:30 p.m.**: Introduction to business reporting. (Wells). Eaton Theater
+- **1:30 p.m. - 2:30 p.m.**: Introduction to business reporting.
+  (Wells). Eaton Theater
 
 - **2:30 p.m. - 3 p.m.**: Digital accessibility for data visualization.
   (Lang). Eaton Theater
@@ -212,13 +217,14 @@ Speakers</a></button>
   one graphic, building on the Tuesday graphics workshop, and some
   summary data analysis, building on the data workshops since Sunday.
   This pitch should include summary tables, basic analysis, questions,
-  and a discussion of potential holes. The best pitches will cover two
-  topics and have a rendered page from your GitHub account. Submit as an
+  and a discussion of potential holes. It will include a paragraph about a major 
+  employer in your community that's important to watch. The best pitches 
+  will cover two topics and have a rendered page from your GitHub account. Submit as an
   R Markdown document, providing a link to your GitHub account. Email
   links to Wells: [robwells\@umd.edu](mailto:robwells@umd.edu){.email}
   and [kdenny12\@umd.edu](mailto:kdenny12@umd.edu){.email}
 
-**Thursday June 4, 2026**
+### Thursday June 4, 2026
 
 - **Breakfast**: On your own at dorm
 - **8:15 a.m.**: Meet at Knight Hall, board van, depart for College Park
@@ -230,7 +236,7 @@ Speakers</a></button>
   Berry, Philip Merrill College of Journalism.
 - **6 p.m.**: Dinner in Washington D.C.
 
-**Friday June 5, 2026**
+### Friday June 5, 2026
 
 - **Breakfast**: On your own at dorm
 - **9 a.m.-10 a.m.**: Skills to survive in the newsroom. Time
@@ -244,7 +250,7 @@ Speakers</a></button>
   [Westminster Church](https://westminsterdc.org/our-pastor). Meet with
   Pastor Brian E. Hamilton beforehand to discuss Southwest D.C. history
 
-**Saturday June 6, 2026**
+### Saturday June 6, 2026
 
 - **Breakfast**: On your own at dorm
 - **9:00 a.m.**: Present your story pitch to the group. –This will be a
@@ -258,9 +264,9 @@ Speakers</a></button>
 - **12:15 p.m.**: Lunch in Knight Hall
 - **1 p.m.**: On the van for D.C.
 - **2:30 p.m.**: Tour of African-American History Museum, D.C.
-- **5:30 p.m.**: Dinner. 
+- **5:30 p.m.**: Dinner.
 
-**Sunday June 7, 2026**
+### Sunday June 7, 2026
 
 - Breakfast available at dining hall.
 - Depart on your own schedule
@@ -321,4 +327,5 @@ Tidyverse](https://thescoop.org/data_journalism_book/)
 - University Health Center 301-314-8180
 :::
 ::::::
-:::::::::::
+
+
