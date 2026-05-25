@@ -80,12 +80,12 @@ Speakers</a></button>
   - Coding Experienced Track: Data Driven Reporting. (Aidan Hughes, the
     Howard Center) Room 2103
     - Web scraping in R
-    - PDF data extraction
+    - PDF data extraction.  
   
   - New to Coding Track: Importing Data. (Wells) Room 2107
     - Creating a R Markdown notebook
     - Importing and analyzing data
-    - Basic queries
+    - Basic queries.  
 
 - **10:30 a.m.**: Break. Coffee served. Lobby.
 
@@ -152,6 +152,8 @@ Speakers</a></button>
 
 - **11 a.m.**: Workshop. Students work on data gathering story pitches.
   (Wells, Willis, Hughes, TA as coaches). Room 2103, 2107
+  
+- **12 p.m.**: Lunch in Knight Hall.
 
 - **1 p.m.-2:30 p.m.: Data Visualization.** . Using Datawrapper for data
   visualization. (Adam Marton). All attend. Room 2103
@@ -193,7 +195,8 @@ Speakers</a></button>
   President, The News Guild](https://newsguild.org/staff/). Eaton Theater.
 
   - [Readings before Jon Schleuss talk](TK%20TK%20TK) TK TK TK
-  - Lunch with Schleuss
+  
+- **12:30 p.m.**: Lunch with Schleuss
 
 - **1:30 p.m. - 2:30 p.m.**: Introduction to business reporting. (Wells). Eaton Theater
 
@@ -222,7 +225,7 @@ Speakers</a></button>
   Metro (Wells driving, plus car pool to Metro)
 - **10 a.m.**: Tour of AP D.C. bureau with Chad Day, AP's elections
   team.
-- **Noon**: Lunch.
+- **12 p.m.**: Lunch.
 - **1:30 p.m.**: Tour U.S. Senate press gallery with Prof. Deborah
   Berry, Philip Merrill College of Journalism.
 - **6 p.m.**: Dinner in Washington D.C.
