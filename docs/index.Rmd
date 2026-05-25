@@ -91,7 +91,9 @@ Speakers</a></button>
     - Importing and analyzing data
     - Basic queries.
 
-- **10:30 a.m.**: Break. Coffee served. Lobby.
+- **10:30 a.m.**: Heather Taylor, DJNF, discussion. Eaton Theater
+
+- **10:45 a.m.**: Break. Coffee served. Lobby.
 
 - **11 a.m.**: Workshops: Use data to find stories. (Wells, Hughes,
   Lang) Rooms 2103, 2107
@@ -148,8 +150,6 @@ Speakers</a></button>
   - New to Coding Track: Data cleaning. (Hughes) Room 2017
     - Use Open Refine, R to clean data
     - Render a basic web page using R and GitHub pages.
-
-- **10:30 a.m.**: Heather Taylor, DJNF, discussion. -- Eaton Theater
 
 - **10:45 a.m.**: Break. Coffee served.
 
