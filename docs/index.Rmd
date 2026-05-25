@@ -45,14 +45,14 @@ Speakers</a></button>
 
 **Sunday, May 31, 2026**
 
-- **2 p.m.**: Welcome at Knight Hall Eaton Theater. Wells Denny, Lang
-  and Shirley Carswell, DJNF Executive Director
-  - Logistics. The week ahead. Rooms meals.
+- **2 p.m.**: Welcome at Knight Hall Eaton Theater. (Wells, Denny, Lang
+  and Shirley Carswell, DJNF Executive Director)
+  - Logistics. The week ahead: rooms, meals.
   - Student introductions.
 - **3:30 p.m.**: Break
 - **3:45 p.m.**: Investigate Your Community.
-  - Review starter code, data memos, develop story ideas. Wells. Eaton
-    Theater\
+  - Review starter code, data memos, develop story ideas. (Wells)
+  - New to Coding Track, getting started with R. (Lang) Knight 2103  
 - **4:30 p.m.**: Break and then independent work
   - Produce draft story ideas by 11:59 p.m.
 - **5:30 p.m.**: Break
@@ -78,22 +78,23 @@ Speakers</a></button>
 - **Skills sessions. Pick one**
 
   - Coding Experienced Track: Data Driven Reporting. (Aidan Hughes, the
-    Howard Center)
-    - Bring material into R and make sense of it.
-    - Basic webscraping, PDF data extraction
-    - Knight Hall Room 2103
-  - New to Coding Track: Importing Data. (Wells)
-    - Basic R.
-    - Knight Hall Room 2107
+    Howard Center) Room 2103
+    - Web scraping in R
+    - PDF data extraction
+  
+  - New to Coding Track: Importing Data. (Wells) Room 2107
+    - Creating a R Markdown notebook
+    - Importing and analyzing data
+    - Basic queries
 
 - **10:30 a.m.**: Break. Coffee served. Lobby.
 
-- **11 a.m.**: Workshops: Use data to find stories. (Wells, Hughes).
+- **11 a.m.**: Workshops: Use data to find stories. (Wells, Hughes, Lang)
   Rooms 2103, 2107
 
 - **12:30 p.m.**: Lunch in Knight Hall.
 
-- **1:30 p.m.**: Writing a story pitch memo. All attend. (Denny). Room
+- **1:30 p.m.**: Writing a story pitch memo. All attend. (Denny) Room
   2103
 
   - [Slides for
@@ -107,16 +108,16 @@ Speakers</a></button>
   (Wells, Denny, Lang coach). Rooms 2103, 2107
 
 - **4 p.m.**: Diversity is Good Journalism: Covering All of the
-  Community. (Prof. Christoph Mergerson). All attend. Room 2103
+  Community. (Prof. Christoph Mergerson). All attend. Eaton Theater.
 
-  - [Readings before
+  - [Readings before Mergerson 
     talk](https://drive.google.com/drive/folders/1VjenaNF-IahhdVl6TQHrQK5_ygELl2JD?usp=drive_link)
 
 - **5:30 p.m.**: Break
 
 - **6:30 p.m.**: Dinner on campus
 
-- **11:59 p.m.**: Draft a story pitch memo due.
+- **11:59 p.m.**: Draft a story pitch memo due.   
 
 - A minimum of 400 words, building on the story idea paragraph, that
   incorporates some of the best practices in pitching a story and
@@ -137,23 +138,24 @@ Speakers</a></button>
 - **9 a.m. - 10:30 a.m.: Skills sessions**
 
   - Coding Experienced Track: Using AI with R. (Derek Willis, the Howard
-    Center)
+    Center) Room 2103
+    - Render a basic web page using R and GitHub pages.
     - Use R to link to a LLM and process data.
-    - Knight Hall Room 2103
-  - New to Coding Track: Data cleaning. (Aidan Hughes, the Howard
-    Center)
+    
+  - New to Coding Track: Data cleaning. (Hughes) Room 2017
     - Use Open Refine, R to clean data
-    - Knight Hall Room 2107
+    - Render a basic web page using R and GitHub pages.
 
 - **10:30 a.m.**: Heather Taylor, DJNF, discussion. -- Eaton Theater
 
 - **10:45 a.m.**: Break. Coffee served.
 
 - **11 a.m.**: Workshop. Students work on data gathering story pitches.
-  (Wells, Willis, Hughes, TA as coaches). Room 1101
+  (Wells, Willis, Hughes, TA as coaches). Room 2103, 2107
 
 - **1 p.m.-2:30 p.m.: Data Visualization.** . Using Datawrapper for data
   visualization. (Adam Marton). All attend. Room 2103
+  - Embedding Datawrapper into GitHub pages
 
 - **2:30 p.m.-2:45 p.m.** : Break
 
@@ -175,12 +177,12 @@ Speakers</a></button>
 - **9 a.m.-10:15 a.m.: Skills sessions**
 
   - Coding Experienced Track: Using AI with R. (Daniel Trielli, Merrill
-    College)
+    College) Room 2103
     - Use R to link to a LLM and process data.
-    - Knight Hall Room 2103
-  - New to Coding Track: Analyzing your data (Wells)
+    
+  - New to Coding Track: Analyzing your data (Wells) Room 2107
     - Using the Tidyverse to summarize and analyze data.
-    - Knight Hall Room 2107
+    - More on rendering web page using R and GitHub pages.
 
 - **10:15 a.m.**: Break. Coffee served.
 
@@ -188,19 +190,17 @@ Speakers</a></button>
   Lang coach). Rooms 2103, 2107
 
 - **11:30 a.m. - 12:30 p.m.**: Keynote speaker: [Jon Schleuss,
-  President, The News Guild](https://newsguild.org/staff/). All attend.
-  Eaton Theater.
+  President, The News Guild](https://newsguild.org/staff/). Eaton Theater.
 
   - [Readings before Jon Schleuss talk](TK%20TK%20TK) TK TK TK
   - Lunch with Schleuss
 
-- **1:30 p.m. - 2:30 p.m.**: Introduction to business reporting. Wells
-  proposals. Eaton Theater
+- **1:30 p.m. - 2:30 p.m.**: Introduction to business reporting. (Wells). Eaton Theater
 
 - **2:30 p.m. - 3 p.m.**: Digital accessibility for data visualization.
-  Lang. Eaton Theater
+  (Lang). Eaton Theater
 
-- **3 p.m. - 6 p.m.**: Workshop on your projects. Wells / Lang / Denny
+- **3 p.m. - 6 p.m.**: Workshop on your projects. (Wells, Lang, Denny)
 
 - **6 p.m.**: Dinner on campus
 
@@ -219,7 +219,7 @@ Speakers</a></button>
 
 - **Breakfast**: On your own at dorm
 - **8:15 a.m.**: Meet at Knight Hall, board van, depart for College Park
-  Metro (Wells driving)
+  Metro (Wells driving, plus car pool to Metro)
 - **10 a.m.**: Tour of AP D.C. bureau with Chad Day, AP's elections
   team.
 - **Noon**: Lunch.
@@ -255,7 +255,7 @@ Speakers</a></button>
 - **12:15 p.m.**: Lunch in Knight Hall
 - **1 p.m.**: On the van for D.C.
 - **2:30 p.m.**: Tour of African-American History Museum, D.C.
-- **5:30 p.m.**: Dinner (Meet at Knight Hall board van)
+- **5:30 p.m.**: Dinner. 
 
 **Sunday June 7, 2026**
 
