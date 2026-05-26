@@ -83,3 +83,50 @@ spending |>
   select(fyear, cty_name, spending_total)
 ```
 
+To drill down into specific spending by county, we now go to USASpending.gov: https://www.usaspending.gov/
+* Select start searching awards
+* Select one fiscal year (multiple years = too much data)
+* Select location, place of performance and type in the county name
+* Search!
+
+The web page serves up a form with spending by specific company in that county per year. Gold mine!
+Make sure this is the search you want. 
+To download this data, see the download icon in the black toolbar
+
+
+Law enforcement /defense  spending by state. 
+Examine the trend from 2020-2024 for your state. Has that changed over time? How does your state compare to others?
+Using the USAspending.gov website, name the top five companies by this category by state
+Which counties are the winners? Understand there are flaws with county-level data
+
+
+```{r}
+
+
+
+```
+
+Social services spending by county. 
+Examine the trend from 2020-2024 for your state. Has that changed over time? How does your state compare to others?
+Using the USAspending.gov website, name the top five companies by this category by state
+Which counties are the winners? Understand there are flaws with county-level data
+Compare to law enforcement
+
+```{r}
+
+
+
+```
+
+
+Differences across administrations
+For your state, compare the last year of Trump’s first administration (2020) to the last year of the Biden administration (2021)
+How did spending differ overall? Was one administration spending way more/less than another?
+Was one administration pouring more/less into specific agencies than the other administration?
+
+```{r}
+
+
+
+```
+
