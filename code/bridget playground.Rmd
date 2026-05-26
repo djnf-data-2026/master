@@ -1,0 +1,98 @@
+---
+title: "bridget playtime"
+output: html_document
+---
+
+# load libraries
+```{r echo=FALSE}
+library(tidyverse)
+library(tidycensus)
+library(janitor)
+library(dplyr)
+```
+
+#load spending data
+```{r echo=FALSE}
+
+spending <- read_csv("../data/federal_spending_by_county_2020 2024 rob_0416_v2.csv") |> 
+     clean_names()
+```
+
+
+
+#Make sure each year has the same number of states
+```{r echo=FALSE}
+options(scipen = 999)  # Disable scientific notation globally
+
+data_2020 <- spending |> filter(fyear==2020)
+data_2021 <- spending |> filter(fyear==2021)
+data_2022 <- spending |> filter(fyear==2022)
+data_2023 <- spending |> filter(fyear==2023)
+data_2024 <- spending |> filter(fyear==2024)
+
+
+nrow(data_2020 |> distinct(fyear, state_nm))
+nrow(data_2021 |> distinct(fyear, state_nm))
+nrow(data_2022 |> distinct(fyear, state_nm))
+nrow(data_2023 |> distinct(fyear, state_nm))
+nrow(data_2024 |> distinct(fyear, state_nm))
+
+
+data_2021 |> filter(!(data_2021$state_nm %in% data_2020$state_nm)) |> distinct(state_nm)
+data_2022 |> filter(!(data_2022$state_nm %in% data_2020$state_nm)) |> distinct(state_nm)
+```
+#Transactions with NA City and NA State by year by agency when that number of transactions is > 1
+```{r echo=FALSE}
+options(scipen = 999)  # Disable scientific notation globally
+
+spending |>
+  filter(is.na(cty_name) & is.na(state_nm)) |>
+  group_by(fyear, agency) |>
+  summarize (
+    Transactions = n()
+  ) |> filter(Transactions > 1)
+
+```
+
+#Transactions with NA state but not NA city by year by agency
+```{r}
+options(scipen = 999)  # Disable scientific notation globally
+
+spending |>
+  filter(is.na(state_nm) & !is.na(cty_name)) |>
+  group_by(fyear, agency) |>
+  summarize (
+    cty_name = cty_name,
+    Transactions = n()
+    
+  )
+
+
+```
+#Transactions with NA city but not NA state by year by agency
+```{r}
+options(scipen = 999)  # Disable scientific notation globally
+
+spending |>
+  filter(!is.na(state_nm) & is.na(cty_name)) |>
+  group_by(fyear, agency) |>
+  summarize (
+    Transactions = n()
+  )
+
+
+```
+
+#Transaction number and totals by agency by year where the state is not NA
+```{r}
+options(scipen = 999)  # Disable scientific notation globally
+
+spending |>
+  group_by(fyear, agency) |>
+  summarize (
+    Transactions = n(),
+    Spending_Total = sum(spending_total[!is.na(state_nm)], na.rm = TRUE)
+  )
+  
+
+```
