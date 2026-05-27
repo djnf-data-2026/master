@@ -1,51 +1,35 @@
 ---
-title: "How Healthy is Your Local Economy?"
+title: "Economic portrait of greater Philadelphia"
 output: html_document
 editor_options: 
   markdown: 
     wrap: 72
 ---
 
-#### The Philip Merrill College of Journalism
+# Economic Portrait of Greater Philadelphia region
 
-#### Dow Jones News Fund
+For this assignment, you will explore the Bureau of Labor Statistics and Bureau of Economic Analysis databases to build a portrait of the major employers and economic trends in the greater Philadelphia area. Along the way, you will develop a story pitch about something you have discovered in the data.
 
-**May 27, 2026**.\
-<img src="../images/Merrill_logo.png" width="600" height="300"/> <br>
-<img src="../images/DJNF_Logo.png" width="600" height="300"/>
+Memo from your newsroom:
 
-**Link to Today's Presentation**.
+There isn’t a specific topic or dataset required for this role. It’s more important for the intern to begin thinking about how to shape story ideas around our coverage area. Since Yueyang is not from the region, becoming familiar with Philadelphia and the surrounding counties, including Montgomery County, Bucks County, Chester County, Delaware County, as well as Gloucester County, Camden County, and Burlington County, would be especially valuable.
 
-> <XXXXXXX>
-
-<br>
-
-> **Presenter** <br> Rob Wells, Ph.D., Philip Merrill College of
-> Journalism / Dow Jones News Fund
-
-<br>
+Our team works across the newsroom, so assignments may span a range of topics. We encourage the intern to pursue enterprise work on a topic of their choosing and begin developing those ideas during the training camp.
 
 > **Learning Outcome:**. <br> You will learn to how to retrieve and
 > analyze employment and regional GDP data for their own counties or
-> states and the steps to put it on a basic interactive charts. We will
-> use Google Sheets and Datarapper. We will make a basic interactive
-> map.
-
-<br>
-
-## <br>
+> states and the steps to put it on a basic interactive charts. 
 
 # Step 1: Storytelling with Employment Data
 
 In this exercise, we will find out how much the typical engineer makes
 versus the typical journalist.
 
-Follow this example for Maryland and then we'll have you do the same for
-your state this summer
+Follow this example for the counties in Pennsylvania and then we'll have you do the same for New Jersey and Delaware
 
-> [Check out the Maryland Occupational Employment and Wage Statistics
+> [Check out the Pennsylvania Occupational Employment and Wage Statistics
 > GDP press release: "CNTL" + click for a New
-> Tab](https://data.bls.gov/oes/#/area/2400000/2025){target="_blank"}
+> Tab](https://data.bls.gov/oes/#/home){target="_blank"}
 
 ![](../images/OES_2026_1.png) <br>
 
@@ -87,11 +71,11 @@ oes <- read_excel("../data/OES_state_M2025_dl.xlsx") |>
 glimpse(oes)
 ```
 
-Now check your state. If it is already Maryland, pick some random state instead
+Now check Pennsylvania totals
 ```{r}
 #note the search for the list: %in% checks whether each value is anywhere in the vector
 oes |> 
-  filter(area_title == "Maryland") |> 
+  filter(area_title == "Pennsylvania") |> 
   filter(occ_title %in% c("Chief Executives", "News Analysts, Reporters, and Journalists", "Waiters and Waitresses")) |> 
   select(prim_state, occ_title, tot_emp, h_mean, a_mean)
 
@@ -114,6 +98,20 @@ file.edit("temp_text.txt")
 Source of the data:
 > [Occupational Employment and Wage Statistics, national index, 2025. Select 'State' in HTML: "CNTL" + click for a New
 > Tab](https://www.bls.gov/oes/tables.htm){target="_blank"}
+
+
+# Look at Philly metro area
+```{r}
+
+philly <- read_excel("/Users/gizmofo/Code/djnf-data-2026/master/data/OES_Report_Philly_metro.xlsx", skip=2) |> 
+  clean_names() |> 
+    mutate(across(4:20, as.numeric))
+
+glimpse(philly)
+
+```
+
+
 
 
 Practice Questions

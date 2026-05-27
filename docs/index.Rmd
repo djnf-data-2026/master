@@ -109,6 +109,7 @@ Speakers</a></button>
 
 - **2:15 p.m.**: Using GitHub. All attend. (Wells/Lang) [GitHub
   refresher](https://wellsdata.github.io/data_journalism_class/_book/github.html)
+      - Render a basic web page using R and GitHub pages.
 
 - **2:45 p.m.**: Workshop for [story pitch memo due at 11:59
   p.m.](https://docs.google.com/document/d/1A-dlzWX7ksOt6LRHYpuPDk7SPPWxyZEmGt2wC0lM7Mg/edit)
@@ -146,8 +147,10 @@ Speakers</a></button>
 
   - Coding Experienced Track: Using AI with R. (Derek Willis, the Howard
     Center) Room 2103
-    - Render a basic web page using R and GitHub pages.
-    - Use R to link to a LLM and process data.
+    - Use R to link to a LLM and process data: the ellmer package
+    - Parsing data and text
+    - The beat book.
+
   - New to Coding Track: Data cleaning. (Hughes) Room 2017
     - Use Open Refine, R to clean data
     - Render a basic web page using R and GitHub pages.
