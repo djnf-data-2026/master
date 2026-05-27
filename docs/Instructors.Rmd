@@ -166,3 +166,19 @@ He previously held interactive journalism roles with The New York Times
 and The Washington Post, after working as a database reporter for The
 Washington Post, The Center for Public Integrity, Congressional
 Quarterly and The Palm Beach Post.
+
+**Aidan Hughes**
+
+<img src="../images/instructors/AidanHughes.jpg" width="300" height="300"/>
+
+Aidan Hughes is a data journalist at the University of Maryland's Howard Center 
+for Investigative Journalism. A former fellow at the Howard Center, Hughes has 
+helped lead a variety of investigative and data projects including an 
+Investigative Reporters and Editors Award-winning series on privately sponsored
+travel for members of Congress.
+
+Before coming to UMD, Hughes worked in data privacy at a health care data and
+analytics company. In addition to his master’s degree from the 
+University of Maryland, he earned a master’s in Conflict 
+Transformation & Social Justice from Queen's University Belfast, 
+and a bachelor’s in International Studies and Creative Writing from Virginia Tech.
