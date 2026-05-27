@@ -21,7 +21,7 @@ editor_options:
 
 #### Sunday, May 31 - Sunday, June 7, 2026
 
-(ver May 25, 2026)
+(ver May 27, 2026)
 :::
 
 <br>
@@ -84,8 +84,9 @@ Speakers</a></button>
 
   - Coding Experienced Track: Data Driven Reporting. (Aidan Hughes, the
     Howard Center) Room 2103
-    - Web scraping in R
-    - PDF data extraction.
+    - Web scraping in R: rvest, rplaywright
+    - PDF data extraction: pdftools
+    - Hidden APIs
   - New to Coding Track: Importing Data. (Wells) Room 2107
     - Creating a R Markdown notebook
     - Importing and analyzing data
@@ -304,12 +305,10 @@ Tidyverse](https://thescoop.org/data_journalism_book/)
 **Residence Halls & Campus**
 
 ::: {}
-- Jennifer Bradley Senior Program Manager Office:301-314-0323 Mobile:
-  301-440-9276 Email:
+- Jennifer Bradley, Senior Program Manager. Office:301-314-0323 Mobile: 301-440-9276 Email:
   [jarsen17\@umd.edu](mailto:jarsen17@umd.edu){.email}
 
-- Rakshanda Hedawoo Assistant Program Manager Mobile: 301-440-9277
-  Email: [rhedawoo\@umd.edu](mailto:rhedawoo@umd.edu){.email}
+- Aishwarya Ramesh, Assistant Program Manager. Mobile: 301-440-9277. Email: [aishram1\@umd.edu](mailto:aishram1@umd.edu){.email}
 
 - Queen Anne’s Hall (For mail/key/access-related questions):
   301-314-4455 (HILL)

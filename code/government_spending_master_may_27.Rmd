@@ -17,22 +17,26 @@ You might be able to find a story here… This data comes from [USASpending.gov]
 
 **Here are the drawbacks of this data.**
 
-* The more detailed we get, the weirder things get. 
+- The more detailed we get, the weirder things get.
 
-* As we get to the county level, some problems arise.
-Some contracts are awarded statewide, so no county is specified. So county totals don’t necessarily add up to statewide totals.
+- As we get to the county level, some problems arise.
+  Some contracts are awarded statewide, so no county is specified.
+  So county totals don’t necessarily add up to statewide totals.
 
-* The state totals will not sum to the overall total. That's because some contracts are national and have no state designation.   
+- The state totals will not sum to the overall total.
+  That's because some contracts are national and have no state designation.
 
-* The data is for spending in the United States. So the Agency for International Development’s data will be underrepresented here, since they spend money overseas, and ditto for the State Department’s foreign aid programs.  
+- The data is for spending in the United States.
+  So the Agency for International Development’s data will be underrepresented here, since they spend money overseas, and ditto for the State Department’s foreign aid programs.
 
-* The data is for performance in a particular county versus payment to the parent company, which might be in a different state.  
+- The data is for performance in a particular county versus payment to the parent company, which might be in a different state.
 
-### Read the [data dictionary](https://www.usaspending.gov/data-dictionary). 
+### Read the [data dictionary](https://www.usaspending.gov/data-dictionary).
 
-Read the [guide to the data](https://www.usaspending.gov/federal-spending-guide).   
+Read the [guide to the data](https://www.usaspending.gov/federal-spending-guide).
 
-Also, worth noting that according to USASpending, the federal obligation variable represents “obligations” rather than actual federal spending. Actual spending may be lower (a variable represents actual expenses, but it is usually missing or underreported).
+Also, worth noting that according to USASpending, the federal obligation variable represents “obligations” rather than actual federal spending.
+Actual spending may be lower (a variable represents actual expenses, but it is usually missing or underreported).
 In addition, federal obligations recorded in one year can later be corrected through de-obligations in subsequent years.
 
 ## Load libraries
@@ -102,6 +106,7 @@ group_by(cty_name, state_nm) |>
   arrange(desc(total_spent))
 
 ```
+
 ## Highlight specific county, FY2020-2024
 
 ```{r}
@@ -129,20 +134,19 @@ spending |>
 
 ### Follow the Money
 
-To drill down into specific spending by county, we now go to [USASpending.gov](https://www.usaspending.gov/). 
+To drill down into specific spending by county, we now go to [USASpending.gov](https://www.usaspending.gov/).
 
-* Select start searching awards 
-* Select one fiscal year (multiple years = too much data)  
-* Select location, place of performance and type in the county name 
-* Search! 
+- Select start searching awards
+- Select one fiscal year (multiple years = too much data)\
+- Select location, place of performance and type in the county name
+- Search!
 
 The web page serves up a form with spending by specific company in that county per year.
-**Gold mine!**
-Make sure this is the search you want.
+**Gold mine!** Make sure this is the search you want.
 To download this data, see the download icon in the black toolbar
 
+### Practice queries
 
-### Practice queries 
 Law enforcement /defense spending by state.
 Examine the trend from 2020-2024 for your state.
 Has that changed over time?
