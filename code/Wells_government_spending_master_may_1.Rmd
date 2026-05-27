@@ -95,6 +95,8 @@ Make sure this is the search you want.
 To download this data, see the download icon in the black toolbar
 
 
+Now for some broad questions:
+
 Law enforcement /defense  spending by state. 
 Examine the trend from 2020-2024 for your state. Has that changed over time? How does your state compare to others?
 Using the USAspending.gov website, name the top five companies by this category by state
@@ -172,3 +174,114 @@ The Hennepin spending was basically from HHS, but any idea who actually got that
 I'm trying to figure out that part of the puzzle -- I assume you extracted the data from the https://www.usaspending.gov/ ?
 Thanks so much, Rob
 
+# Bridget Playground
+
+
+
+#Make sure each year has the same number of states
+```{r echo=FALSE}
+options(scipen = 999)  # Disable scientific notation globally
+
+data_2020 <- spending |> filter(fyear==2020)
+data_2021 <- spending |> filter(fyear==2021)
+data_2022 <- spending |> filter(fyear==2022)
+data_2023 <- spending |> filter(fyear==2023)
+data_2024 <- spending |> filter(fyear==2024)
+
+
+nrow(data_2020 |> distinct(fyear, state_nm))
+nrow(data_2021 |> distinct(fyear, state_nm))
+nrow(data_2022 |> distinct(fyear, state_nm))
+nrow(data_2023 |> distinct(fyear, state_nm))
+nrow(data_2024 |> distinct(fyear, state_nm))
+
+
+data_2021 |> filter(!(data_2021$state_nm %in% data_2020$state_nm)) |> distinct(state_nm)
+data_2022 |> filter(!(data_2022$state_nm %in% data_2020$state_nm)) |> distinct(state_nm)
+```
+#Transactions with NA City and NA State by year by agency when that number of transactions is > 1
+```{r echo=FALSE}
+options(scipen = 999)  # Disable scientific notation globally
+
+na_spending |>
+  filter(is.na(cty_name) & is.na(state_nm)) |>
+  group_by(fyear, agency, state_nm, spending_total) |>
+  summarize (
+    Transactions = n()
+  ) |> filter(Transactions > 1)
+
+```
+#Wells tests
+
+```{r echo=FALSE}
+options(scipen = 999)  # Disable scientific notation globally
+
+na_spending2 <- na_spending |>
+  filter(is.na(cty_name) & is.na(state_nm)) |>
+  group_by(fyear, agency, state_nm, spending_total) |>
+  summarize (
+    Transactions = n()
+  ) #|> filter(Transactions > 1)
+
+write_csv(na_spending2, "../data/na_spending2.csv")
+
+```
+
+Verify NA totals
+```{r}
+na_spending <- spending |> 
+  filter(agency == "Department of Health and Human Services") |> 
+  group_by(agency, fyear) |>
+  summarize(
+    total_spent = sum(spending_total, na.rm = TRUE),
+    net_total_spent = sum(spending_total[!is.na(state_nm)], na.rm = TRUE),
+    na_spending = sum(spending_total[is.na(state_nm)])
+  )
+write_csv(na_spending, "../data/na_spending.csv")
+```
+
+
+
+
+#Transactions with NA state but not NA city by year by agency
+```{r}
+options(scipen = 999)  # Disable scientific notation globally
+
+spending |>
+  filter(is.na(state_nm) & !is.na(cty_name)) |>
+  group_by(fyear, agency) |>
+  summarize (
+    cty_name = cty_name,
+    Transactions = n()
+    
+  )
+
+
+```
+#Transactions with NA city but not NA state by year by agency
+```{r}
+options(scipen = 999)  # Disable scientific notation globally
+
+spending |>
+  filter(!is.na(state_nm) & is.na(cty_name)) |>
+  group_by(fyear, agency) |>
+  summarize (
+    Transactions = n()
+  )
+
+
+```
+
+#Transaction number and totals by agency by year where the state is not NA
+```{r}
+options(scipen = 999)  # Disable scientific notation globally
+
+spending |>
+  group_by(fyear, agency) |>
+  summarize (
+    Transactions = n(),
+    Spending_Total = sum(spending_total[!is.na(state_nm)], na.rm = TRUE)
+  )
+  
+
+```

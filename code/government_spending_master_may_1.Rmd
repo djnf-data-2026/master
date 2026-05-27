@@ -1,7 +1,7 @@
 ---
 title: "Government Spending Master DJNF"
 author: "Wells"
-date: "2026-05-15"
+date: "2026-05-26"
 output: html_document
 ---
 
@@ -20,7 +20,7 @@ spending <- read_csv("../data/federal_spending_by_county_2020 2024 rob_0416_v2.c
 
 ```
 
-**pokin around!**
+**pokin' around!**
 
 ## Spending by agency
 
@@ -31,8 +31,9 @@ spending |>
 group_by(agency) |> 
   summarize(
     n = n(),
-    total_spent = sum(spending_total, na.rm = TRUE)
-  ) |> 
+    total_spent = sum(spending_total, na.rm = TRUE), 
+    Spending_Total = sum(spending_total[!is.na(state_nm)], na.rm = TRUE)) |> 
+   mutate(`total_spent_$` = scales::dollar(total_spent / 1e9, suffix = "B", accuracy = 0.01)) |> 
   arrange(desc(total_spent))
 
 ```
@@ -50,7 +51,7 @@ group_by(state_nm) |>
 
 ```
 
-## Spending by city
+## Spending by county
 ```{r}
 spending |> 
 group_by(cty_name, state_nm) |> 
