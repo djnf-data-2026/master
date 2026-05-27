@@ -61,7 +61,10 @@ Speakers</a></button>
 - **4:30 p.m.**: Break and then independent work
   - Produce draft story ideas by 11:59 p.m.
 - **5:30 p.m.**: Break
-- **6:00 p.m.**: Dinner in Hyattsville - (Meet at Knight Hall board van)
+- **6:00 p.m.**: Dinner in Hyattsville - (Meet at Knight Hall board van). 
+- [Readings before Mergerson
+    talk](https://drive.google.com/drive/folders/1VjenaNF-IahhdVl6TQHrQK5_ygELl2JD?usp=drive_link)
+    
 - **11:59 p.m.**: One paragraph draft story ideas.
   - This will reflect that you have read the data memo in your Google
     Doc folder, the guidance from your newsroom and have conducted a
@@ -107,8 +110,7 @@ Speakers</a></button>
   - [Slides for
     talk](https://docs.google.com/presentation/d/1zdlk2Ss9jE_SZL2HuHvUbZeUteEO0OBasFKpXtjuZIY/edit?usp=sharing)
 
-- **2:15 p.m.**: Using GitHub. All attend. (Wells/Lang) [GitHub
-  refresher](https://wellsdata.github.io/data_journalism_class/_book/github.html)
+- **2:15 p.m.**: Hosting a GitHub page. All attend. (Wells/Lang) [Download GitHub page tutorial](https://github.com/djnf-data-2026/master/blob/main/code/Hosting_GitHub_Page_DJNF_2026.qmd)
       - Render a basic web page using R and GitHub pages.
 
 - **2:45 p.m.**: Workshop for [story pitch memo due at 11:59
