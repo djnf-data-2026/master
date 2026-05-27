@@ -185,7 +185,12 @@ Speakers</a></button>
 
   - Coding Experienced Track: Using AI with R. (Daniel Trielli, Merrill
     College) Room 2103
-    - Use R to link to a LLM and process data.
+    - Risks of each application. 
+    - Tool demo: Pinpoint for document mining. 
+    - Mapping tasks to tools. Together we will determine which AI technique or tool we need for each phase of a project.
+    - The AI News Game: a board game to consider the trade-offs for adapting AI tools.
+    
+
   - New to Coding Track: Analyzing your data (Wells) Room 2107
     - Using the Tidyverse to summarize and analyze data.
     - More on rendering web page using R and GitHub pages.
