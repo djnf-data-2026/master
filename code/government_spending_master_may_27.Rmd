@@ -1,0 +1,180 @@
+---
+title: "Government Spending Master DJNF"
+author: "Wells"
+date: "2026-05-26"
+output: html_document
+editor_options: 
+  markdown: 
+    wrap: sentence
+---
+
+# Who is getting federal bucks in my state?
+
+For your project, you will examine federal spending in your state and county for the 2020-2024 fiscal years.
+
+We have a dataset that specifies spending for 81 federal agencies and commissions for all 50 states, the District of Columbia and the territories.
+You might be able to find a story here… This data comes from [USASpending.gov](http://USASpending.gov) and was compiled by our friends at the Robert H Smith School of Business.
+
+**Here are the drawbacks of this data.**
+
+* The more detailed we get, the weirder things get. 
+
+* As we get to the county level, some problems arise.
+Some contracts are awarded statewide, so no county is specified. So county totals don’t necessarily add up to statewide totals.
+
+* The state totals will not sum to the overall total. That's because some contracts are national and have no state designation.   
+
+* The data is for spending in the United States. So the Agency for International Development’s data will be underrepresented here, since they spend money overseas, and ditto for the State Department’s foreign aid programs.  
+
+* The data is for performance in a particular county versus payment to the parent company, which might be in a different state.  
+
+### Read the [data dictionary](https://www.usaspending.gov/data-dictionary). 
+
+Read the [guide to the data](https://www.usaspending.gov/federal-spending-guide).   
+
+Also, worth noting that according to USASpending, the federal obligation variable represents “obligations” rather than actual federal spending. Actual spending may be lower (a variable represents actual expenses, but it is usually missing or underreported).
+In addition, federal obligations recorded in one year can later be corrected through de-obligations in subsequent years.
+
+## Load libraries
+
+```{r include=FALSE}
+#install.packages("tidycensus")
+#install.packages("janitor")
+#install.packages("scales")
+library(scales)
+library(tidyverse)
+library(tidycensus)
+library(janitor)
+```
+
+## Load spending data
+
+```{r}
+
+spending <- read_csv("https://raw.githubusercontent.com/djnf-data-2026/master/refs/heads/main/data/federal_spending_by_county_2020%202024%20rob_0416_v2.csv") |> 
+     clean_names()
+
+```
+
+**pokin' around!**
+
+## Spending by agency, FY2020-2024
+
+```{r}
+options(scipen = 999)  # Disable scientific notation globally
+
+totals <- spending |> 
+group_by(agency) |> 
+  summarize(
+    n = n(),
+    total_spent = sum(spending_total, na.rm = TRUE), 
+    states_spending = sum(spending_total[!is.na(state_nm)], na.rm = TRUE)) |> 
+   mutate(`total_spent_$` = scales::dollar(total_spent / 1e9, suffix = "B", accuracy = 0.01)) |> 
+  arrange(desc(total_spent))
+
+view(totals)
+```
+
+## Spending by state, FY2020-2024
+
+```{r}
+spending |> 
+group_by(state_nm) |> 
+  summarize(
+    n = n(),
+    total_spent = sum(spending_total, na.rm = TRUE)
+  ) |> 
+   mutate(`total_spent_$` = scales::dollar(total_spent / 1e9, suffix = "B", accuracy = 0.01)) |> 
+  arrange(desc(total_spent))
+
+```
+
+## Spending by county, FY2020-2024
+
+```{r}
+spending |> 
+group_by(cty_name, state_nm) |> 
+  summarize(
+     total_spent = sum(spending_total, na.rm = TRUE),
+     n = n()
+  ) |> 
+   mutate(`total_spent_$` = scales::dollar(total_spent / 1e9, suffix = "B", accuracy = 0.01)) |> 
+  arrange(desc(total_spent))
+
+```
+## Highlight specific county, FY2020-2024
+
+```{r}
+
+spending |> 
+  filter(cty_name == "HENNEPIN") |> 
+  group_by(agency) |> 
+  summarize(
+     total_spent = sum(spending_total, na.rm = TRUE),
+     n = n()
+  ) |> 
+   mutate(`total_spent_$` = scales::dollar(total_spent / 1e9, suffix = "B", accuracy = 0.01)) |> 
+  arrange(desc(total_spent))
+```
+
+## Highlight specific city and agency, FY2020-2024
+
+```{r}
+spending |> 
+  filter(cty_name == "HENNEPIN") |> 
+  filter(agency == "Department of Health and Human Services") |> 
+   mutate(`total_spent_$` = scales::dollar(total_spent / 1e9, suffix = "B", accuracy = 0.01)) |> 
+  select(fyear, cty_name, spending_total)
+```
+
+### Follow the Money
+
+To drill down into specific spending by county, we now go to [USASpending.gov](https://www.usaspending.gov/). 
+
+* Select start searching awards 
+* Select one fiscal year (multiple years = too much data)  
+* Select location, place of performance and type in the county name 
+* Search! 
+
+The web page serves up a form with spending by specific company in that county per year.
+**Gold mine!**
+Make sure this is the search you want.
+To download this data, see the download icon in the black toolbar
+
+
+### Practice queries 
+Law enforcement /defense spending by state.
+Examine the trend from 2020-2024 for your state.
+Has that changed over time?
+How does your state compare to others?
+Using the USAspending.gov website, name the top five companies by this category by state Which counties are the winners?
+Understand there are flaws with county-level data
+
+```{r}
+
+
+
+```
+
+Social services spending by county.
+Examine the trend from 2020-2024 for your state.
+Has that changed over time?
+How does your state compare to others?
+Using the USAspending.gov website, name the top five companies by this category by state Which counties are the winners?
+Understand there are flaws with county-level data Compare to law enforcement
+
+```{r}
+
+
+
+```
+
+Differences across administrations For your state, compare the last year of Trump’s first administration (2020) to the last year of the Biden administration (2021) How did spending differ overall?
+Was one administration spending way more/less than another?
+Was one administration pouring more/less into specific agencies than the other administration?
+
+```{r}
+
+
+
+```
