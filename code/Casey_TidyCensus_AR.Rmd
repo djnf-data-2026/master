@@ -1,13 +1,17 @@
 ---
 title: "TidyCensus in Arkansas"
 author: "Rob Wells"
-date: "April 2 2026"
+date: "May 28 2026"
 output: html_document
 ---
+# Arkansas Prisons and their Host Towns
+As we discussed, you will continue to develop the work on Arkansas prisons and demographics, contrasting the prison population to that of their host communities.
 
-## TidyCensus Tutorial Using Kyle Walker's How-To Page
-### For Casey's exploration of Census data
+The project also will determine the disparity in wages in the prison Census tracts versus the surrounding counties.
 
+You’ll create maps and charts with the results.
+
+The next step is to use tidycensus to get demographics (population by race in a census tract) and join that with your prison map. And then you would use Leaflet and tooltips to displace the demographics in a pop up box.
 
 You want to read this:
 https://www.census.gov/data/what-is-data-census-gov/guidance-for-data-users/getting-started.html
@@ -17,10 +21,10 @@ Source: vignettes/basic-usage.Rmd
 
 Run this only once
 ```{r}
-install.packages("tidyverse")
-install.packages("formattable")
-install.packages("leaflet")
-remotes::install_github("walkerke/tidycensus")
+# install.packages("tidyverse")
+# install.packages("formattable")
+# install.packages("leaflet")
+# remotes::install_github("walkerke/tidycensus")
 
 ```
 
@@ -60,7 +64,7 @@ black <- tidycensus::get_decennial( geography = "tract", geometry = TRUE, state 
 
 ```{r}
 #Calls variables for the 2020 decennial census
-dogfood <- load_variables(2020, "pl", cache = TRUE)
+vars <- load_variables(2020, "pl", cache = TRUE)
 ```
 
 
@@ -289,7 +293,7 @@ saveWidget(leafMap, "leafMap.html")
 #https://waterdata.usgs.gov/blog/leaflet/
 #https://github.com/profrobwells/Test/blob/master/leafMap.html
 
-https://profrobwells.github.io/Test/leafMap.html
+# https://profrobwells.github.io/Test/leafMap.html
 
 ```
 
