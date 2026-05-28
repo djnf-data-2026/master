@@ -1,7 +1,7 @@
 ---
 title: "LCA "
 author: "Wells"
-date: "2026-05-19"
+date: "2026-05-28"
 output: html_document
 ---
 
@@ -39,9 +39,51 @@ library(googledrive)
 library(janitor)
 ```
 
+# Import Ad impressions data
+```{r}
+#this data is weird - you'll needs to extract specific tables separately
+us_ads <- rio::import("https://github.com/djnf-data-2026/emily-wilson/raw/refs/heads/main/data/2026%20Ad%20Impressions%20US%20Products.xlsx") 
+
+```
 
 
-# Import data
+#Extract specific table
+Which of the following types of promotional products would you be most excited to receive?
+```{r}
+#this process involves so trial and error
+#examine the spreadsheet and then adjust the row numbers to extract the table you want:https://docs.google.com/spreadsheets/d/1vcSOjyVHvJNzR8Oe1bj8A9ZOWlKpBFm5/edit?usp=sharing&ouid=102324743793755798467&rtpof=true&sd=true
+
+excited <- us_ads[39:62, ] 
+colnames(excited) <- excited[1, ]
+
+excited <- excited[-1, ] |> 
+  clean_names() |> 
+  as.tibble()
+
+excited <- excited[-1, ] |> 
+  mutate(across(2:21, as.numeric)) |> 
+  rename(item = na)
+
+glimpse(excited)
+
+
+
+```
+
+Import 2026 Ad impressions countries with USA.xlsx
+```{r}
+
+```
+
+
+Import 2026 Ad impressions Canada.xlsx
+```{r}
+
+```
+
+
+
+# Import LCA data
 
 After some poking around, I think this Bonsai project has the most user friendly LCA data
 https://bonsai.uno/gtdr
