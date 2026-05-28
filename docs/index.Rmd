@@ -21,7 +21,7 @@ editor_options:
 
 #### Sunday, May 31 - Sunday, June 7, 2026
 
-(ver May 27, 2026)
+(ver May 28, 2026)
 :::
 
 <br>
@@ -40,6 +40,10 @@ Speakers</a></button>
 :::
 
 :::::: {style="text-align: left;color: #000000;"}
+### Wifi Instructions 
+- [Get your wifi user - password here](https://docs.google.com/document/d/1YA0H5VASofnWRyhU9RkHGakqotXkqKTAF4VCyiZa68g/edit?usp=sharing)
+
+
 ### Pre-Conference
 
 - **By May 25**: Students will be sent a data starter kit to load
@@ -49,9 +53,9 @@ Speakers</a></button>
 
 ### Sunday, May 31, 2026
 
-- **2 p.m.**: Welcome at Knight Hall Eaton Theater. (Wells, Denny, Lang
-  and Shirley Carswell, DJNF Executive Director)
+- **2 p.m.**: Welcome at Knight Hall Eaton Theater. (Wells, Denny, Lang and Shirley Carswell, DJNF Executive Director)
   - Logistics. The week ahead: rooms, meals.
+  - [Wifi instructions](https://docs.google.com/document/d/1YA0H5VASofnWRyhU9RkHGakqotXkqKTAF4VCyiZa68g/edit?usp=sharing)
   - Student introductions.
 - **3:30 p.m.**: Break
 - **3:45 p.m.**: Investigate Your Community.
@@ -63,7 +67,7 @@ Speakers</a></button>
 - **5:30 p.m.**: Break
 - **6:00 p.m.**: Dinner in Hyattsville - (Meet at Knight Hall board van). 
 - [Readings before Mergerson
-    talk](https://drive.google.com/drive/folders/1VjenaNF-IahhdVl6TQHrQK5_ygELl2JD?usp=drive_link)
+    talk](https://docs.google.com/document/d/15uYP18yQFVcWvv_qn-Je-GnVElMT2wkLPx5DHxn9If8/edit?usp=sharing)
     
 - **11:59 p.m.**: One paragraph draft story ideas.
   - This will reflect that you have read the data memo in your Google
@@ -121,7 +125,7 @@ Speakers</a></button>
   Community. (Prof. Christoph Mergerson). All attend. Eaton Theater.
 
   - [Readings before Mergerson
-    talk](https://drive.google.com/drive/folders/1VjenaNF-IahhdVl6TQHrQK5_ygELl2JD?usp=drive_link)
+    talk](https://docs.google.com/document/d/15uYP18yQFVcWvv_qn-Je-GnVElMT2wkLPx5DHxn9If8/edit?usp=sharing)
 
 - **5:30 p.m.**: Break
 
