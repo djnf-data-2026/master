@@ -1,7 +1,7 @@
 ---
 title: "Hosting a GitHub Page"
 author: "Rob Wells"
-date: "5-25-2026"
+date: "5-29-2026"
 format:
   html:
     theme: cosmo
@@ -11,9 +11,8 @@ format:
 
 This exercise will allow you to create a basic web page which will be required for the Investigate Your Community final project option.
 
-For this exercise, you will create a page with your notes on R commands. You will then host it on your GitHub page.
+For this exercise, you will create a page with your one paragraph story idea. You will then host it on your GitHub page.
 
-You will write your code in chunks but not execute the data. Use {r eval=FALSE, include=TRUE} in the header so the page will render without running the actual code.
 
 ## Styled Text
 
@@ -51,17 +50,21 @@ The code below, for example, will output the text inside the print statement whe
 
 ## Create your website
 
-In place of these instructions, you will paste your project draft code into this document. 
+In place of these instructions, you will paste your project one paragraph story idea into this document and any code you've developed so far.
+
+You will need to load libraries and data because rendering a page requires a full R session to execute on the code.
 
 First, create H1 headers 
 
-For example: 
+**For example:** 
 
 # Income and Vacancies of Baltimore Neighborhoods 2020
 
 ## Looking at wealth inequality in Charm City
 
 ```{r eval=FALSE, include=TRUE}
+
+# You will write your code in chunks but not execute the data. Use {r eval=FALSE, include=TRUE} in the header so the page will render without running the actual code.
 income_vacancy %>% 
   ggplot(aes(x = community)) +
   geom_point(aes(y=income_2020), color = "#64D197", stroke=5) +
@@ -80,7 +83,7 @@ income_vacancy %>%
 
 ## Set up for hosting  
 
- * Create a new folder in your repository called "docs" 
+ * Create a new folder in your repository called "docs" (if one isn't there already)
  * Rename this document as "index.qmd"
  * Move "index.qmd" into the "docs" folder
       
@@ -89,8 +92,8 @@ income_vacancy %>%
  
  * Make sure this document is named "index.qmd" and is in the "docs" folder
  * Click Render button. It will create an html version of this page, called "index.html" 
- * Use GitHub Desktop to push your files to your your github account. 
- * Access the URL from your Github account. 
+ * Use GitHub Desktop to push your files to your your github repository on the web. 
+ * Access the URL from your Github repository. 
 
 ## Host html on GitHub    
 
@@ -115,13 +118,13 @@ income_vacancy %>%
 
 * create a folder in your repository's main branch, call it images
 
-* find any .jpg or .png file and insert it into that folder.
+* find any .jpeg, .jpg or .png file and insert it into that folder.
 
 * In a QMD file, display the image as follows:
 
-#![](images/your_link_here.png)
+#![CAPTION FOR YOUR PHOTO](images/your_link_here.png)
 
-#![](images/xl-refresher-grid_SHEETS.png)
+#![CHATTER FOR YOUR chart](images/xl-refresher-grid_SHEETS.png)
 
 
 A more advanced technique controlling the width and height
@@ -152,9 +155,11 @@ From a **Datawrapper Map**
 <iframe width="560" height="315" src="https://www.youtube.com/embed/DIDHbEZYFSc?si=a-KNzlQgoGjXD6VV" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 :::
 
-Now replace these two videos with something you selected. The embed code is in the video share feature
+**Now replace these two videos with something you selected.**
 
+The embed code is in the video share feature
 
+## Instructions to embed a gif
 ```{r text_to_columns.gif, out.width="100%", echo=FALSE}
 ### Embed a GIF
 #First, download a GIF (extension will be .gif) and load it into "images" folder
