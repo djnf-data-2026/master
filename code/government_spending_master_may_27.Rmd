@@ -128,7 +128,8 @@ spending |>
 spending |> 
   filter(cty_name == "HENNEPIN") |> 
   filter(agency == "Department of Health and Human Services") |> 
-   mutate(`total_spent_$` = scales::dollar(total_spent / 1e9, suffix = "B", accuracy = 0.01)) |> 
+  mutate(`total_spent` = sum(spending_total, na.rm = TRUE)) |>
+  mutate(`total_spent_$` = scales::dollar(total_spent / 1e9, suffix = "B", accuracy = 0.01)) |> 
   select(fyear, cty_name, spending_total)
 ```
 
