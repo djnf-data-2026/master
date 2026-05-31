@@ -5,8 +5,11 @@ date: "2026-05-31"
 output: html_document
 ---
 
+For the Detroit News:
 
 Examine hospital expenditures over time by county, the effects of consolidation
+
+**We really need documentation files for this data**
 
 # Load packages - do this once
 
@@ -18,6 +21,7 @@ Examine hospital expenditures over time by county, the effects of consolidation
 
 ```
 
+# Load libraries, do this every time
 
 ```{r}
 library(tidyverse)
@@ -44,10 +48,10 @@ glimpse(ahrfsn2025)
 
 ```{r}
 
-AHRF2025_A <- read_csv("https://raw.githubusercontent.com/djnf-data-2026/laine-cibulskis/refs/heads/main/data/ahrfsn2024.csv")
+AHRF2025_MI <- read_csv("https://raw.githubusercontent.com/djnf-data-2026/laine-cibulskis/refs/heads/main/data/AHRF2025_MI.csv")
 
 
-AHRF2024_A <- read_csv("https://raw.githubusercontent.com/djnf-data-2026/laine-cibulskis/refs/heads/main/data/ahrfsn2024.csv")
+AHRF2024_MI <- read_csv("https://raw.githubusercontent.com/djnf-data-2026/laine-cibulskis/refs/heads/main/data/AHRF2024_MI.csv")
 ```
 
 
@@ -59,12 +63,23 @@ Some of the HSRA hospital data is saved as ACS files, unfortunately. I have the 
 I tried for quite some time to save each HSRA file properly through Visual Studio Code and R, but it's going to take longer than I thought given the scale and the documentation issues. Perhaps I'd need to heavily cut the HRSA data before looking into it because having every single county in the U.S. for all of those rows is jamming it up quite a bit.
 
 
-# Load AHRF2025 file
+#-------------------------------------------------------
+# 
+# Data Wrangling Notes
+#
+#-------------------------------------------------------
+
+You don't need to run this code below -- I kept it to show you how I loaded the AHRF2025 file from a Google Drive link and then created the filtered Michigan files
+
+
 ```{r}
-googledrive::drive_auth()
+googledrive::drive_auth() #you may need to authorize your browser
+
+# Here's the file: https://drive.google.com/file/d/1K8DzTY5yTNI0EeIUpadeCrE552tcxRsj/view?usp=sharing
+
 drive_download(
-  as_id("1K8DzTY5yTNI0EeIUpadeCrE552tcxRsj"),  # from the share link
-  path = "../data/AHRF2025.csv",
+  as_id("1K8DzTY5yTNI0EeIUpadeCrE552tcxRsj"),  # copied from the file link
+  path = "../data/AHRF2025.csv", #a random data path - you can select any folder you want
   overwrite = TRUE
 )
 AHRF2025 <- read_csv("../data/AHRF2025.csv")|> 
@@ -78,6 +93,7 @@ AHRF2025_MI <- AHRF2025 |>
 ```
 
 # Load AHRF2024 file
+Same thing as above
 ```{r}
 #https://drive.google.com/file/d/1GgVgzo7DSv1pn8BjCuhygmILEjGT04Ja/view?usp=sharing
 googledrive::drive_auth()
