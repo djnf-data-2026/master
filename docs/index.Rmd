@@ -116,6 +116,9 @@ Speakers</a></button>
 
   - [Slides for
     talk](https://docs.google.com/presentation/d/1zdlk2Ss9jE_SZL2HuHvUbZeUteEO0OBasFKpXtjuZIY/edit?usp=sharing)
+  - [Story Based Inquiry book](https://www.storybasedinquiry.com/manual2)
+  - [Story Pitch Database](https://www.theopennotebook.com/pitch/scientists-describe-a-new-fishing-spider-species/) 
+  
 
 - **2:15 p.m.**: Hosting a GitHub page. All attend. (Wells/Lang) [Download GitHub page tutorial](https://github.com/djnf-data-2026/master/blob/main/code/Hosting_GitHub_Page_DJNF_2026.qmd)
       - Render a basic web page using R and GitHub pages.
