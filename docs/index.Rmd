@@ -182,7 +182,7 @@ Speakers</a></button>
 - **12 p.m.**: Lunch in Knight Hall.
 
 - **1 p.m.-2:30 p.m.: Data Visualization.** . Using Datawrapper for data
-  visualization. (Adam Marton). All attend. Room 2103
+  visualization. (Adam Marton). All attend. Eaton Theater
 
   - Embedding Datawrapper into GitHub pages
 
@@ -200,14 +200,13 @@ Speakers</a></button>
 
 - **5:30 p.m.**: Break
 
-- **6:30 p.m.**: Dinner in Hyattsville. (Meet at Knight Hall board van.
-  Wells / driving)
+- **6 p.m.**: Dinner in Hyattsville. Walk to Greene Turtle, 7356 Baltimore Ave, College Park, MD 20740.
   
 - [Readings before Jon Schleuss talk](https://docs.google.com/document/d/1V325-4V1iExFS30EWRWZC2X6zZEXjmAJ-ZWhJFiIS5k/edit?usp=sharing)
 
 ### Wednesday June 3, 2026
 
-- **8 a.m.: Breakfast**: In Knight Hall
+- **8:30 a.m.: Breakfast**: In Knight Hall
 
 - **9 a.m.-10:15 a.m.: Skills sessions**
 
@@ -273,7 +272,7 @@ Speakers</a></button>
 
 ### Friday June 5, 2026
 
-- **8 a.m.: Breakfast**: In Knight Hall
+- **8:30 a.m.: Breakfast**: In Knight Hall
 - **9 a.m.-10 a.m.**: Skills to survive in the newsroom. Time
   management, deadlines. All attend. (Denny) Eaton Theater.
 - **10:00 a.m. - 10:15 a.m.**: Break
@@ -287,7 +286,7 @@ Speakers</a></button>
 
 ### Saturday June 6, 2026
 
-- **8 a.m.: Breakfast**: In Knight Hall
+- **8:30 a.m.: Breakfast**: In Knight Hall
 - **9:00 a.m.**: Present your story pitch to the group. –This will be a
   webpage rendered from your GitHub account that includes at least three
   graphics, several summary tables, and a written analysis. Entry level
