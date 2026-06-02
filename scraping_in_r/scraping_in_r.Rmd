@@ -226,7 +226,7 @@ https://www.courts.state.md.us/media/news/2026/pr20260514
 It looks like we'll need to extract and combine the text from all of the <p> nodes.
 
 ```{r}
-press_release_url_example <- table_2026_w_urls$url[2]
+press_release_url_example <- table_2026_w_urls$url[1]
 
 press_release_result <- read_html(press_release_url_example)
 
