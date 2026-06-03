@@ -169,6 +169,7 @@ Speakers</a></button>
     - Use R to link to a LLM and process data: the ellmer package
     - Parsing data and text
     - The beat book.
+    - [LLM playground](https://github.com/NewsAppsUMD/llm-playground)
 
   - New to Coding Track: Data cleaning. (Hughes) Room 2017
     - Use Open Refine, R to clean data
@@ -185,6 +186,9 @@ Speakers</a></button>
   visualization. (Adam Marton). All attend. Eaton Theater
 
   - Embedding Datawrapper into GitHub pages
+  - [Use HTML to hack a DataWrapper map](https://docs.google.com/document/d/1-YiRkfjo15E6nX6GUN7AwGLpsr6EI27hp72exrZAN4M/edit?usp=sharing)
+  - [Use the DataWrapper API to create graphics in R](https://adammarton.com/?p=2861)
+  
 
 - **2:30 p.m.-2:45 p.m.** : Break
 
@@ -259,9 +263,9 @@ Speakers</a></button>
 
 ### Thursday June 4, 2026
 
-- **7:30 a.m.: Breakfast**: In Knight Hall
+- **8 a.m.: Breakfast**: In Knight Hall
 
-- **8:15 a.m.**: Meet at Knight Hall, board van, depart for College Park
+- **8:30 a.m.**: Meet at Knight Hall, board van, depart for College Park
   Metro (Wells driving, plus car pool to Metro)
 - **10 a.m.**: Tour of AP D.C. bureau with Chad Day, AP's elections
   team.
