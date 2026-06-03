@@ -237,11 +237,16 @@ Speakers</a></button>
 
   - [Readings before Jon Schleuss talk](https://docs.google.com/document/d/1V325-4V1iExFS30EWRWZC2X6zZEXjmAJ-ZWhJFiIS5k/edit?usp=sharing)
   - [News Not Slop](https://www.newsnotslop.org/)
+  - [Presentation slides](https://docs.google.com/presentation/d/1EaLQ0Ez4DeTWO0YLH6rryDmHhto_LON_LG6ZKv9oiVo/edit?usp=sharing)
 
 - **12:30 p.m.**: Lunch with Schleuss
 
 - **1:30 p.m. - 2:30 p.m.**: Introduction to business reporting.
   (Wells). Eaton Theater
+  
+  - [Slides from presentation](https://docs.google.com/presentation/d/1pkNXrPdX4MNCrmpfpqlBd4y1eKh6KFK2/edit?usp=sharing&ouid=102324743793755798467&rtpof=true&sd=true)
+  - [Business reporting cheat sheet](https://docs.google.com/document/d/1RHzcqIGuzfEtUEQ5w8jYWqTpnxNa6-5j/edit?usp=sharing&ouid=102324743793755798467&rtpof=true&sd=true)
+  
 
 - **2:30 p.m. - 3 p.m.**: Digital accessibility for data visualization.
   (Lang). Eaton Theater
