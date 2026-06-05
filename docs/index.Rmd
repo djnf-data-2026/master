@@ -340,9 +340,9 @@ And include the link to your source file, for example:
     coach)
 -   **3:30 p.m.**: Meet at Knight Hall, board van, depart for College
     Park Metro, dinner in Washington D.C., attend a community jazz show
-    at [Westminster Church](https://westminsterdc.org/our-pastor). Meet
-    with Pastor Brian E. Hamilton beforehand to discuss Southwest D.C.
-    history
+    at [Westminster Church](https://westminsterdc.org/our-pastor).
+    -   Meet with Pastor Brian E. Hamilton beforehand to discuss
+        Southwest D.C. history
 
 ### Saturday June 6, 2026
 
@@ -350,13 +350,12 @@ And include the link to your source file, for example:
 -   **9:00 a.m.: Breakfast**: In Knight Hall
 -   **9:30 a.m.**: Present your story pitch to the group.
     -   5 minute presentation
-    -   5 minute feedback. –This will be a webpage rendered from your
-        GitHub account that includes at least three graphics, several
-        summary tables, and a written analysis. One story pitch will be
-        presented, along with questions and a discussion of potential
-        holes. Email links to Wells:
-        [robwells\@umd.edu](mailto:robwells@umd.edu){.email} Shirley
-        Carswell, DJNF Executive Director, visits
+    -   5 minute feedback.
+    -   This will be a webpage rendered from your GitHub account that
+        includes at least three graphics, several summary tables, and a
+        written analysis. One story pitch will be presented, along with
+        questions and a discussion of potential holes.
+    -   Shirley Carswell, DJNF Executive Director, visits
 -   **12:15 p.m.**: Lunch in Knight Hall
 -   **1 p.m.**: On the van for D.C.
 -   **2:30 p.m.**: Tour of African-American History Museum, D.C.
