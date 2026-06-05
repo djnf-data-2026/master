@@ -124,6 +124,19 @@ md_income1 <- get_acs(geography = "county",
 md_income1
 ```
 
+# Population by state
+```{r}
+
+#B01001_001 COUNTS Population
+population_inc_2024 <- get_acs(geography = "state", 
+              variables = c(total_pop = "B01001_001"), 
+               year = 2024) 
+
+write_csv(population_inc_2024, "population_inc_2024.csv")
+ 
+
+```
+
 #Median Income By Census Tract
 ```{r}
 #B19001 COUNTS THE NUMBER OF HOUSEHOLDS

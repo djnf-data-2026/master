@@ -1,0 +1,53 @@
+GEOID,NAME,variable,estimate,moe
+01,Alabama,total_pop,5086768,NA
+02,Alaska,total_pop,735706,NA
+04,Arizona,total_pop,7378838,NA
+05,Arkansas,total_pop,3049391,NA
+06,California,total_pop,39287377,NA
+08,Colorado,total_pop,5862189,NA
+09,Connecticut,total_pop,3624508,NA
+10,Delaware,total_pop,1021191,NA
+11,District of Columbia,total_pop,681294,NA
+12,Florida,total_pop,22416077,NA
+13,Georgia,total_pop,10940407,NA
+15,Hawaii,total_pop,1445235,NA
+16,Idaho,total_pop,1934262,NA
+17,Illinois,total_pop,12694798,NA
+18,Indiana,total_pop,6851073,NA
+19,Iowa,total_pop,3210507,NA
+20,Kansas,total_pop,2947197,NA
+21,Kentucky,total_pop,4534824,NA
+22,Louisiana,total_pop,4611961,NA
+23,Maine,total_pop,1387817,NA
+24,Maryland,total_pop,6206011,NA
+25,Massachusetts,total_pop,7044056,NA
+26,Michigan,total_pop,10077761,NA
+27,Minnesota,total_pop,5739445,NA
+28,Mississippi,total_pop,2946779,NA
+29,Missouri,total_pop,6191814,NA
+30,Montana,total_pop,1116875,NA
+31,Nebraska,total_pop,1978707,NA
+32,Nevada,total_pop,3184612,NA
+33,New Hampshire,total_pop,1394868,NA
+34,New Jersey,total_pop,9343809,NA
+35,New Mexico,total_pop,2120246,NA
+36,New York,total_pop,19852366,NA
+37,North Carolina,total_pop,10730404,NA
+38,North Dakota,total_pop,784841,NA
+39,Ohio,total_pop,11810293,NA
+40,Oklahoma,total_pop,4028634,NA
+41,Oregon,total_pop,4254293,NA
+42,Pennsylvania,total_pop,13018639,NA
+44,Rhode Island,total_pop,1101801,NA
+45,South Carolina,total_pop,5296225,NA
+46,South Dakota,total_pop,907428,NA
+47,Tennessee,total_pop,7066383,NA
+48,Texas,total_pop,30188424,NA
+49,Utah,total_pop,3392331,NA
+50,Vermont,total_pop,647106,NA
+51,Virginia,total_pop,8705170,NA
+53,Washington,total_pop,7816116,NA
+54,West Virginia,total_pop,1778373,NA
+55,Wisconsin,total_pop,5914872,NA
+56,Wyoming,total_pop,582397,NA
+72,Puerto Rico,total_pop,3234309,NA
