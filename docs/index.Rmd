@@ -330,6 +330,7 @@ And include the link to your source file, for example:
 -   **8:30 a.m.: Breakfast**: In Knight Hall
 -   **9 a.m.-10 a.m.**: Skills to survive in the newsroom. Time
     management, deadlines. All attend. (Denny) Eaton Theater.
+    - [Slides from talk](https://docs.google.com/presentation/d/1D-E8yd_BARkJ100iMOjedThaHBvbD15qPrv0IclgmV8/edit?usp=sharing)
 -   **10:00 a.m. - 10:15 a.m.**: [Julie Lee code tricks and
     tips](https://github.com/djnf-data-2026/master/blob/main/code/Julie_lee_index.qmd)
 -   **10:15 a.m. - 10:30 a.m.**: Break
