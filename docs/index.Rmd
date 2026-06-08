@@ -364,7 +364,7 @@ And include the link to your source file, for example:
 
 ### Sunday June 7, 2026
 
--   **9:00 a.m.: Breakfast**: In Knight Hall
+-   Breakfast on your own
 -   Depart on your own schedule
 
 ::: {style="text-align: center; color: #ff9500;"}
