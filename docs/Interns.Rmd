@@ -37,10 +37,10 @@ Wilson studies at Craig Newmark Graduate School of Journalism at CUNY
 and will intern at the Advertising Specialty Institute
 
 <br> Emily Wilson's [DJNF
-project:](https://djnf-data-2026.github.io/emily-wilson/)
+project](https://djnf-data-2026.github.io/emily-wilson/)
 
 <br> Tiasia Saunders [profile of Emily
-Wilson:](https://docs.google.com/document/d/1C_2FIzjwnEtyTAnYMT0h4Lphau8qXZDjsGC7jt6gQCQ/edit?usp=sharing)
+Wilson](https://docs.google.com/document/d/1C_2FIzjwnEtyTAnYMT0h4Lphau8qXZDjsGC7jt6gQCQ/edit?usp=sharing)
 :::
 
 ::: {style="float:right; padding:10px;"}
@@ -87,8 +87,9 @@ the Howard Center for Investigative Journalism
 Diego Torrealba's [DJNF
 project](https://djnf-data-2026.github.io/diego-torrealba/)
 
-Sam Gauntt's [profile of Diego
-Torrealba](https://docs.google.com/document/d/1GZhbcUgiukQv2gZXmbHOzxZuF-dMu_0YsQY-1e5ZaWs/edit?usp=sharing)
+Sam Gauntt's profile of Diego
+Torrealba, TK
+
 :::
 
 ::: {style="float:right; padding:10px;"}
@@ -156,7 +157,7 @@ Gauntt studies at University of Maryland and will intern at the States
 Newsroom D.C. Bureau
 
 Sam Gauntt's [DJNF
-project:](https://djnf-data-2026.github.io/samuel-gauntt/)
+project](https://djnf-data-2026.github.io/samuel-gauntt/)
 
 Diego Torrealba's [profile of Sam
 Gauntt](https://docs.google.com/document/d/1hVFgJeCJP6Wmyi7KV2-xLWiy4kHxG9vh/edit?usp=sharing&ouid=102324743793755798467&rtpof=true&sd=true)
