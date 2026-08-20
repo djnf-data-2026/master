@@ -1,0 +1,256 @@
+---
+output: html_document
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+::: {style="text-align: center; color: #2ba9dc;"}
+# Dow Jones News Fund Data Interns 2026
+
+[(ver May 17, 2026)]{style="font-size: 8pt;"}
+:::
+
+::: {style="display: flex; align-items: center; justify-content: center; gap: 20px; margin-top: 30px;"}
+<img src="../images/DJNF_Logo.png" style="height: 170px; width: auto;"/>
+<img src="../images/Merrill_logo.png" style="height: 130px; width: auto;"/>
+:::
+
+::: {style="text-align:center"}
+<button><a href="https://djnf-data-2026.github.io/master/">Home</a></button>
+
+<button><a href="https://djnf-data-2026.github.io/master/Instructors">Instructors</a></button>
+
+<button><a href="https://djnf-data-2026.github.io/master/GuestSpeakers">Guest
+Speakers</a></button>
+
+<button><a href="https://djnf-data-2026.github.io/master/Interns">Interns</a></button>
+:::
+
+::: {style="float:right; padding:10px;"}
+<img src="../images/interns/EmilyWilson.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Emily
+Wilson studies at Craig Newmark Graduate School of Journalism at CUNY
+and will intern at the Advertising Specialty Institute
+
+<br> Tiasia Saunders [profile of Emily
+Wilson:](https://docs.google.com/document/d/1C_2FIzjwnEtyTAnYMT0h4Lphau8qXZDjsGC7jt6gQCQ/edit?usp=sharing)
+<br> Emily Wilson's [DJNF
+project:](https://djnf-data-2026.github.io/emily-wilson/)
+:::
+
+::: {style="float:right; padding:10px;"}
+<img src="../images/interns/CaseyMann.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Casey
+Mann studies at University of Arkansas - Fayetteville and will intern at
+the Arkansas Democrat-Gazette
+:::
+
+::: {style="float:right; padding:10px;"}
+<img src="../images/interns/LaineCibulskis.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Laine
+Cibulskis studies at University of Missouri - Columbia and will intern
+at Detroit News
+:::
+
+::: {style="float:right; padding:10px;"}
+<img src="../images/interns/JulieLee.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Julie
+Lee studies at Columbia University and will intern at the Howard Center
+for Investigative Journalism
+:::
+
+::: {style="float:right; padding:10px;"}
+<img src="../images/interns/DiegoTorrealba.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Diego
+Torrealba studies at University of Texas at Austin and will intern at
+the Howard Center for Investigative Journalism
+:::
+
+::: {style="float:right; padding:10px;"}
+<img src="../images/interns/TiasiaSaunders.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Tiasia
+Saunders studies at University of Maryland and will intern at the
+Investigative Project on Race and Equity
+:::
+
+::: {style="float:right; padding:10px;"}
+<img src="../images/interns/ElaJalil.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Ela
+Jalil studies at University of Maryland and will intern at the
+Investigative Reporting Workshop
+:::
+
+::: {style="float:right; padding:10px;"}
+<img src="../images/interns/WillHammann.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Will
+Hammann studies at University of Maryland and will intern at the
+Maryland Matters
+:::
+
+::: {style="float:right; padding:10px;"}
+<img src="../images/interns/IsabelleFarina.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Izzy
+Farina studies at University of Georgia and will intern at the NJ
+Advance Media
+:::
+
+::: {style="float:right; padding:10px;"}
+<img src="../images/interns/YaelleTang.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Yaelle
+Tang studies at University of California, Berkeley and will intern at
+the Philadelphia Inquirer
+:::
+
+::: {style="float:right; padding:10px;"}
+<img src="../images/interns/SamuelGauntt.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Sam
+Gauntt studies at University of Maryland and will intern at the States
+Newsroom D.C. Bureau
+:::
+
+::: {style="float:right; padding:10px;"}
+<img src="../images/interns/KatelynnWinebrenner.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Katelynn
+Winebrenner studies at University of Maryland and will intern at The
+Frederick News-Post
+:::
+
+::: {style="float:right; padding:10px;"}
+<img src="../images/interns/TeresaDo.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Teresa
+Do studies at University of Texas at Austin and will intern at The Trace
+:::
+
+::: {style="float:right; padding:10px;"}
+<img src="../images/interns/EmilyWilson.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>
+
+Emily Wilson studies at Craig Newmark Graduate School of Journalism at
+CUNY and will intern at the Advertising Specialty Institute
+
+Tiasia Saunders [profile of Emily
+Wilson:](https://docs.google.com/document/d/1C_2FIzjwnEtyTAnYMT0h4Lphau8qXZDjsGC7jt6gQCQ/edit?usp=sharing)
+
+Emily Wilson's [DJNF
+project:](https://djnf-data-2026.github.io/emily-wilson/)
+:::
+
+::: {style="float:right; padding:10px;"}
+<img src="../images/interns/CaseyMann.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>
+
+Casey Mann studies at University of Arkansas - Fayetteville and will
+intern at the Arkansas Democrat-Gazette
+
+Ela Jalil's profile of Casey Mann
+
+Casey Mann's [DJNF
+project](https://djnf-data-2026.github.io/casey-mann/)
+:::
+
+::: {style="float:right; padding:10px;"}
+<img src="../images/interns/LaineCibulskis.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Laine
+Cibulskis studies at University of Missouri - Columbia and will intern
+at Detroit News
+
+Will Hammann’s profile of Laine Cibulskis
+
+Laine Cibulskis's [DJNF
+project](https://djnf-data-2026.github.io/laine-cibulskis/)
+:::
+
+::: {style="float:right; padding:10px;"}
+<img src="../images/interns/JulieLee.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Julie
+Lee studied at Columbia University and will intern at the Howard Center
+for Investigative Journalism
+
+Isabella Farina’s profile of Julie Lee\
+
+Julie Lee's [DJNF project](https://djnf-data-2026.github.io/julie-lee/)
+:::
+
+::: {style="float:right; padding:10px;"}
+<img src="../images/interns/DiegoTorrealba.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Diego
+Torrealba studies at University of Texas at Austin and will intern at
+the Howard Center for Investigative Journalism
+
+Sam Gauntt's profile of Diego Torrealba
+
+Diego Torrealba's [DJNF
+project](https://djnf-data-2026.github.io/diego-torrealba/)
+:::
+
+::: {style="float:right; padding:10px;"}
+<img src="../images/interns/TiasiaSaunders.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Tiasia
+Saunders studied at University of Maryland and will intern at the
+Investigative Project on Race and Equity
+
+Emily Wilson's profile of Tiasia Saunders
+
+Tiasia Saunders's [DJNF
+project](https://djnf-data-2026.github.io/tiasia-saunders/webpage/index.html)
+:::
+
+::: {style="float:right; padding:10px;"}
+<img src="../images/interns/ElaJalil.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Ela
+Jalil studied at University of Maryland and will intern at the
+Investigative Reporting Workshop
+
+Casey Mann profile of Ela Jalil
+
+Ela Jalil's [DJNF project](https://djnf-data-2026.github.io/ela-jalil/)
+:::
+
+::: {style="float:right; padding:10px;"}
+<img src="../images/interns/WillHammann.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Will
+Hammann studies at University of Maryland and will intern at the
+Maryland Matters
+
+Laine Cibulskis profile of Will Hammann\
+
+Will Hammann's [DJNF
+project](https://djnf-data-2026.github.io/will-hammann/)
+:::
+
+::: {style="float:right; padding:10px;"}
+<img src="../images/interns/IsabelleFarina.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Isabelle
+"Izzy" Farina studied at University of Georgia and will intern at the NJ
+Advance Media
+
+Julie Lee profiles Izzy Farina
+
+Izzy Farina's [DJNF
+project](https://djnf-data-2026.github.io/isabelle-farina/)
+:::
+
+::: {style="float:right; padding:10px;"}
+<img src="../images/interns/YaelleTang.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Yaelle
+Tang studies at University of California, Berkeley and will intern at
+the Philadelphia Inquirer
+
+Katelynn Winebrenner’s [profile of Yaelle
+Tang](https://docs.google.com/document/d/10egsZSSdpLtxX-dJZgZMsvf3h3UQ8VOE8Lx7TYpCLeY/edit?usp=sharing)
+
+Yaelle Tang's [DJNF
+project](https://djnf-data-2026.github.io/yaelle-tang/)
+:::
+
+::: {style="float:right; padding:10px;"}
+<img src="../images/interns/SamuelGauntt.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Sam
+Gauntt studies at University of Maryland and will intern at the States
+Newsroom D.C. Bureau
+
+Diego Torrealba [profile of Sam
+Gauntt](https://docs.google.com/document/d/1hVFgJeCJP6Wmyi7KV2-xLWiy4kHxG9vh/edit?usp=sharing&ouid=102324743793755798467&rtpof=true&sd=true)
+
+Sam Gauntt's [DJNF
+project:](https://djnf-data-2026.github.io/samuel-gauntt/)
+:::
+
+::: {style="float:right; padding:10px;"}
+<img src="../images/interns/KatelynnWinebrenner.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Katelynn
+Winebrenner studied at University of Maryland and will intern at The
+Frederick News-Post
+
+Teresa Do's profile of Katelynn Winebrenner
+
+Katelynn Winebrenner's [DJNF
+project](https://djnf-data-2026.github.io/katelynn-winebrenner/)
+:::
+
+::: {style="float:right; padding:10px;"}
+<img src="../images/interns/TeresaDo.jpg" width="25%" height="25%" align="left" style="padding:10px;"/>Teresa
+Do studies at University of Texas at Austin and will intern at The Trace
+
+Yaelle Tang profile of Teresa Do\
+\
+Teresa Do's [DJNF project](https://djnf-data-2026.github.io/teresa-do/)
+:::
+
+</div>

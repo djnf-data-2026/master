@@ -1,0 +1,117 @@
+---
+title: "Laine-Hospital Data"
+author: "Wells"
+date: "2026-05-31"
+output: html_document
+---
+
+For the Detroit News:
+
+Examine hospital expenditures over time by county, the effects of consolidation
+
+**We really need documentation files for this data**
+
+# Load packages - do this once
+
+```{r}
+# install.packages("tidyverse")
+# install.packages("janitor")
+# install.packages("rio")
+# install.packages("googledrive")
+
+```
+
+# Load libraries, do this every time
+
+```{r}
+library(tidyverse)
+library(janitor)
+library(rio)
+library(googledrive)
+
+
+```
+
+# Loading data AHRFSN data for 2024 and 2025
+**need documentation files**
+```{r}
+ahrfsn2025 <- read_csv("https://raw.githubusercontent.com/djnf-data-2026/laine-cibulskis/refs/heads/main/data/ahrfsn2025.csv")
+
+ahrfsn2024 <- read_csv("https://raw.githubusercontent.com/djnf-data-2026/laine-cibulskis/refs/heads/main/data/ahrfsn2024.csv")
+
+glimpse(ahrfsn2025)
+
+```
+
+
+# Loading AHRF 2025 and 2024 files for Michigan only
+
+```{r}
+
+AHRF2025_MI <- read_csv("https://raw.githubusercontent.com/djnf-data-2026/laine-cibulskis/refs/heads/main/data/AHRF2025_MI.csv")
+
+
+AHRF2024_MI <- read_csv("https://raw.githubusercontent.com/djnf-data-2026/laine-cibulskis/refs/heads/main/data/AHRF2024_MI.csv")
+```
+
+
+
+Load healthcare market saturation csv 
+
+Some of the HSRA hospital data is saved as ACS files, unfortunately. I have the documentation but I'm going to have to edit it so I can easily add the column names as it is not in a nicely joinable format. I might need some help with that during the training
+
+I tried for quite some time to save each HSRA file properly through Visual Studio Code and R, but it's going to take longer than I thought given the scale and the documentation issues. Perhaps I'd need to heavily cut the HRSA data before looking into it because having every single county in the U.S. for all of those rows is jamming it up quite a bit.
+
+
+#-------------------------------------------------------
+# 
+# Data Wrangling Notes
+#
+#-------------------------------------------------------
+
+You don't need to run this code below -- I kept it to show you how I loaded the AHRF2025 file from a Google Drive link and then created the filtered Michigan files
+
+
+```{r}
+googledrive::drive_auth() #you may need to authorize your browser
+
+# Here's the file: https://drive.google.com/file/d/1K8DzTY5yTNI0EeIUpadeCrE552tcxRsj/view?usp=sharing
+
+drive_download(
+  as_id("1K8DzTY5yTNI0EeIUpadeCrE552tcxRsj"),  # copied from the file link
+  path = "../data/AHRF2025.csv", #a random data path - you can select any folder you want
+  overwrite = TRUE
+)
+AHRF2025 <- read_csv("../data/AHRF2025.csv")|> 
+  clean_names()
+
+AHRF2025_MI <- AHRF2025 |> 
+  filter(st_name_abbrev == "MI")
+
+#write_csv(AHRF2025_MI, "../data/AHRF2025_MI.csv" )
+
+```
+
+# Load AHRF2024 file
+Same thing as above
+```{r}
+#https://drive.google.com/file/d/1GgVgzo7DSv1pn8BjCuhygmILEjGT04Ja/view?usp=sharing
+googledrive::drive_auth()
+drive_download(
+  as_id("1GgVgzo7DSv1pn8BjCuhygmILEjGT04Ja"),  # from the share link
+  path = "../data/AHRF2024.csv",
+  overwrite = TRUE
+)
+AHRF2024 <- read_csv("../data/AHRF2024.csv")|> 
+  clean_names()
+
+AHRF2024_MI <- AHRF2024 |> 
+  filter(st_name_abbrev == "MI")
+
+write_csv(AHRF2024_MI, "../data/AHRF2024_MI.csv" )
+
+```
+
+
+What are .ASC & .ASCII files?
+An ASC file is a variant of the ASCII format, which is an encryption file used by Pretty Good Privacy (PGP) for secure online communication. It includes messages and digital signatures, as well as plain text and binary information. It also includes a verification key. It’s mainly used to post online security notices and to transmit messages by text and email.

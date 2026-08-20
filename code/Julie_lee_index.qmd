@@ -1,0 +1,463 @@
+---
+title: "Are Florida homeowners paying more for less?"
+format: 
+  html: 
+    toc: true
+    toc-depth: 2
+    math: katex
+editor: visual
+execute: 
+  warning: false # suppress warnings
+date: last-modified
+date-format: "YYYY-MM-DD HH:mm"
+author: 
+  - name: Julie Lee
+    email: julie.lee@columbia.edu
+    url: www.julielee.net
+---
+
+![Cuba-Florida hurricane shortly after landfall in Southwestern Florida on October 19, 1944 (Public domain)](https://github.com/djnf-data-2026/julie-lee/blob/main/img/hurricane_map.jpg?raw=true)
+
+## What's the story?
+
+In 2023, Florida homeowners were paying [the most](https://www.politifact.com/factchecks/2023/jul/18/donald-trump/trump-is-correct-that-florida-has-highest-home-ins/) for home insurance in the country, in part due to the susceptibility of the state to hurricanes, but also, according to the insurance industry, because of an overly plaintiff-friendly litigation environment. Regardless, insurers in Florida were not doing well financially, a risk which they passed onto consumers by hiking rates. It wasn't enough. Six insurers [went insolvent](https://www.cbsnews.com/miami/news/sixth-florida-property-insurer-declared-insolvent/) in Florida in 2022, and the year after, Farmers Insurance [left the state altogether](https://www.cnn.com/2023/07/12/business/farmers-insurance-florida). In response, the state [passed](https://floir.gov/newsroom/archives/item-details/2023/05/31/icymi-governor-desantis-signs-consumer-protection-legislation-to-support-florida-policyholders-when-disaster-strikes) reforms in 2022 and 2023 that were intended to lower premiums for Floridians by changing claims handling processes. The Sun Sentinel and Orlando Sentinel are interested in analyzing **how homeowners' insurance coverage has changed for Floridians and whether they are paying more for less.**
+
+As a first step, the newsrooms are interested in determining how policy cancellations and non-renewal rates have changed. A recent analysis of data from the National Association of Insurance Commissioners (NAIC) by Weiss Ratings, an insurance rating industry, [found](https://www.prnewswire.com/news-releases/homeowners-in-florida-and-california-dropped-by-their-insurance-companies-at-highest-rate-in-nation-302597819.html) that Florida homeowners have the highest rate of policy cancellations in the country. Using public data from the Florida Office of Insurance Regulation (FLOIR), I will analyze proportions of policy cancellations and non-renewals for the top insurers in the state, normalized by the overall number of written policies.
+
+##### 🏠 Why does this matter?
+
+As the litigation environment has become less favorable for plaintiffs, homeowners have less recourse to fight cancellations or non-renewals. If more policies (or a similar number of policies) are being cancelled, more Floridians may be put in a situation where they have to pay more for a different insurer, opt for less coverage to save on premiums or may forgo insurance altogether if they have paid their mortgage. When the next big hurricane strikes, which is all but inevitable in Florida, there may be fewer homeowners who can recoup the damages to their homes.
+
+This analysis will also hold the industry and Florida lawmakers to account by critically analyzing the claims by the insurance industry that the 2022-23 reforms resulted in lower premiums for Floridians. A recent report [found](https://www.insurancebusinessmag.com/us/news/property/floridians-pay-181-more-for-home-insurance-than-us-average--report-571385.aspx) that Floridians still pay the most for home insurance in the country, and a report by the advocacy group Coalition for an Insurable Future [found](https://www.miamiherald.com/news/local/environment/climate-change/article315840623.html) that premiums went up, even more than the national rate. To test the assumption that premiums are just as expensive or even more expensive than before the reforms, I will use estimated premium data from a [National Bureau of Economic Research paper](https://benkeys.github.io/insurance_data/). If it turns out that premiums have not meaningfully changed, it would be harder for the insurance industry and Florida lawmakers to justify the reforms that worsened consumer protections.
+
+##### 🌀 Why now?
+
+Hurricane season for Florida has just started, which [runs from June to November](https://www.nhc.noaa.gov/refresh.shtml?epac). Extreme weather events are becoming more common around the world, and so Florida is becoming an increasingly costly environment to do business for insurers. As a result, Floridians are dominated by Florida-only insurers, a state insurance program or people going without insurance altogether. Others may leave the state altogether. Last December, a [survey](https://business.fau.edu/departments/economics/business-economics-polling/bepi-polls/bepi-polls-2025/florida-american-dream.php) by the Business and Economic Polling Initiative at Florida Atlantic University found that a quarter were "seriously" considering leaving the state, for a number of reasons. 
+
+## Have insurance premiums gone down?
+
+To determine whether premiums have indeed lowered as a result of the 2022-23 reforms, I used data from a [National Bureau of Economic Research (NBER) paper](https://benkeys.github.io/insurance_data/) which estimated premiums for each county from mortgage escrow payments, which authors said they were able to extract insurance-related payments. They in turn obtained this escrow data from CoreLogic (now [Cotality](https://www.cotality.com/)), a property data and analytics provider.
+
+The following is a snapshot of estimated premiums for 2024 across the state, showing higher estimated premiums for coastal counties in South Florida.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Code"
+
+library(leaflet)
+pr24 <- read.csv("../data/nber-property-insurance-expenditures-2024-county.csv")
+flor_prm_24 <- pr24 %>% dplyr::filter(StateAbb=="FL")
+
+flor_prm_24 <- flor_prm_24 %>%
+  mutate(FIPS = sprintf("%05d", FIPS))
+
+dw_data <- flor_prm_24 %>%
+  select(FIPS, NAME, median_premium)
+
+#write.csv(dw_data, "../data/county_premiums_24.csv", row.names = FALSE)
+
+```
+
+<iframe title="Medium property insurance premiums in 2024" aria-label="Choropleth map" id="datawrapper-chart-OiCOg" src="https://datawrapper.dwcdn.net/OiCOg/2/" scrolling="no" frameborder="0" style="border: none;" width="500px" height="" data-external="1"></iframe>
+
+### Read in the full NBER estimated premiums data
+Extending the analysis to the full date range from 2014 to 2024, it is clear that premiums did not meaningfully *reduce* after 2022-23 legislative reforms. This may be in part because of major hurricanes in 2024 that could have cancelled out legislation-related savings. Data from 2025 is forthcoming, and I have reached out to the authors who told the previous intern a month ago that it would be uploaded soon.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Code"
+
+years <- 2014:2024
+
+files <- sprintf("../data/nber-property-insurance-expenditures-%d-county.csv", 2014:2024)
+
+premiums_allyears <- NULL
+
+for (yr in 2014:2024) {
+  filename <- paste0("../data/nber-property-insurance-expenditures-", yr, "-county.csv")
+  df <- read.csv(filename)
+  df$year <- yr
+  premiums_allyears <- rbind(premiums_allyears, df)
+}
+
+fl_allyears <- premiums_allyears |>
+  dplyr::filter(StateAbb == "FL") |>
+  select(year, NAME, median_premium) |>
+  pivot_wider(names_from = NAME, values_from = median_premium)
+
+#write.csv(fl_allyears, "../data/county_premiums_all.csv")
+
+```
+
+<iframe title="Preliminary data analysis suggests premiums still rose for Florida homeowners despite 2022-23 reforms" aria-label="Small multiple column chart" id="datawrapper-chart-5dWKp" src="https://datawrapper.dwcdn.net/5dWKp/1/" scrolling="no" frameborder="0" style="border: none;" width="600" height="340" data-external="1">
+
+</iframe>
+
+## Have cancellations and non-renewals increased?
+
+The Florida Office of Insurance Regulation publishes quarterly [Residential Market Share Reports](https://floir.gov/tools-and-data/residential-market-share-reports) from Q2 2022 to Q4 2025, broken down by insurer and policy type. We are most interested in the variables that relate to **cancellations** and **non-renewals**.
+
+::: callout-note
+## Key terms (Source: FLOIR)
+
+**Cancelled**: Policies in which either the policyholder or the insurer decides to stop coverage before the expiration date of the policy. All policies transferred to other corporations, including subsidiaries with a separate book of business, should be reported as canceled.
+
+**Non-Renewed**: Occurs when the policy expires and either the policyholder or the insurer decides not to continue the same coverage. This does not include policies canceled.
+
+**Hurricane Risk cancelled/non-renewed**: Policies that are canceled by the insurer for the purpose of reducing exposure to hurricane claims.
+:::
+
+Here's what the landscape looked like in the most recent report, the first quarter of 2026, after a little cleaning to drop irrelevant columns:
+
+```{r setup}
+#| echo: false
+library(tidyverse)
+library(readxl)
+library(janitor)
+
+example_df <- read.csv("../data/example_df.csv",check.names = F)
+```
+
+<iframe title="Florida homeowners&#39; insurance market data - 2026 Q1" aria-label="Table" id="datawrapper-chart-6xH4Q" src="https://datawrapper.dwcdn.net/6xH4Q/6/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height data-external="1">
+
+</iframe>
+
+```{=html}
+<script type="text/javascript">(function(){function e(){window.addEventListener(`message`,function(e){if(e.data[`datawrapper-height`]!==void 0){var t=document.querySelectorAll(`iframe`);for(var n in e.data[`datawrapper-height`])for(var r=0,i;i=t[r];r++)if(i.contentWindow===e.source){var a=e.data[`datawrapper-height`][n]+`px`;i.style.height=a}}})}e()})();</script>
+```
+</iframe>
+
+```{=html}
+<script type="text/javascript">(function(){function e(){window.addEventListener(`message`,function(e){if(e.data[`datawrapper-height`]!==void 0){var t=document.querySelectorAll(`iframe`);for(var n in e.data[`datawrapper-height`])for(var r=0,i;i=t[r];r++)if(i.contentWindow===e.source){var a=e.data[`datawrapper-height`][n]+`px`;i.style.height=a}}})}e()})();</script>
+```
+::: {.callout-note collapse="true"}
+## Data Dictionary
+
+| Column name                  | Definition                                                                                                                                                                                                                        |
+|------------------|------------------------------------------------------|
+| **Policies in Force**        | Snapshot as of the last day of the reporting quarter. Total policies in force across all coverage types.                                                                                                                          |
+| **Wind-Covered Policies**    | Snapshot as of the last day of the reporting quarter. Policies in force that include wind coverage.                                                                                                                               |
+| **Policies Canceled**        | Quarterly count. Policies in which either the policyholder or the insurer stopped coverage before the expiration date. Per FLOIR, also includes policies transferred to affiliated corporations with a separate book of business. |
+| **Canceled Bc Hurr. Risk**   | Quarterly count. Subset of canceled policies where the insurer initiated the cancellation specifically to reduce hurricane exposure. Insurer-initiated only.                                                                      |
+| **Policies Nonrenewed**      | Quarterly count. Policies where the term expired and either the policyholder or the insurer chose not to continue coverage. Does not include canceled policies.                                                                   |
+| **Nonrenewed Bc Hurr. Risk** | Quarterly count. Subset of nonrenewed policies where the insurer initiated the nonrenewal specifically to reduce hurricane exposure. Insurer-initiated only.                                                                      |
+| **New Policies Written**     | Quarterly count. New policies written where: (1) the risk was not previously insured by this carrier, (2) coverage materially changed from prior coverage, or (3) coverage was extended to the same policyholder.                 |
+:::
+
+### Load the full dataset (2022-2025)
+
+```{r}
+#| code-fold: true
+#| code-summary: "Code"
+
+by_policy_post_22_files <- list.files(
+  path = "../data/raw/market_share_reports/by_policy_post_22_quarterly",
+  full.names = TRUE
+)
+
+# create a list object of dataframes
+by_policy_post_22_raw <- by_policy_post_22_files |> 
+  # set the name to ####-q#
+  set_names(~ str_extract(.x, "\\d{4}-q\\d{1,2}")) |> 
+  map(
+    \(x) read_excel(x, skip = 3) 
+  )
+
+### <helper functions> ###
+clean_df <- function(input_df) {
+  input_df %>%
+    clean_names() %>%                                   
+    mutate(across(where(is.character), tolower))       
+}
+
+remove_date <- function(col_name) {
+  case_when(
+    # when the col contains _as_of delete everything after that (dates)
+    str_detect(col_name, "_as_of") ~ str_remove(col_name, "(?<=_as_of).*"),
+    # when the col contains _in_the_three, delete everything after that
+    str_detect(col_name, "_in_the_three") ~ str_remove(col_name, "(?<=_in_the_three).*"),
+    # if it doesn't contain either string, then default to original col name
+.default = col_name
+)
+}
+
+### </helper functions> ###
+
+# every dataframe starts on row 3
+by_policy_post_22_raw <- by_policy_post_22_raw |> 
+  map(
+    # apply clean_df() function to lower everything and clean up text
+    \(x) clean_df(x)
+  )
+
+# making colnames consistent then binding dataframes into master quarterly
+by_policy_post_22 <- by_policy_post_22_raw |> 
+  # applying remove_date function across all dataframes on all cols to remove dates
+  map(
+    \(x) rename_with(x, remove_date) |> 
+      # edited by JL
+      mutate(across(
+        -c(company_name, naic_code, policy_type),
+        as.numeric
+      ))
+  ) |> 
+  bind_rows(.id = "quarter")
+
+homeowner_policies <- c(
+  "personal residential - condominium unit owners",
+  "personal residential - homeowners (excl tenant and condo) - owner occupied",
+  "personal residential - tenants",
+  "personal residential - mobile homeowners",
+  "personal residential - farmowners",
+  "personal residential - allied lines - wind only dwellings",
+  "personal residential - condominium unit owners - wind only",
+  "personal residential - homeowners (excl tenant and condo) - owner occupied - wind only",
+  "personal residential - mobile homeowners - wind only",
+  "personal residential - tenants - wind only",
+  "personal residential - allied lines"
+)
+
+homeowner_policies_post_22 <- by_policy_post_22 |> 
+  dplyr::filter(policy_type %in% homeowner_policies) |> #filter by homeowner
+  # sum across all homeowner-related policies
+  group_by(quarter, naic_code, company_name) |> 
+  summarise(across(where(is.numeric), ~ sum(.x, na.rm = TRUE)), .groups = "drop")
+
+# clean up colnames and drop unneeded cols
+hp <- homeowner_policies_post_22 |>
+  rename(
+    policies_snapshot     = total_number_of_policies_in_force_as_of,
+    canceled_cumulative   = total_number_of_policies_canceled_in_the_three,
+    nonrenewed_cumulative = total_number_of_policies_nonrenewed_in_the_three,
+    new_cumulative        = total_number_of_new_policies_written_in_the_three,
+    received_cumulative   = total_number_of_policies_received_from_other_insurers_in_the_three,
+    transferred_cumulative = total_number_of_policies_transferred_to_other_insurers_in_the_three
+  ) |>
+  mutate(
+    year        = as.integer(str_sub(quarter, 1, 4)),
+    quarter_num = as.integer(str_extract(quarter, "(?<=q)\\d+"))
+  ) |>
+  select(
+    quarter, year, quarter_num,
+    naic_code, company_name,
+    policies_snapshot,
+    canceled_cumulative, nonrenewed_cumulative,
+    new_cumulative, received_cumulative,
+    transferred_cumulative
+  )
+
+```
+
+Then combine quarters to get annual data:
+
+```{r}
+insurer_annual <- hp |>
+  arrange(naic_code, year, quarter_num) |>
+  group_by(naic_code, year) |>
+  summarise(
+    across(ends_with("_cumulative"), ~ sum(.x, na.rm = TRUE)),
+    policies_snapshot = dplyr::last(policies_snapshot),
+    .groups = "drop"
+  )
+
+```
+
+The main calculations of interest:
+
+$$\scriptsize
+\text{Proportion canceled} = \frac{\text{Policies canceled that year}}{\text{Policies in force at start of year} + \text{New policies written} + \text{Policies received from other insurers}}
+$$
+
+$$\scriptsize
+\text{Proportion nonrenewed} = \frac{\text{Policies nonrenewed that year}}{\text{Policies in force at start of year} + \text{New policies written} + \text{Policies received from other insurers}}
+$$
+
+```{r}
+#| code-fold: true
+#| code-summary: "Code"
+industry_annual <- insurer_annual |>
+  group_by(year) |>
+  summarise(
+    across(ends_with("_cumulative"), ~ sum(.x, na.rm = TRUE)),
+    policies_snapshot = sum(policies_snapshot, na.rm = TRUE),
+    .groups = "drop"
+  ) |>
+  arrange(year) |>
+  mutate(
+    annual_policies = dplyr::lag(policies_snapshot, 1) + new_cumulative + received_cumulative,
+    prop_canceled   = if_else(annual_policies == 0, NA_real_, canceled_cumulative   / annual_policies),
+    prop_nonrenewed = if_else(annual_policies == 0, NA_real_, nonrenewed_cumulative / annual_policies)
+  )
+
+insurer_annual <- insurer_annual |>
+  group_by(naic_code) |>
+  arrange(year, .by_group = TRUE) |>
+  mutate(
+    annual_policies = dplyr::lag(policies_snapshot, 1) + new_cumulative + received_cumulative,
+    prop_canceled   = if_else(annual_policies == 0, NA_real_, canceled_cumulative   / annual_policies),
+    prop_nonrenewed = if_else(annual_policies == 0, NA_real_, nonrenewed_cumulative / annual_policies)
+  ) |>
+  ungroup()
+```
+
+### Debugging sanity check
+
+```{r}
+#| code-fold: true
+#| code-summary: "Code"
+# For every year, industry_annual$policies_snapshot should equal
+# the sum of all insurers' snapshots in insurer_annual
+snapshot_check <- insurer_annual |>
+  group_by(year) |>
+  summarise(insurer_sum = sum(policies_snapshot, na.rm = TRUE), .groups = "drop") |>
+  left_join(industry_annual |> select(year, policies_snapshot), by = "year") |>
+  mutate(match = near(insurer_sum, policies_snapshot))
+
+stopifnot("Bug 1: industry snapshot != sum of insurer snapshots" = all(snapshot_check$match, na.rm = TRUE))
+
+# For every insurer-year, annual_policies should equal
+# THAT insurer's prior-year snapshot + current-year new + received.
+# Self-join insurer_annual to itself with a 1-year offset to get the expected lag.
+lag_check <- insurer_annual |>
+  select(naic_code, year, policies_snapshot) |>
+  mutate(year_next = year + 1) |>
+  rename(prior_snapshot = policies_snapshot) |>
+  right_join(
+    insurer_annual |> select(naic_code, year, annual_policies, new_cumulative, received_cumulative),
+    by = join_by(naic_code, year_next == year)
+  ) |>
+  mutate(
+    expected_annual_policies = prior_snapshot + new_cumulative + received_cumulative,
+    match = near(annual_policies, expected_annual_policies) | 
+      (is.na(annual_policies) & is.na(expected_annual_policies))
+  )
+
+stopifnot("Bug 2: lag walked across insurers, not across years" = all(lag_check$match, na.rm = TRUE))
+
+```
+
+### Data cleaning
+
+```{r}
+#| code-fold: true
+#| code-summary: "Code"
+
+names_lookup <- hp |>
+  group_by(naic_code) |>
+  arrange(year, quarter_num, .by_group = TRUE) |>
+  slice_tail(n = 1) |>
+  ungroup() |>
+  select(naic_code, company_name)
+
+insurer_annual <- insurer_annual |>
+  left_join(names_lookup, by = "naic_code")
+
+```
+
+## Potential considerations
+
+Potential considerations when attempting to adequately addressing the hypothesis:
+
+-   Premium data from the NBER paper is only estimated rather than directly reported by consumers or insurers. The newsrooms plan to run a survey to collect homeowners' experiences. While this will be anecdotal, it will still be helpful to complement these analyses.
+
+-   Hurricanes Helene and Milton in fall 2024 were costly and likely cancelled out any reforms-driven changes in premiums. Data for 2025 premiums from the NBER authors does not exist yet, but I have reached out to the authors to ask for it (they told the previous intern a month ago that it would be uploaded soon).
+
+-   *Either* the policyholder *or* the insurer can cancel and non-renew policies, making it difficult to attribute these actions specifically to industry decisions.
+
+-   It looks like there is a data issue with at least one insurer, Clear Blue Insurance Company, which may be a data entry error on their end, which resulted in there being 130% policies calculated as non-renewed. However as this insurer had only a couple hundred policies, it would have been excluded anyway due to the analysis being limited to insurers which have 500 or more policies.
+
+## Future work
+
+The analysis of cancellations and non-renewals thus far is limited to the 2022-2025 period because that is the period covered by the "market share reports" data. A different data source exists for pre-2022 data called [Market Intelligence Reports](https://qsrng.floir.gov/reports/ReportViewer.aspx). This data source is much more incomplete as not all insurance carriers had data for every year, due to carriers invoking trade secret exemptions, which are detailed on [the FLOIR website.](https://floir.gov/tools-and-data/residential-market-share-reports) Future work will build on code written by the previous intern in order to extend the policy cancellation/non-renewal analyses further back in time.
+
+::: {.callout-note collapse="true"}
+## Trade secret exemptions details 
+
+* Beginning with the first quarter of 2014, State Farm Florida Insurance Company
+* Beginning with the first quarter of 2017, United Property & Casualty Insurance Company
+* Beginning with the first quarter of 2017, Family Security Insurance Company
+* Beginning with the first quarter of 2017, American Coastal Insurance Company
+* Beginning with the first quarter of 2019, Tower Hill Signature Insurance Company
+* Beginning with the first quarter of 2019, Tower Hill Prime Insurance Company
+* Beginning with the first quarter of 2019, Tower Hill Preferred Insurance Company
+* Beginning with the second quarter of 2019, American Integrity Insurance Company of Florida
+* Beginning with the second quarter of 2019, Edison Insurance Company
+* Beginning with the second quarter of 2019, Florida Peninsula Insurance Company
+* Beginning with the second quarter of 2019, Journey Insurance Company
+* Beginning with the second quarter of 2019, Security First Insurance Company
+* Beginning with the second quarter of 2019, US Coastal Property & Casualty Insurance Company
+* Beginning with the third quarter of 2019, Southern Oak Insurance Company
+* Beginning with the third quarter of 2019, Gulfstream Property and Casualty Insurance Company
+* Beginning with the third quarter of 2019, Fednat Insurance Company
+* Beginning with the third quarter of 2019, Monarch National Insurance Company
+* Beginning with the third quarter of 2019, Safe Harbor Insurance Company
+* Beginning with the third quarter of 2019, Universal Insurance Company of North America
+* Beginning with the third quarter of 2019, First Community Insurance Company
+* Beginning with the third quarter of 2019, People's Trust Insurance Company
+* Beginning with the fourth quarter of 2019, First Protective Insurance Company
+* Beginning with the fourth quarter of 2019, Kin Interinsurance Network
+* Beginning with the first quarter of 2020, Heritage Property & Casualty Insurance Company
+* Beginning with the first quarter of 2020, Maison Insurance Company
+* Beginning with the first quarter of 2020, St. Johns Insurance Company, Inc.
+* Beginning with the second quarter of 2020, American Strategic Insurance Corp.
+* Beginning with the second quarter of 2020, ASI Assurance Corp.
+* Beginning with the second quarter of 2020, ASI Preferred Insurance Corp.
+* Beginning with the second quarter of 2020, Progressive Property Insurance Company
+* Beginning with the fourth quarter of 2020, Homesite Insurance Company
+* Beginning with the fourth quarter of 2020, Auto Club Insurance Company of Florida
+* Beginning with the first quarter of 2021, Florida Family Home Insurance Company
+* Beginning with the first quarter of 2021, Florida Family Insurance Company
+* Beginning with the second quarter of 2021, Universal Property and Casualty Insurance Company
+* Beginning with fourth quarter 2021, Unique Insurance Company
+* Beginning with the first quarter 2022, Centauri Specialty Insurance Company
+* Beginning with the first quarter 2022, Slide Insurance Company
+* Beginning with the first quarter 2022, Tower Hill Insurance Exchange
+* Beginning with the second quarter 2022, Sutton National Insurance Company
+* Beginning with the third quarter 2022, Federal Insurance Company
+* Beginning with the third quarter 2022, Garrison Property And Casualty Insurance Company
+* Beginning with the third quarter 2022, United Services Automobile Association
+* Beginning with the third quarter 2022, USAA Casualty Insurance Company
+* Beginning with the third quarter 2022, USAA General Indemnity Company
+* Beginning with the third quarter 2022, Ace Insurance Company Of The Midwest
+* Beginning with the third quarter 2022, National Trust Insurance Company
+* Beginning with the third quarter 2022, FCCI Insurance Company
+* Beginning with the third quarter 2022, Aventus Insurance Company
+* Beginning with the third quarter 2022, The Travelers Indemnity Company
+* Beginning with the third quarter 2022, Travelers Property Casualty Company Of America
+* Beginning with the third quarter 2022, The Charter Oak Fire Insurance Company
+* Beginning with the third quarter 2022, The Travelers Indemnity Company Of America
+* Beginning with the third quarter 2022, The Travelers Indemnity Company Of Connecticut
+* Beginning with the third quarter 2022, The Phoenix Insurance Company
+* Beginning with the third quarter 2022, St. Paul Fire And Marine Insurance Company
+* Beginning with the third quarter 2022, First Floridian Auto And Home Insurance Company
+* Beginning with the third quarter 2022, Safepoint Insurance Company
+* Beginning with the third quarter 2022, American Traditions Insurance Company
+* Beginning with the third quarter 2022, Universal North America Insurance Company
+* Beginning with the third quarter 2022, American Platinum Property and Casualty Insurance Company
+* Beginning with the third quarter 2022, Federal Insurance Company
+* Beginning with the third quarter 2022, Great Northern Insurance Company
+* Beginning with the third quarter 2022, Pacific Indemnity Company
+* Beginning with the third quarter 2022, Vigilant Insurance Company
+* Beginning with the third quarter 2022, Auto-Owners Insurance Company
+* Beginning with the third quarter 2022, Southern-Owners Insurance Company
+* Beginning with the third quarter 2022, Indemnity Insurance Company of North America
+* Beginning with the third quarter 2022, Pacific Employers Insurance Company
+* Beginning with the third quarter 2022, Ace American Insurance Company
+* Beginning with the third quarter 2022, Universal North America Insurance Company
+* Beginning with the fourth quarter 2022, Loggerhead Reciprocal Interinsurance Exchange
+* Beginning with the fourth quarter 2022, VYRD Insurance Company
+* Beginning with the first quarter 2023, Homeowners Choice Property & Casualty Insurance Company, Inc.
+* Beginning with the first quarter 2023, Olympus Insurance Company
+* Beginning with the first quarter 2023, Typtap Insurance Company
+* Beginning with the first quarter 2023, Vault Reciprocal Exchange
+* Beginning with the second quarter 2023, Trusted Resource Underwriters Exchange
+* Beginning with the first quarter 2024, American Mobile Insurance Exchange
+* Beginning with the first quarter 2024, Condo Owners Reciprocal Exchange
+* Beginning with the first quarter 2024, Privilege Underwriters Reciprocal Exhange
+* Beginning with the second quarter 2024, Geovera Insurance Company
+* Beginning with the second quarter 2024, Manatee Insurance Exchange
+* Beginning with the third quarter 2024, Ovation Home Insurance Exchange
+* Beginning with the third quarter 2024, Safeport Insurance Company
+* Beginning with the fourth quarter 2024, Orange Insurance Exchange
+:::
+

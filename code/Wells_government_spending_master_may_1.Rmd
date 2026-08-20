@@ -1,0 +1,287 @@
+---
+title: "Government Spending Master DJNF"
+author: "Wells"
+date: "2026-05-01"
+output: html_document
+---
+
+# load libraries
+```{r}
+library(tidyverse)
+library(tidycensus)
+library(janitor)
+library(jsonlite)
+```
+
+#load spending data
+```{r}
+
+spending <- read_csv("../data/federal_spending_by_county_2020 2024 rob_0416_v2.csv") |> 
+     clean_names()
+
+```
+
+**pokin around!**
+
+## Spending by agency
+
+```{r}
+options(scipen = 999)  # Disable scientific notation globally
+
+spending |> 
+group_by(agency) |> 
+  summarize(
+    n = n(),
+    total_spent = sum(spending_total, na.rm = TRUE)
+  ) |> 
+  arrange(desc(total_spent))
+
+```
+
+## Spending by state
+
+```{r}
+spending |> 
+group_by(state_nm) |> 
+  summarize(
+    n = n(),
+    total_spent = sum(spending_total, na.rm = TRUE)
+  ) |> 
+  arrange(desc(total_spent))
+
+```
+
+## Spending by county
+```{r}
+spending |> 
+group_by(cty_name, state_nm) |> 
+  summarize(
+     total_spent = sum(spending_total, na.rm = TRUE),
+     n = n()
+  ) |> 
+  arrange(desc(total_spent))
+
+```
+
+## Highlight specific county
+```{r}
+
+spending |> 
+  filter(cty_name == "HENNEPIN") |> 
+  group_by(agency) |> 
+  summarize(
+     total_spent = sum(spending_total, na.rm = TRUE),
+     n = n()
+  ) |> 
+  arrange(desc(total_spent))
+```
+
+## Highlight specific county and agency
+```{r}
+spending |> 
+  filter(cty_name == "HENNEPIN") |> 
+  filter(agency == "Department of Health and Human Services") |> 
+  select(fyear, cty_name, spending_total)
+```
+
+To drill down into specific spending by county, we now go to USASpending.gov: https://www.usaspending.gov/
+* Select start searching awards
+* Select one fiscal year (multiple years = too much data)
+* Select location, place of performance and type in the county name
+* Search!
+
+The web page serves up a form with spending by specific company in that county per year. Gold mine!
+Make sure this is the search you want. 
+To download this data, see the download icon in the black toolbar
+
+
+Now for some broad questions:
+
+Law enforcement /defense  spending by state. 
+Examine the trend from 2020-2024 for your state. Has that changed over time? How does your state compare to others?
+Using the USAspending.gov website, name the top five companies by this category by state
+Which counties are the winners? Understand there are flaws with county-level data
+
+
+```{r}
+
+
+
+```
+
+Social services spending by county. 
+Examine the trend from 2020-2024 for your state. Has that changed over time? How does your state compare to others?
+Using the USAspending.gov website, name the top five companies by this category by state
+Which counties are the winners? Understand there are flaws with county-level data
+Compare to law enforcement
+
+```{r}
+
+
+
+```
+
+
+Differences across administrations
+For your state, compare the last year of Trump’s first administration (2020) to the last year of the Biden administration (2021)
+How did spending differ overall? Was one administration spending way more/less than another?
+Was one administration pouring more/less into specific agencies than the other administration?
+
+```{r}
+
+
+
+```
+
+
+
+
+### Data Definitions
+
+```{r}
+
+metadata <- fromJSON("/Users/gizmofo/Code/djnf-data-2026/master/data/USAspending-data-catalog.json") |> 
+  as.data.frame()
+
+awards <- metadata |> 
+  filter(dataset.title == "Award Data Archive")
+
+glimpse(awards)
+
+```
+
+
+
+
+Who are these employers
+https://www.forbes.com/lists/best-employers-by-state/
+
+zdiaz@umd.edu Zaida Diaz
+Hi Zaida - I saw your name on a business research guide. I hope you are doing well.
+I am leading a group of journalism students in June to examine federal spending by state and county. They will analyze data and come up with things like Hennepin Minnesota leads the list of cities with the most federal grants from 2020-2024. Hennepin? It's the home of the Mayo Clinic, which raked in billions of federal money from HHS.
+
+So with that in mind, I am looking for a handy lookup database to determine largest employers by city, county or state, and it would have to include private businesses and nonprofits (the SEC's Edgar system wouldn't cut it, for example). ValueLine and Morningstar are not useful for this. Maybe it's buried in some corner of Factiva?
+
+So your help would be most welcome! Thank you, Rob Wells
+
+
+Hi Liu - I hope you're doing well. Thanks again for sending along this dataset. Do you have time next week for a few followup questions? This data appears to be quite clean and really useful for this project. 
+
+But I am not understanding what is going on here. I ran a few queries and got some very weird results. 
+
+Hennepin County (Minneapolis) in Minnesota had $706 billion in total federal spending over the five-year period, double that of Los Angeles County, even though LA has about 8 times the population. 
+The Hennepin spending was basically from HHS, but any idea who actually got that money? I would guess UnitedHealth Care, but most of its money comes from the VA.  
+I'm trying to figure out that part of the puzzle -- I assume you extracted the data from the https://www.usaspending.gov/ ?
+Thanks so much, Rob
+
+# Bridget Playground
+
+
+
+#Make sure each year has the same number of states
+```{r echo=FALSE}
+options(scipen = 999)  # Disable scientific notation globally
+
+data_2020 <- spending |> filter(fyear==2020)
+data_2021 <- spending |> filter(fyear==2021)
+data_2022 <- spending |> filter(fyear==2022)
+data_2023 <- spending |> filter(fyear==2023)
+data_2024 <- spending |> filter(fyear==2024)
+
+
+nrow(data_2020 |> distinct(fyear, state_nm))
+nrow(data_2021 |> distinct(fyear, state_nm))
+nrow(data_2022 |> distinct(fyear, state_nm))
+nrow(data_2023 |> distinct(fyear, state_nm))
+nrow(data_2024 |> distinct(fyear, state_nm))
+
+
+data_2021 |> filter(!(data_2021$state_nm %in% data_2020$state_nm)) |> distinct(state_nm)
+data_2022 |> filter(!(data_2022$state_nm %in% data_2020$state_nm)) |> distinct(state_nm)
+```
+#Transactions with NA City and NA State by year by agency when that number of transactions is > 1
+```{r echo=FALSE}
+options(scipen = 999)  # Disable scientific notation globally
+
+na_spending |>
+  filter(is.na(cty_name) & is.na(state_nm)) |>
+  group_by(fyear, agency, state_nm, spending_total) |>
+  summarize (
+    Transactions = n()
+  ) |> filter(Transactions > 1)
+
+```
+#Wells tests
+
+```{r echo=FALSE}
+options(scipen = 999)  # Disable scientific notation globally
+
+na_spending2 <- na_spending |>
+  filter(is.na(cty_name) & is.na(state_nm)) |>
+  group_by(fyear, agency, state_nm, spending_total) |>
+  summarize (
+    Transactions = n()
+  ) #|> filter(Transactions > 1)
+
+write_csv(na_spending2, "../data/na_spending2.csv")
+
+```
+
+Verify NA totals
+```{r}
+na_spending <- spending |> 
+  filter(agency == "Department of Health and Human Services") |> 
+  group_by(agency, fyear) |>
+  summarize(
+    total_spent = sum(spending_total, na.rm = TRUE),
+    net_total_spent = sum(spending_total[!is.na(state_nm)], na.rm = TRUE),
+    na_spending = sum(spending_total[is.na(state_nm)])
+  )
+write_csv(na_spending, "../data/na_spending.csv")
+```
+
+
+
+
+#Transactions with NA state but not NA city by year by agency
+```{r}
+options(scipen = 999)  # Disable scientific notation globally
+
+spending |>
+  filter(is.na(state_nm) & !is.na(cty_name)) |>
+  group_by(fyear, agency) |>
+  summarize (
+    cty_name = cty_name,
+    Transactions = n()
+    
+  )
+
+
+```
+#Transactions with NA city but not NA state by year by agency
+```{r}
+options(scipen = 999)  # Disable scientific notation globally
+
+spending |>
+  filter(!is.na(state_nm) & is.na(cty_name)) |>
+  group_by(fyear, agency) |>
+  summarize (
+    Transactions = n()
+  )
+
+
+```
+
+#Transaction number and totals by agency by year where the state is not NA
+```{r}
+options(scipen = 999)  # Disable scientific notation globally
+
+spending |>
+  group_by(fyear, agency) |>
+  summarize (
+    Transactions = n(),
+    Spending_Total = sum(spending_total[!is.na(state_nm)], na.rm = TRUE)
+  )
+  
+
+```
