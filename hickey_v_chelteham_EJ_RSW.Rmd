@@ -161,7 +161,7 @@ joined_chelt <- joined_chelt %>%
   mutate(discrepancy = abs(report_deaths - death_cert))
 ```
 
-# Total: 258
+# Total: 264
 ```{r}
 
 joined_chelt |> 
